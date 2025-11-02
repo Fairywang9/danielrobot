@@ -1,376 +1,180 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EurekaTalk - 科技与思考</title>
+    <title>增速科技 - 链接全球智慧，增速产业未来</title>
+    <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Inter字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 使用Inter字体作为默认字体 */
         body {
             font-family: 'Inter', sans-serif;
+        }
+        /* 为页面添加平滑滚动效果 */
+        html {
             scroll-behavior: smooth;
-        }
-        .hidden-lang {
-            display: none !important;
-        }
-        .lang-btn.active {
-            background-color: #2563eb; /* blue-600 */
-            color: white;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #3b82f6; /* blue-500 */
-            margin: 8px auto 0;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem; /* py-3 px-6 */
-            background-color: #2563eb; /* blue-600 */
-            color: white;
-            font-weight: 600; /* semibold */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-decoration: none;
-        }
-        .cta-button:hover {
-            background-color: #1d4ed8; /* blue-700 */
-            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50">
 
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-600">
-                <a href="index.html">EurekaTalk</a>
+    <!-- 顶端导航栏 -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <!-- 公司Logo图片占位符 -->
+                <!-- 图片建议路径: ./images/logo.png -->
+                <img src="https://placehold.co/150x40/003366/FFFFFF?text=增速科技" alt="增速科技 Logo" class="h-10 rounded">
+                <!-- <span class="text-2xl font-bold text-blue-800">增速科技</span> -->
             </div>
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html#home" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                    <span lang="zh">首页</span>
-                    <span lang="en" class="hidden-lang">Home</span>
-                </a>
-                <a href="about.html" class="text-gray-600 hover:text-blue-600 transition duration-300"> <span lang="zh">关于我们</span>
-                    <span lang="en" class="hidden-lang">About Us</span>
-                </a>
-                <a href="services.html" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                    <span lang="zh">服务与洞察</span>
-                    <span lang="en" class="hidden-lang">Services & Insights</span>
-                </a>
-                <a href="https://danielrobot.com/reports/index.html" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                    <span lang="zh">调研报告</span>
-                    <span lang="en" class="hidden-lang">Reports</span>
-                </a>
-                <a href="blog.html" class="text-gray-600 hover:text-blue-600 transition duration-300"> <span lang="zh">博客</span>
-                    <span lang="en" class="hidden-lang">Blog</span>
-                </a>
-                <a href="index.html#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">
-                    <span lang="zh">联系我</span>
-                    <span lang="en" class="hidden-lang">Contact</span>
-                </a>
-            </nav>
-            <div class="flex items-center">
-                <button id="lang-zh" class="lang-btn active text-sm px-3 py-1.5 rounded-l-md border border-gray-300 hover:bg-blue-500 hover:text-white transition-colors duration-200" onclick="switchLanguage('zh')">中文</button>
-                <button id="lang-en" class="lang-btn text-sm px-3 py-1.5 rounded-r-md border border-gray-300 border-l-0 hover:bg-blue-500 hover:text-white transition-colors duration-200" onclick="switchLanguage('en')">EN</button>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium">首页</a>
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium">关于我们</a>
+                <a href="#programs" class="text-gray-700 hover:text-blue-600 font-medium">旗下栏目</a>
+                <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">核心业务</a>
+                <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium">联系我们</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
-            <a href="index.html#home" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link">
-                <span lang="zh">首页</span>
-                <span lang="en" class="hidden-lang">Home</span>
-            </a>
-            <a href="about.html" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link"> <span lang="zh">关于我们</span>
-                <span lang="en" class="hidden-lang">About Us</span>
-            </a>
-            <a href="services.html" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link">
-                <span lang="zh">服务与洞察</span>
-                <span lang="en" class="hidden-lang">Services & Insights</span>
-            </a>
-            <a href="https://danielrobot.com/reports/index.html" target="_blank" rel="noopener noreferrer" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link">
-                <span lang="zh">调研报告</span>
-                <span lang="en" class="hidden-lang">Reports</span>
-            </a>
-            <a href="blog.html" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link"> <span lang="zh">博客</span>
-                <span lang="en" class="hidden-lang">Blog</span>
-            </a>
-            <a href="index.html#contact" class="block px-6 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition duration-300 mobile-nav-link">
-                <span lang="zh">联系我</span>
-                <span lang="en" class="hidden-lang">Contact</span>
-            </a>
-        </div>
+            <!-- 移动端菜单按钮 (可选) -->
+            <div class="md:hidden">
+                <button class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <section id="home" class="hero-gradient text-white pt-32 pb-20 px-6 text-center">
-        <div class="container mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                <span lang="zh">探索科技前沿，分享深度思考</span>
-                <span lang="en" class="hidden-lang">Exploring Tech Frontiers, Sharing Deep Insights</span>
-            </h1>
-            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-                <span lang="zh">欢迎来到 EurekaTalk。在这里，我们讨论最新的科技趋势、数据分析、以及对商业和生活的影响。</span>
-                <span lang="en" class="hidden-lang">Welcome to EurekaTalk. Here, we discuss the latest technology trends, data analysis, and their impact on business and life.</span>
-            </p>
-            <a href="#contact" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-                <span lang="zh">保持联系</span>
-                <span lang="en" class="hidden-lang">Get in Touch</span>
-            </a>
-        </div>
-    </section>
+    <main>
+        <!-- 首页 (Hero) 模块 -->
+        <section id="home" class="pt-16">
+            <div class="relative w-full h-[60vh] md:h-[80vh] bg-blue-800 text-white flex items-center justify-center">
+                <!-- 背景图片占位符 -->
+                <!-- 图片建议路径: ./images/hero-background.jpg -->
+                <img src="https://placehold.co/1920x1080/003366/FFFFFF?text=[科技与全球商务背景图]" 
+                     alt="背景图" 
+                     class="absolute top-0 left-0 w-full h-full object-cover opacity-30 rounded">
+                <div class="relative z-10 text-center p-8">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">增速科技</h1>
+                    <p class="text-xl md:text-2xl mb-8">链接全球智慧，加速产业未来</p>
+                    <a href="#services" class="bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">了解我们的业务</a>
+                </div>
+            </div>
+        </section>
 
-    <section id="featured-image" class="py-10 bg-white">
-        <div class="container mx-auto px-6">
-            <img src="https://placehold.co/1200x500/60a5fa/ffffff?text=请替换为您的特色图片" alt="特色图片" class="rounded-lg shadow-xl w-full mx-auto">
-            <p class="text-center text-sm text-gray-500 mt-2">
-                <span lang="zh">在这里添加图片的简短描述或标题（可选）</span>
-                <span lang="en" class="hidden-lang">Add a short description or caption for the image here (optional)</span>
-            </p>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 px-6 bg-gray-50">
-        <div class="container mx-auto">
-            <h2 class="section-title text-3xl font-bold text-center mb-12">
-                <span lang="zh">关于我们</span>
-                <span lang="en" class="hidden-lang">About Us</span>
-            </h2>
-            <div class="text-center max-w-2xl mx-auto">
-                <p class="mb-8 text-gray-700 leading-relaxed">
-                    <span lang="zh">你好！我是 EurekaTalk 的博主，对科技、数据和创新充满热情。通过这个平台，我希望分享我的见解、经验和对未来的展望，连接思想，激发讨论。</span>
-                    <span lang="en" class="hidden-lang">Hello! I'm the blogger behind EurekaTalk, passionate about technology, data, and innovation. Through this platform, I aim to share insights, experiences, and future outlooks, connecting minds and sparking discussions.</span>
+        <!-- 关于我们模块 -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">关于我们</h2>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                    北京增速科技有限公司，是一家致力于链接科技创新与全球商业资源的前沿企业。我们通过旗下多元化的新媒体栏目和专业的企业服务，访谈顶尖科技及海外企业家，高效对接资本方，为企业提供精准的人工智能落地培训及国际化资源对接。
                 </p>
-                <a href="about.html" class="cta-button">
-                    <span lang="zh">了解更多关于我</span>
-                    <span lang="en" class="hidden-lang">Learn More About Me</span>
-                </a>
+                <!-- 公司环境或团队图片占位符 -->
+                <!-- 图片建议路径: ./images/about-us-team.jpg -->
+                <img src="https://placehold.co/1000x400/F0F4F8/333333?text=[公司团队或办公环境图]" alt="公司环境" class="mt-12 w-full max-w-4xl mx-auto rounded-lg shadow-xl">
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="services" class="py-20 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="section-title text-3xl font-bold text-center mb-12">
-                <span lang="zh">服务与洞察</span>
-                <span lang="en" class="hidden-lang">Services & Insights</span>
-            </h2>
-            <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto">
-                <span lang="zh">我们提供全面的专业服务，满足从个人到商业开发的各类客户需求。探索我们如何助您实现目标。</span>
-                <span lang="en" class="hidden-lang">Our comprehensive suite of professional services caters to a diverse clientele. Discover how we can help you achieve your goals.</span>
-            </p>
-            <div class="text-center">
-                <a href="services.html" class="cta-button">
-                    <span lang="zh">查看所有服务</span>
-                    <span lang="en" class="hidden-lang">Explore Our Services</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="py-20 px-6 bg-gray-50">
-        <div class="container mx-auto">
-            <h2 class="section-title text-3xl font-bold text-center mb-12">
-                <span lang="zh">最新博客</span>
-                <span lang="en" class="hidden-lang">Latest Blog Posts</span>
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                    <img src="https://placehold.co/400x250/9ca3af/ffffff?text=人形机器人前沿" alt="人形机器人" class="rounded-md mb-4 w-full h-48 object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">
-                        <span lang="zh">人形机器人：未来已来，还是任重道远？</span>
-                        <span lang="en" class="hidden-lang">Humanoid Robots: Future Now, or Long Road Ahead?</span>
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-3">
-                        <span lang="zh">2025年5月22日</span>
-                        <span lang="en" class="hidden-lang">May 22, 2025</span>
-                    </p>
-                    <p class="text-gray-700 text-sm leading-relaxed flex-grow">
-                        <span lang="zh">从特斯拉的 Optimus 到波士顿动力的人形机器人，我们正见证着技术的飞速进步。它们会如何改变我们的工作与生活？</span>
-                        <span lang="en" class="hidden-lang">From Tesla's Optimus to Boston Dynamics' humanoids, we're witnessing rapid technological advancements. How will they change our work and lives?</span>
-                    </p>
-                    <a href="blog.html#post-humanoid" class="mt-4 text-blue-600 hover:text-blue-800 font-medium self-start"> <span lang="zh">阅读更多 &rarr;</span>
-                        <span lang="en" class="hidden-lang">Read More &rarr;</span>
-                    </a>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                    <img src="https://placehold.co/400x250/a5b4fc/ffffff?text=外骨骼技术突破" alt="外骨骼技术" class="rounded-md mb-4 w-full h-48 object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">
-                        <span lang="zh">外骨骼技术：增强人类能力的边界</span>
-                        <span lang="en" class="hidden-lang">Exoskeleton Technology: Pushing Human Augmentation</span>
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-3">
-                        <span lang="zh">2025年5月21日</span>
-                        <span lang="en" class="hidden-lang">May 21, 2025</span>
-                    </p>
-                    <p class="text-gray-700 text-sm leading-relaxed flex-grow">
-                        <span lang="zh">外骨骼不再仅限于科幻电影。它们在医疗康复、工业生产乃至军事领域的应用前景广阔，但挑战与机遇并存。</span>
-                        <span lang="en" class="hidden-lang">Exoskeletons are no longer just sci-fi. Their applications in medical rehab, industry, and military are vast, yet challenges and opportunities coexist.</span>
-                    </p>
-                    <a href="blog.html#post-exoskeleton" class="mt-4 text-blue-600 hover:text-blue-800 font-medium self-start"> <span lang="zh">阅读更多 &rarr;</span>
-                        <span lang="en" class="hidden-lang">Read More &rarr;</span>
-                    </a>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                    <img src="https://placehold.co/400x250/818cf8/ffffff?text=AI行业洞察" alt="AI行业洞察" class="rounded-md mb-4 w-full h-48 object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">
-                        <span lang="zh">AI 行业观察：泡沫之下，真实价值何在？</span>
-                        <span lang="en" class="hidden-lang">AI Industry Insights: Real Value Beneath the Hype?</span>
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-3">
-                        <span lang="zh">2025年5月20日</span>
-                        <span lang="en" class="hidden-lang">May 20, 2025</span>
-                    </p>
-                    <p class="text-gray-700 text-sm leading-relaxed flex-grow">
-                        <span lang="zh">生成式 AI 引爆市场，但可持续的商业模式和技术壁垒仍在探索中。我们如何辨别趋势，把握未来机遇？</span>
-                        <span lang="en" class="hidden-lang">Generative AI has ignited the market, but sustainable business models and tech barriers are still being explored. How do we discern trends and seize future opportunities?</span>
-                    </p>
-                    <a href="blog.html#post-ai-insights" class="mt-4 text-blue-600 hover:text-blue-800 font-medium self-start"> <span lang="zh">阅读更多 &rarr;</span>
-                        <span lang="en" class="hidden-lang">Read More &rarr;</span>
-                    </a>
+        <!-- 旗下栏目模块 -->
+        <section id="programs" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">旗下栏目</h2>
+                <div class="flex flex-wrap md:flex-nowrap gap-10">
+                    <!-- 栏目一：增速商谈UTalk -->
+                    <div class="w-full md:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                        <!-- 栏目图片占位符 -->
+                        <!-- 图片建议路径: ./images/program-utalk.jpg -->
+                        <img src="https://placehold.co/600x400/004A99/FFFFFF?text=增速商谈UTalk" alt="增速商谈UTalk" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">增速商谈 UTalk</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                面向国际化、跨境及资本人物的新媒体栏目。我们深入访谈行业领袖，探讨全球市场趋势与资本动态，搭建高端资源对接桥梁。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 栏目二：增速智谈DanielRobot -->
+                    <div class="w-full md:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                        <!-- 栏目图片占位符 -->
+                        <!-- 图片建议路径: ./images/program-danielrobot.jpg -->
+                        <img src="https://placehold.co/600x400/003366/FFFFFF?text=增速智谈DanielRobot" alt="增速智谈DanielRobot" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-3">增速智谈 DanielRobot</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                面向人工智能、机器人全产业链的人物访谈与活动举办。我们聚焦前沿技术，深度链接产业上下游，推动AI与机器人的商业化落地。
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-             <div class="text-center mt-12">
-                <a href="blog.html" class="cta-button"> <span lang="zh">查看所有博客</span>
-                    <span lang="en" class="hidden-lang">View All Posts</span>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="py-20 px-6 bg-white">
-        <div class="container mx-auto">
-            <h2 class="section-title text-3xl font-bold text-center mb-12">
-                <span lang="zh">联系我</span>
-                <span lang="en" class="hidden-lang">Get In Touch</span>
-            </h2>
-            <div class="max-w-2xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl shadow-2xl text-center">
-                <p class="text-gray-700 mb-8 text-lg">
-                    <span lang="zh">有任何问题、建议或合作意向？我非常乐意倾听您的想法！请点击下方按钮，通过问卷与我联系。</span>
-                    <span lang="en" class="hidden-lang">Have questions, suggestions, or collaboration ideas? I'd love to hear from you! Please click the button below to reach out via our questionnaire.</span>
+        <!-- 核心业务模块 -->
+        <section id="services" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">核心业务</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <!-- 业务介绍文本 -->
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">企业人工智能落地培训</h4>
+                            <p class="text-gray-700">
+                                提供定制化的人工智能技术培训和落地实施方案，帮助企业解决实际业务问题，实现智能化转型。
+                            </p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">机器人国际化行业资源对接</h4>
+                            <p class="text-gray-700">
+                                凭借丰富的国际网络，为机器人企业提供精准的海外市场拓展、技术合作和供应链资源对接服务。
+                            </p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">资本与项目对接</h4>
+                            <p class="text-gray-700">
+                                通过我们的媒体影响力及行业深度，高效链接优质科技项目与一线投资机构，加速企业融资进程。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 业务图片占位符 -->
+                    <div class="mt-10 md:mt-0">
+                        <!-- 图片建议路径: ./images/services-main.jpg -->
+                        <img src="https://placehold.co/600x500/004A99/FFFFFF?text=[专业业务对接图]" alt="核心业务" class="w-full rounded-lg shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我们模块 -->
+        <section id="contact" class="py-20 bg-blue-700 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-6">联系我们</h2>
+                <p class="text-lg mb-8 max-w-2xl mx-auto">
+                    我们期待与您交流合作，共同探讨科技与商业的无限可能。
                 </p>
-                <a href="https://wj.qq.com/s2/12345678/xxxx/" target="_blank" rel="noopener noreferrer" class="cta-button text-lg">
-                    <span lang="zh">填写联系问卷</span>
-                    <span lang="en" class="hidden-lang">Fill Out Contact Form</span>
-                </a>
-                <div class="mt-12">
-                    <p class="text-gray-700 mb-2">
-                        <span lang="zh">您也可以通过以下方式找到我：</span>
-                        <span lang="en" class="hidden-lang">You can also find me here:</span>
-                    </p>
-                    <div class="flex justify-center space-x-6">
-                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300 text-2xl"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300 text-2xl"><i class="fab fa-github"></i></a>
-                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
-                         </div>
+                <div class="flex flex-wrap justify-center gap-8 text-lg">
+                    <div class="bg-white text-blue-800 p-6 rounded-lg shadow-lg min-w-[280px]">
+                        <h4 class="font-bold mb-2">公众号</h4>
+                        <p>增速科技</p>
+                    </div>
+                    <div class="bg-white text-blue-800 p-6 rounded-lg shadow-lg min-w-[280px]">
+                        <h4 class="font-bold mb-2">公司地址</h4>
+                        <p>北京市海淀区中关村大街</p>
+                    </div>
+                    <div class="bg-white text-blue-800 p-6 rounded-lg shadow-lg min-w-[280px]">
+                        <h4 class="font-bold mb-2">商务合作</h4>
+                        <p> contact@speedup-ai.com</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="bg-gray-800 text-gray-300 py-12 px-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; <span id="currentYear"></span> EurekaTalk. 
-                <span lang="zh">版权所有。</span>
-                <span lang="en" class="hidden-lang">All Rights Reserved.</span>
-            </p>
-            <p class="text-sm mt-2">
-                <span lang="zh">由 <a href="https://github.com" class="hover:text-blue-400">GitHub Pages</a> 强力驱动</span>
-                <span lang="en" class="hidden-lang">Powered by <a href="https://github.com" class="hover:text-blue-400">GitHub Pages</a></span>
-            </p>
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-gray-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 北京增速科技有限公司. 保留所有权利。</p>
         </div>
     </footer>
 
-    <script>
-        // Language Switching Logic
-        const defaultLang = 'zh';
-        let currentLang = localStorage.getItem('eurekatalk-lang') || defaultLang;
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('eurekatalk-lang', lang);
-            applyLanguage();
-        }
-
-        function applyLanguage() {
-            document.documentElement.lang = currentLang;
-            document.querySelectorAll('[lang]').forEach(el => {
-                if (el.getAttribute('lang') === currentLang) {
-                    el.classList.remove('hidden-lang');
-                } else {
-                    el.classList.add('hidden-lang');
-                }
-            });
-            
-            const zhBtn = document.getElementById('lang-zh');
-            const enBtn = document.getElementById('lang-en');
-            if (zhBtn && enBtn) {
-                if (currentLang === 'zh') {
-                    zhBtn.classList.add('active');
-                    enBtn.classList.remove('active');
-                } else {
-                    enBtn.classList.add('active');
-                    zhBtn.classList.remove('active');
-                }
-            }
-            
-            if (currentLang === 'zh') {
-                document.title = "EurekaTalk - 科技与思考";
-            } else {
-                document.title = "EurekaTalk - Technology & Insights";
-            }
-
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        }
-
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        document.addEventListener('DOMContentLoaded', applyLanguage);
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>
