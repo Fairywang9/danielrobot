@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>增速科技 Upspeed Tech - 链接创新，增速制造</title>
+    <!-- 引入网站图标 Favicon (请在 pics 文件夹放入 favicon.png) -->
+    <link rel="icon" href="./pics/upspeed_logo.png" type="image/png">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for Icons -->
@@ -60,7 +63,6 @@
             box-shadow: -10px 10px 20px rgba(0,0,0,0.5), -2px 2px 0px rgba(255,255,255,0.1) inset;
         }
         
-        /* 简单的微交互：连接线动画 */
         .hover-connect:hover::after {
             width: 100%;
         }
@@ -73,11 +75,9 @@
             transition: width 0.3s;
         }
 
-        /* 模态框动画 */
         .modal-enter { opacity: 0; transform: scale(0.95); }
         .modal-enter-active { opacity: 1; transform: scale(1); transition: opacity 0.3s ease-out, transform 0.3s ease-out; }
         
-        /* 首页文字发光特效 */
         .text-glow {
             text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
         }
@@ -88,10 +88,11 @@
     <!-- 导航栏 -->
     <header class="fixed w-full top-0 z-50 bg-deepBlue/80 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 h-20 flex justify-between items-center">
-            <!-- Logo (Top Left - Small) -->
+            <!-- Logo 区域 (替换为图片) -->
             <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-8 h-8 bg-vitalOrange rounded flex items-center justify-center text-white font-bold text-lg">U</div>
-                <span class="font-bold tracking-wider">UPSPEED</span>
+                <!-- 请确保 pics 文件夹下有 logo.png，建议高度 32px-40px -->
+                <img src="./pics/upspeed_logo.png" alt="增速科技 Logo" class="h-10 w-auto object-contain">
+                <span class="font-bold tracking-wider text-lg">UPSPEED</span>
             </a>
 
             <!-- Desktop Menu -->
@@ -130,8 +131,9 @@
     <section id="home" class="relative pt-20 h-screen min-h-[800px] flex items-center justify-center bg-deepBlue overflow-hidden">
         <!-- 背景层 -->
         <div class="absolute inset-0 z-0">
-            <!-- 模拟暗黑科技背景视频 -->
-            <img src="https://placehold.co/1920x1080/050a14/FFF?text=." class="w-full h-full object-cover opacity-80" alt="Background">
+            <!-- 背景图替换为本地图片，建议使用暗色调科技感图片 (1920x1080) -->
+            <img src="./pics/bg_index.jpg" class="w-full h-full object-cover opacity-80" alt="Background" onerror="this.src='https://placehold.co/1920x1080/050a14/FFF?text=Background+Image'">
+            
             <!-- 径向渐变，营造中间亮四周暗的聚焦感 -->
             <div class="absolute inset-0 bg-radial-gradient from-transparent to-deepBlue opacity-90"></div>
             <!-- 科技网格背景装饰 -->
@@ -143,9 +145,11 @@
             
             <!-- 1. Logo (Large & Animated) -->
             <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
-                <div class="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center text-white text-6xl md:text-7xl font-bold shadow-[0_0_50px_rgba(249,115,22,0.4)] transform rotate-3 hover:rotate-0 transition-all duration-500">
-                    U
-                </div>
+                <!-- 首页中央的大 Logo，建议使用透明背景 PNG，尺寸较大 -->
+                <img src="./pics/logo_large.png" alt="增速科技 Logo" class="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.3)] transform hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                
+                <!-- Fallback 如果图片加载失败显示的备用 CSS Logo -->
+                <div class="hidden w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl items-center justify-center text-white text-6xl md:text-7xl font-bold shadow-[0_0_50px_rgba(249,115,22,0.4)]">U</div>
             </div>
 
             <!-- 2. Brand Name (Massive) -->
@@ -191,8 +195,6 @@
         </div>
     </section>
 
-    <!-- 合作伙伴 Logo Wall 已移除 -->
-
     <!-- 2. 增速媒体 (Media & IP) -->
     <section id="media" class="py-24 bg-lightGray relative">
         <div class="absolute top-0 left-0 w-full h-64 bg-deepBlue z-0"></div>
@@ -214,7 +216,7 @@
                             </div>
                             <div>
                                 <h3 class="text-2xl font-bold text-deepBlue">增速智谈</h3>
-                                <p class="text-sm text-blue-600 font-medium tracking-wide">UPSPEED TALKS</p>
+                                <p class="text-sm text-blue-600 font-medium tracking-wide">EUREKA TALKS</p>
                             </div>
                         </div>
                         <p class="text-gray-600 mb-6 leading-relaxed">
@@ -264,34 +266,35 @@
             <!-- 嘉宾墙 -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-deepBlue border-l-4 border-deepBlue pl-3">做客嘉宾</h3>
+                    <h3 class="text-xl font-bold text-deepBlue border-l-4 border-deepBlue pl-3">过往嘉宾</h3>
                     <a href="#" class="text-sm text-gray-500 hover:text-deepBlue">查看全部嘉宾 ></a>
                 </div>
                 <div class="flex gap-8 overflow-x-auto pb-4 no-scrollbar">
+                    <!-- 嘉宾头像均改为本地引用 -->
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="https://placehold.co/100x100/333/FFF?text=Prof.L" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
-                        <h4 class="font-bold text-sm text-gray-800">李教授</h4>
-                        <p class="text-xs text-gray-500 mt-1">MIT机器人实验室</p>
+                        <img src="./pics/goutiancong.jpg" onerror="this.src='https://placehold.co/100x100/333/FFF?text=Prof.L'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <h4 class="font-bold text-sm text-gray-800">苟天聪</h4>
+                        <p class="text-xs text-gray-500 mt-1">英龙制造科技 CEO</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="https://placehold.co/100x100/444/FFF?text=CEO.Z" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
-                        <h4 class="font-bold text-sm text-gray-800">张总</h4>
-                        <p class="text-xs text-gray-500 mt-1">某独角兽CEO</p>
+                        <img src="./pics/zhuangziwen.jpg" onerror="this.src='https://placehold.co/100x100/444/FFF?text=CEO.Z'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <h4 class="font-bold text-sm text-gray-800">庄子文</h4>
+                        <p class="text-xs text-gray-500 mt-1">清华大学叉院博士生</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="https://placehold.co/100x100/555/FFF?text=Partner.W" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
-                        <h4 class="font-bold text-sm text-gray-800">王合伙人</h4>
-                        <p class="text-xs text-gray-500 mt-1">红杉中国</p>
+                        <img src="./pics/guangai.png" onerror="this.src='https://placehold.co/100x100/555/FFF?text=Partner.W'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <h4 class="font-bold text-sm text-gray-800">管盖</h4>
+                        <p class="text-xs text-gray-500 mt-1">远科资本 合伙人</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="https://placehold.co/100x100/666/FFF?text=Dr.C" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
-                        <h4 class="font-bold text-sm text-gray-800">陈博士</h4>
-                        <p class="text-xs text-gray-500 mt-1">AI算法科学家</p>
+                        <img src="./pics/gaozelin.jpg" onerror="this.src='https://placehold.co/100x100/666/FFF?text=Dr.C'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <h4 class="font-bold text-sm text-gray-800">高泽林</h4>
+                        <p class="text-xs text-gray-500 mt-1">AI Hero 主理人</p>
                     </div>
                      <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="https://placehold.co/100x100/888/FFF?text=VP.S" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
-                        <h4 class="font-bold text-sm text-gray-800">孙副总</h4>
-                        <p class="text-xs text-gray-500 mt-1">海外市场负责人</p>
+                        <img src="./pics/lixiaoxuan.jpg" onerror="this.src='https://placehold.co/100x100/888/FFF?text=VP.S'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <h4 class="font-bold text-sm text-gray-800">李小轩</h4>
+                        <p class="text-xs text-gray-500 mt-1">尼日利亚自贸区中国区顾问</p>
                     </div>
                 </div>
             </div>
@@ -320,12 +323,12 @@
                         </div>
                         <span class="bg-vitalOrange text-white text-xs px-3 py-1 rounded-full mb-4 inline-block">2025 年度重磅</span>
                         <div class="flex flex-col items-center my-8">
-                            <div class="w-48 h-64 bg-gradient-to-br from-gray-700 to-gray-900 border-l-4 border-gray-600 book-shadow transform group-hover:scale-105 transition-transform duration-500 flex flex-col justify-between p-4">
-                                <div>
-                                    <div class="w-8 h-8 rounded-full bg-vitalOrange mb-2"></div>
-                                    <h3 class="text-lg font-bold leading-tight text-gray-100">人形机器人<br>核心零部件<br>供应链图谱</h3>
-                                </div>
-                                <div class="text-xs text-gray-400">Upspeed Research</div>
+                            <!-- 报告封面也改为可插入图片 -->
+                            <div class="relative w-48 h-64 shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
+                                <img src="./pics/report_cover.jpg" onerror="this.src='https://placehold.co/200x300/334155/FFF?text=Report+Cover'" class="w-full h-full object-cover rounded border-l-4 border-gray-600" alt="报告封面">
+                                <!-- 如果没有图片，用这个遮罩增加质感 -->
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 rounded"></div>
+                                <div class="absolute bottom-4 left-4 text-white font-bold text-shadow">Upspeed Research</div>
                             </div>
                         </div>
                         <h3 class="text-2xl font-bold mb-3">2025 人形机器人供应链图谱</h3>
@@ -342,9 +345,10 @@
                     </div>
                 </div>
                 <div class="lg:col-span-7 flex flex-col gap-6">
+                    <!-- 文章配图本地化 -->
                     <div class="group flex gap-4 md:gap-6 border-b border-gray-100 pb-6">
                         <div class="w-32 md:w-48 h-24 md:h-32 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                            <img src="https://placehold.co/400x300/334155/FFF?text=Tech+Image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="./pics/factory_daily.jpg" onerror="this.src='https://placehold.co/400x300/334155/FFF?text=Factory+Daily'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </div>
                         <div>
                             <div class="flex gap-2 mb-2">
@@ -359,7 +363,7 @@
                     </div>
                     <div class="group flex gap-4 md:gap-6 border-b border-gray-100 pb-6">
                         <div class="w-32 md:w-48 h-24 md:h-32 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                            <img src="https://placehold.co/400x300/334155/FFF?text=Global+Map" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="./pics/robot_market.jpg" onerror="this.src='https://placehold.co/400x300/334155/FFF?text=Global+Market'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </div>
                         <div>
                             <div class="flex gap-2 mb-2">
@@ -387,6 +391,7 @@
             <div class="relative">
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-700 -z-0 transform -translate-y-1/2"></div>
                 <div class="grid md:grid-cols-4 gap-8 relative z-10">
+                    <!-- 此处图标保持使用 FontAwesome，如需改为本地图片请替换 i 标签为 img -->
                     <div class="bg-tungsten border border-gray-600 p-6 rounded-lg text-center hover:border-vitalOrange transition-colors group">
                         <div class="w-16 h-16 bg-deepBlue border-2 border-vitalOrange rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-[0_0_15px_rgba(249,115,22,0.5)]">
                             <i class="fa-solid fa-comments"></i>
@@ -463,7 +468,8 @@
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="md:w-2/3 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 shadow-sm flex flex-col md:flex-row">
                     <div class="md:w-1/2 relative">
-                        <img src="https://placehold.co/600x400/334155/FFF?text=Factory+Tour+Photo" class="w-full h-full object-cover">
+                        <!-- 本地图片 -->
+                        <img src="./pics/factory_event.jpg" onerror="this.src='https://placehold.co/600x400/334155/FFF?text=Factory+Event'" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-vitalOrange text-white text-center px-3 py-1 rounded shadow">
                             <span class="block text-xs uppercase font-bold">OCT</span>
                             <span class="block text-2xl font-bold">24</span>
@@ -500,7 +506,8 @@
             </div>
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="order-2 md:order-1">
-                    <img src="https://placehold.co/600x400/1E293B/FFF?text=Our+Team" class="rounded-lg shadow-xl w-full">
+                    <!-- 本地图片 -->
+                    <img src="./pics/team.jpg" onerror="this.src='https://placehold.co/600x400/1E293B/FFF?text=Our+Team'" class="rounded-lg shadow-xl w-full" alt="我们的团队">
                 </div>
                 <div class="order-1 md:order-2 space-y-6">
                     <h3 class="text-2xl font-bold text-gray-800">链接全球智慧，加速产业未来</h3>
@@ -538,7 +545,8 @@
             </button>
 
             <div class="text-center mb-8">
-                <div class="w-12 h-12 bg-vitalOrange rounded mx-auto flex items-center justify-center text-white font-bold text-2xl mb-4">U</div>
+                <!-- 模态框 Logo 也改为本地图片 -->
+                <img src="./pics/logo.png" class="w-12 h-12 mx-auto mb-4 object-contain" alt="Logo">
                 <h2 class="text-2xl font-bold text-deepBlue">官方合作通道</h2>
                 <p class="text-gray-500 text-sm mt-2">找工厂 · 领报告 · 商务合作</p>
             </div>
@@ -546,7 +554,8 @@
             <!-- 联系方式核心区 -->
             <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
                 <div class="w-48 h-48 bg-white rounded-lg mx-auto mb-6 p-2 shadow-sm border border-gray-100">
-                    <img src="https://placehold.co/200x200/22c55e/FFF?text=WeChat+QR" class="w-full h-full object-cover rounded">
+                    <!-- 二维码本地图片 -->
+                    <img src="./pics/qrcode.jpg" onerror="this.src='https://placehold.co/200x200/22c55e/FFF?text=WeChat+QR'" class="w-full h-full object-cover rounded" alt="微信二维码">
                 </div>
                 
                 <div class="space-y-4 text-center">
@@ -566,7 +575,7 @@
             </div>
             
             <p class="text-xs text-gray-400 text-center mt-6">
-                我们的项目经理将在工作时间 1 小时内响应
+                我们的项目经理将在工作时间 1 天内响应
             </p>
         </div>
     </div>
@@ -577,11 +586,12 @@
             <div class="grid md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
-                        <div class="w-8 h-8 bg-vitalOrange rounded flex items-center justify-center text-white font-bold">U</div>
-                        <span class="text-xl font-bold text-white">增速科技</span>
+                        <!-- Footer Logo 图片 -->
+                        <img src="./pics/logo_white.png" onerror="this.src='./pics/logo.png'" class="w-8 h-8 object-contain" alt="Logo">
+                        <span class="text-xl font-bold text-white ml-2">增速科技</span>
                     </div>
                     <p class="text-sm leading-relaxed mb-6">
-                        链接创新，增速制造。<br>
+                        链接创新界，增速制造业。<br>
                         专业的机器人产业链资源整合平台。
                     </p>
                 </div>
@@ -595,14 +605,15 @@
                 <div>
                     <h4 class="text-white font-bold mb-6">联系我们</h4>
                     <ul class="space-y-3 text-sm">
-                        <li><i class="fa-solid fa-phone mr-2"></i> 010-8888 6666</li>
-                        <li><i class="fa-solid fa-envelope mr-2"></i> contact@upspeed.tech</li>
+                        <li><i class="fa-solid fa-phone mr-2"></i> 010-8827 4866</li>
+                        <li><i class="fa-solid fa-envelope mr-2"></i> contact@speedup-ai.com</li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6">关注公众号</h4>
                     <div class="bg-white p-2 w-32 mx-auto md:mx-0 rounded">
-                        <img src="https://placehold.co/150x150/000/FFF?text=QR+Code" alt="QR Code" class="w-full">
+                        <!-- 公众号二维码本地图片 -->
+                        <img src="./pics/upspeed_qrcode.jpg" onerror="this.src='https://placehold.co/150x150/000/FFF?text=QR+Code'" alt="QR Code" class="w-full">
                     </div>
                 </div>
             </div>
