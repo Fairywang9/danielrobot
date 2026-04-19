@@ -8,6 +8,928 @@
 <meta name="description" content="增速科技提供企业网络安全防护、AI安全解决方案，并运营增速智谈（DanielRobot）与增速商谈（UTalk）科技媒体。">
 <link rel="canonical" href="https://danielrobot.com/">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --ink: #0a0c10;
+    --ink-soft: #141820;
+    --ink-mid: #1c2030;
+    --line: rgba(255,255,255,0.07);
+    --line-bright: rgba(255,255,255,0.15);
+    --cyan: #00c8d4;
+    --cyan-dim: rgba(0,200,212,0.12);
+    --cyan-glow: rgba(0,200,212,0.25);
+    --white: #f0f4f8;
+    --white-dim: rgba(240,244,248,0.55);
+    --white-faint: rgba(240,244,248,0.18);
+    --red-accent: #e05252;
+    --amber-accent: #d4a84b;
+    --serif: 'Noto Serif SC', serif;
+    --sans: 'Noto Sans SC', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+  
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,212,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,212,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(10,12,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--cyan);
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .logo-mark::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--cyan);
+    display: block;
+  }
+  
+  .logo-text {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  
+  .nav-links a {
+    font-size: 13px;
+    color: var(--white-dim);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+    font-family: var(--mono);
+  }
+  
+  .nav-links a:hover { color: var(--cyan); }
+  
+  .nav-cta {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--cyan) !important;
+    border: 1px solid var(--cyan);
+    padding: 6px 16px;
+    transition: background 0.2s !important;
+  }
+  
+  .nav-cta:hover { background: var(--cyan-dim) !important; }
+  
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 5vw 80px;
+  }
+  
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+    border: 1px solid var(--cyan-dim);
+    padding: 6px 16px;
+    margin-bottom: 40px;
+    background: var(--cyan-dim);
+    animation: fadeUp 0.8s ease both;
+  }
+  
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 1.8s ease infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--white-faint);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  
+  .hero-title .accent {
+    color: var(--cyan);
+    position: relative;
+  }
+  
+  .hero-title .accent::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+  }
+  
+  .hero-slogan {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-weight: 400;
+    color: var(--white-dim);
+    margin-bottom: 56px;
+    letter-spacing: 0.04em;
+    animation: fadeUp 0.8s 0.25s ease both;
+  }
+  
+  .hero-slogan em {
+    color: var(--cyan);
+    font-style: normal;
+    font-weight: 600;
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+  
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    background: var(--cyan);
+    color: var(--ink);
+    padding: 14px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  
+  .btn-ghost {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    background: transparent;
+    color: var(--white-dim);
+    padding: 14px 36px;
+    border: 1px solid var(--line-bright);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--white); }
+  
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--white-faint);
+    letter-spacing: 0.15em;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+  
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--white-faint), transparent);
+    animation: scrollDown 1.5s ease infinite;
+  }
+  
+  @keyframes scrollDown {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  
+  /* ── STATS BAR ── */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--ink-soft);
+    padding: 28px 5vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .stat-item { padding: 8px; }
+  
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--cyan);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    color: var(--white-faint);
+    letter-spacing: 0.1em;
+  }
+  
+  /* ── SECTION COMMON ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 5vw;
+  }
+  
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--cyan);
+  }
+  
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--white-dim);
+    max-width: 560px;
+    line-height: 1.8;
+  }
+  
+  /* ── THREAT BANNER ── */
+  .threat-banner {
+    background: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 40px 5vw;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .threat-banner::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--red-accent);
+  }
+  
+  .threat-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .threat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--red-accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  
+  .threat-text {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.2vw, 22px);
+    font-weight: 400;
+    color: var(--white-dim);
+    line-height: 1.9;
+  }
+  
+  .threat-text strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+  
+  /* ── SERVICES ── */
+  .services-header {
+    margin-bottom: 64px;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    background: var(--line);
+  }
+  
+  .service-card {
+    background: var(--ink);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  
+  .service-card:hover {
+    background: var(--ink-soft);
+  }
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  
+  .service-card:nth-child(1)::before { background: var(--cyan); }
+  .service-card:nth-child(2)::before { background: var(--amber-accent); }
+  .service-card:nth-child(3)::before { background: var(--red-accent); }
+  
+  .service-card:hover::before { transform: scaleX(1); }
+  
+  .service-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--white-faint);
+    letter-spacing: 0.2em;
+    margin-bottom: 28px;
+  }
+  
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 28px;
+    opacity: 0.85;
+  }
+  
+  .service-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  
+  .service-desc {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.85;
+    margin-bottom: 32px;
+  }
+  
+  .service-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  
+  .service-points li {
+    font-size: 13px;
+    color: var(--white-dim);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  
+  .service-points li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  
+  .service-card:nth-child(1) .service-points li::before { color: var(--cyan); }
+  .service-card:nth-child(2) .service-points li::before { color: var(--amber-accent); }
+  .service-card:nth-child(3) .service-points li::before { color: var(--red-accent); }
+  
+  .service-delivery {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  
+  .delivery-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--white-faint);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  
+  .delivery-text {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.6;
+  }
+  
+  /* ── PHILOSOPHY ── */
+  .philosophy {
+    background: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  
+  .phi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .phi-quote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--white-dim);
+  }
+  
+  .phi-quote em {
+    color: var(--white);
+    font-style: normal;
+    font-weight: 600;
+  }
+  
+  .phi-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--ink);
+    border: 1px solid var(--line);
+    transition: border-color 0.2s;
+  }
+  
+  .pillar:hover { border-color: var(--cyan); }
+  
+  .pillar-icon-wrap {
+    width: 40px;
+    height: 40px;
+    background: var(--cyan-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .pillar-icon-wrap svg { width: 20px; height: 20px; }
+  
+  .pillar-text { font-size: 14px; color: var(--white-dim); }
+  .pillar-text strong { display: block; color: var(--white); font-weight: 500; font-size: 15px; margin-bottom: 2px; }
+  
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    padding: 48px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--white-dim);
+  }
+  
+  .footer-brand span { color: var(--cyan); }
+  
+  .footer-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--white-faint);
+    letter-spacing: 0.08em;
+  }
+  
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .phi-grid { grid-template-columns: 1fr; gap: 48px; }
+    .services-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark"></div>
+    <span class="logo-text">增速科技</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">服务矩阵</a></li>
+    <li><a href="/zhitan/">增速智谈</a></li>
+    <li><a href="/utalk/">增速商谈</a></li>
+    <li><a href="#philosophy">安全理念</a></li>
+    <li><a href="#contact" class="nav-cta">预约咨询</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">企业网络安全防护专家</div>
+  <p class="hero-eyebrow">UPSPEED TECH</p>
+
+  <h1 class="hero-title">
+    <span class="accent">「增速」</span>守护<br>您的企业安全
+  </h1>
+
+  <p class="hero-slogan">
+    从<em>意识培训</em>到<em>漏洞诊断</em>，构建企业网络安全的第一道防线
+  </p>
+
+  <div class="hero-actions">
+    <a href="#services" class="btn-primary">查看服务矩阵</a>
+    <a href="#contact" class="btn-ghost">预约免费咨询</a>
+  </div>
+
+  <div style="margin-top:40px; font-size:12px; font-family:var(--mono); color:var(--white-faint); animation: fadeUp 0.8s 0.45s ease both;">
+    媒体及产业洞察入口：
+    <a href="/zhitan/" style="color:var(--cyan); text-decoration:none; margin: 0 4px;">DanielRobot</a>
+    /
+    <a href="/utalk/" style="color:var(--cyan); text-decoration:none; margin: 0 4px;">UTalk</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">3</span>
+    <span class="stat-label">核心服务产品线</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">37+</span>
+    <span class="stat-label">企业合作客户</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">95%</span>
+    <span class="stat-label">安全事故可通过意识提升预防</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">24h</span>
+    <span class="stat-label">知识库响应支持</span>
+  </div>
+</div>
+
+<div class="threat-banner">
+  <div class="threat-inner">
+    <p class="threat-label">▪ THREAT REALITY · 安全现实</p>
+    <p class="threat-text">
+      一次<strong>弱密码的泄露</strong>、一个不经意点开的<strong>钓鱼链接</strong>，<br>
+      或者一份来源不明的文件——都可能让企业面临数据丢失或勒索的巨大风险。<br>
+      安全不是大厂才需要操心的高深技术，<strong>它离每家企业都很近。</strong>
+    </p>
+  </div>
+</div>
+
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-tag">CORE SERVICES</p>
+    <h2 class="section-title">企业安全防护矩阵</h2>
+    <p class="section-subtitle">三层递进式防护体系，覆盖安全建设的全生命周期——从人的意识，到流程的固化，再到系统的体检。</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <p class="service-number">01 / AWARENESS</p>
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="50" height="50" stroke="#00c8d4" stroke-width="1"/>
+        <circle cx="26" cy="20" r="8" stroke="#00c8d4" stroke-width="1.5"/>
+        <path d="M10 44c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#00c8d4" stroke-width="1.5"/>
+        <line x1="26" y1="4" x2="26" y2="8" stroke="#00c8d4" stroke-width="1.5"/>
+        <line x1="26" y1="32" x2="26" y2="36" stroke="#00c8d4" stroke-width="0.8" stroke-dasharray="2 2"/>
+      </svg>
+      <h3 class="service-title">员工安全意识培训<br><span style="font-size:15px;font-weight:400;color:var(--white-faint)">打造企业"人肉防火墙"</span></h3>
+      <p class="service-desc">
+        安全防线的最大漏洞，往往出在"人"的身上。我们拒绝照本宣科，直接切入员工每天都会遇到的真实场景。
+      </p>
+      <ul class="service-points">
+        <li>密码管理规范 · 多因子认证实战</li>
+        <li>钓鱼邮件 / 高危链接识别技巧</li>
+        <li>社交工程学陷阱深度解析</li>
+        <li>日常防御微习惯养成</li>
+      </ul>
+      <div class="service-delivery">
+        <p class="delivery-label">▸ DELIVERY / 交付形式</p>
+        <p class="delivery-text">线上 / 线下互动式工坊，结合真实入侵案例，让安全意识成为员工肌肉记忆。</p>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <p class="service-number">02 / KNOWLEDGE</p>
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="50" height="50" stroke="#d4a84b" stroke-width="1"/>
+        <rect x="8" y="12" width="36" height="6" stroke="#d4a84b" stroke-width="1.5"/>
+        <rect x="8" y="23" width="28" height="6" stroke="#d4a84b" stroke-width="1.5"/>
+        <rect x="8" y="34" width="20" height="6" stroke="#d4a84b" stroke-width="1.5"/>
+        <circle cx="42" cy="37" r="7" stroke="#d4a84b" stroke-width="1.5"/>
+        <line x1="42" y1="34" x2="42" y2="40" stroke="#d4a84b" stroke-width="1.5"/>
+        <line x1="39" y1="37" x2="45" y2="37" stroke="#d4a84b" stroke-width="1.5"/>
+      </svg>
+      <h3 class="service-title">飞书智能化知识库<br><span style="font-size:15px;font-weight:400;color:var(--white-faint)">企业"全天候安全大脑"</span></h3>
+      <p class="service-desc">
+        培训解决"意识"问题，知识库解决"实操"问题。搭建即查即用的安全保障中枢，让合规要求变成可执行的 SOP。
+      </p>
+      <ul class="service-points">
+        <li>安全 SOP 沉淀 · 合规流程标准化</li>
+        <li>AI 问答助手 · 自然语言实时检索</li>
+        <li>入职 / 离职数据交接安全流程</li>
+        <li>行业预警通报 · 定期案例更新</li>
+      </ul>
+      <div class="service-delivery">
+        <p class="delivery-label">▸ DELIVERY / 交付形式</p>
+        <p class="delivery-text">部署于企业内部飞书环境，分类清晰，支持自然语言检索的专属智能安全知识库。</p>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <p class="service-number">03 / DIAGNOSIS</p>
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="50" height="50" stroke="#e05252" stroke-width="1"/>
+        <circle cx="26" cy="26" r="14" stroke="#e05252" stroke-width="1.5"/>
+        <circle cx="26" cy="26" r="7" stroke="#e05252" stroke-width="1" stroke-dasharray="3 2"/>
+        <circle cx="26" cy="26" r="2" fill="#e05252"/>
+        <line x1="36" y1="16" x2="48" y2="4" stroke="#e05252" stroke-width="1.5"/>
+        <line x1="44" y1="4" x2="48" y2="4" stroke="#e05252" stroke-width="1.5"/>
+        <line x1="48" y1="4" x2="48" y2="8" stroke="#e05252" stroke-width="1.5"/>
+      </svg>
+      <h3 class="service-title">轻量化漏洞挖掘服务<br><span style="font-size:15px;font-weight:400;color:var(--white-faint)">企业"年度安全体检"</span></h3>
+      <p class="service-desc">
+        先体检，后开药。针对非 IT 领域企业，我们的诊断服务有的放矢，报告让管理者看得懂、用得上。
+      </p>
+      <ul class="service-points">
+        <li>自动化扫描 + 人工复核双重诊断</li>
+        <li>红黄绿灯风险等级 · 管理层可读报告</li>
+        <li>对外网站 / 办公网络 / 核心服务器覆盖</li>
+        <li>高危漏洞无缝对接专家深度服务</li>
+      </ul>
+      <div class="service-delivery">
+        <p class="delivery-label">▸ DELIVERY / 交付形式</p>
+        <p class="delivery-text">《企业网络安全基础健康诊断报告》+ 优先级修复建议，一份让决策者直接可用的文件。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--ink-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div style="max-width:1100px; margin:0 auto; padding-bottom: 20px;">
+    <div class="services-header reveal">
+      <p class="section-tag">MEDIA</p>
+      <h2 class="section-title">增速媒体矩阵</h2>
+      <p class="section-subtitle">技术与商业的长期观察与深度对话，为主营业务提供智力支持。</p>
+    </div>
+
+    <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+      <a href="/zhitan/" class="service-card reveal" style="text-decoration:none;">
+        <p class="service-number">01 / DANIELROBOT</p>
+        <h3 class="service-title" style="color:var(--white);">增速智谈</h3>
+        <p class="service-desc">
+          聚焦机器人、AI与前沿技术，输出深度产业洞察与技术解读。
+        </p>
+      </a>
+
+      <a href="/utalk/" class="service-card reveal" style="text-decoration:none;">
+        <p class="service-number">02 / UTALK</p>
+        <h3 class="service-title" style="color:var(--white);">增速商谈</h3>
+        <p class="service-desc">
+          面向全球市场与资本，拆解出海路径与商业模式。
+        </p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy" class="philosophy">
+  <div class="phi-grid">
+    <div class="reveal">
+      <p class="section-tag">OUR BELIEF</p>
+      <blockquote class="phi-quote">
+        真正的安全管理，<br>
+        不是靠堆砌昂贵的设备，<br>
+        而是靠<em>标准化流程</em>、<em>智能化工具</em><br>
+        与<em>全员防范意识</em>的有机结合。
+      </blockquote>
+    </div>
+    <div class="phi-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-icon-wrap">
+          <svg viewBox="0 0 20 20" fill="none" stroke="#00c8d4" stroke-width="1.5">
+            <path d="M10 2L2 6v4c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6L10 2z"/>
+          </svg>
+        </div>
+        <div class="pillar-text">
+          <strong>标准化流程 SOP</strong>
+          复杂的合规要求转化为每个人都能执行的操作手册
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon-wrap">
+          <svg viewBox="0 0 20 20" fill="none" stroke="#00c8d4" stroke-width="1.5">
+            <circle cx="10" cy="10" r="8"/>
+            <path d="M10 6v4l3 3"/>
+          </svg>
+        </div>
+        <div class="pillar-text">
+          <strong>智能化工具支撑</strong>
+          AI 知识库让安全响应从"靠人记"升级为"靠系统查"
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon-wrap">
+          <svg viewBox="0 0 20 20" fill="none" stroke="#00c8d4" stroke-width="1.5">
+            <circle cx="6" cy="8" r="3"/>
+            <circle cx="14" cy="8" r="3"/>
+            <path d="M1 18c0-3.866 2.239-7 5-7h8c2.761 0 5 3.134 5 7"/>
+          </svg>
+        </div>
+        <div class="pillar-text">
+          <strong>全员防范意识</strong>
+          安全文化从培训落地，让每位员工都成为防线的一部分
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-brand">
+    增速科技 · <span>Upspeed Tech</span><br>
+    <span style="font-size:12px;color:var(--white-faint)">
+      企业安全服务 · 科技媒体矩阵
+    </span>
+  </div>
+
+  <div class="footer-note">
+    <a href="/zhitan/" style="color:var(--white-faint); text-decoration:none;">DanielRobot</a> · 
+    <a href="/utalk/" style="color:var(--white-faint); text-decoration:none;">UTalk</a><br>
+    © 2026 Upspeed Tech. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>增速科技 Upspeed Tech｜企业网络安全与AI安全服务</title>
+<meta name="description" content="增速科技提供企业网络安全防护、AI安全解决方案，并运营增速智谈（DanielRobot）与增速商谈（UTalk）科技媒体。">
+<link rel="canonical" href="https://danielrobot.com/">
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -742,4 +1664,4 @@
 </footer>
 
 </body>
-</html>
+</html> -->
