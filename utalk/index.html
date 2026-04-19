@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>增速商谈 UTALK · 对话商业前沿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── CSS Variables ─────────────────────── */
+    :root {
+      --navy-900: #04101f;
+      --navy-800: #071829;
+      --navy-700: #0b2240;
+      --navy-600: #0f2d55;
+      --navy-500: #163a6b;
+      --gold:     #b8963e;
+      --gold-lt:  #d4b165;
+      --gold-pale:#f0d98a;
+      --white:    #f7f4ef;
+      --muted:    #8a9bb5;
+      --border:   rgba(184,150,62,0.22);
+      --border-lt:rgba(184,150,62,0.10);
+      --sans: 'DM Sans', 'Noto Sans SC', sans-serif;
+      --serif: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    }
+
+    /* ── Reset & Base ─────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--navy-900);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Noise Overlay ────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Topbar ───────────────────────────── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(4,16,31,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--serif);
+    }
+    .topbar-logo .logo-badge {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-500), var(--navy-700));
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--gold-lt);
+    }
+    .topbar-logo span { font-size: 16px; letter-spacing: 0.08em; color: var(--white); font-weight: 400; }
+    .topbar-logo em { font-style: normal; color: var(--gold-lt); font-size: 11px; letter-spacing: 0.2em; margin-left: 2px; }
+    .topbar-nav { display: flex; gap: 36px; align-items: center; }
+    .topbar-nav a {
+      font-size: 12px; letter-spacing: 0.18em; color: var(--muted);
+      text-transform: uppercase; transition: color 0.25s;
+    }
+    .topbar-nav a:hover { color: var(--gold-lt); }
+    .topbar-cta {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold-lt); padding: 8px 20px; border-radius: 2px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .topbar-cta:hover { background: var(--gold); color: var(--navy-900); }
+
+    /* ── Hero ─────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 80px;
+      overflow: hidden;
+    }
+    /* radial glow */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 75% 30%, rgba(22,58,107,0.55) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 40% at 20% 80%, rgba(184,150,62,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(184,150,62,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,150,62,0.05) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-eyebrow {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 32px;
+    }
+    .hero-eyebrow .line { height: 1px; width: 48px; background: var(--gold); }
+    .hero-eyebrow span { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-lt); }
+    .hero-title {
+      position: relative; z-index: 2;
+      font-family: var(--serif);
+      font-size: clamp(52px, 8vw, 108px);
+      font-weight: 300; line-height: 1.02;
+      letter-spacing: -0.01em;
+      max-width: 900px;
+      animation: fadeUp 1s ease both;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub {
+      position: relative; z-index: 2;
+      margin-top: 28px;
+      font-size: 14px; letter-spacing: 0.12em; color: var(--muted);
+      max-width: 560px; line-height: 2;
+      animation: fadeUp 1s 0.15s ease both;
+    }
+    .hero-actions {
+      position: relative; z-index: 2;
+      margin-top: 48px; display: flex; gap: 20px; align-items: center;
+      animation: fadeUp 1s 0.28s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold);
+      color: var(--navy-900);
+      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 14px 32px; border-radius: 2px;
+      font-weight: 500;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .btn-ghost:hover { color: var(--white); }
+    .btn-ghost svg { transition: transform 0.25s; }
+    .btn-ghost:hover svg { transform: translateX(4px); }
+    /* floating stats */
+    .hero-stats {
+      position: absolute; right: 48px; bottom: 80px; z-index: 2;
+      display: flex; flex-direction: column; gap: 32px;
+      animation: fadeLeft 1s 0.35s ease both;
+    }
+    .stat { text-align: right; }
+    .stat-num { font-family: var(--serif); font-size: 42px; font-weight: 300; color: var(--white); line-height: 1; }
+    .stat-num em { color: var(--gold-lt); font-style: normal; }
+    .stat-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    .stat-line { width: 100%; height: 1px; background: var(--border); margin-top: 8px; }
+
+    /* ── Ticker ───────────────────────────── */
+    .ticker {
+      position: relative; z-index: 10;
+      background: var(--gold);
+      overflow: hidden; height: 36px;
+      display: flex; align-items: center;
+    }
+    .ticker-inner {
+      display: flex; white-space: nowrap;
+      animation: ticker 32s linear infinite;
+    }
+    .ticker-item {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--navy-900); font-weight: 500;
+      padding: 0 48px;
+    }
+    .ticker-sep { color: var(--navy-700); }
+
+    /* ── Section Commons ──────────────────── */
+    section { position: relative; z-index: 1; }
+    .section-label {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 48px;
+    }
+    .section-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .section-label span { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-lt); }
+    .section-label .hline { flex: 1; height: 1px; background: var(--border-lt); }
+
+    /* ── Featured Articles ────────────────── */
+    .featured {
+      padding: 100px 48px;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+    }
+    .card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(15,45,85,0.5), rgba(7,24,41,0.8));
+      border: 1px solid var(--border-lt);
+      overflow: hidden;
+      transition: border-color 0.3s;
+      cursor: pointer;
+    }
+    .card:hover { border-color: var(--border); }
+    .card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(184,150,62,0.04) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .card:hover::before { opacity: 1; }
+    .card-inner { padding: 40px; height: 100%; display: flex; flex-direction: column; }
+    .card.featured-main { grid-row: 1 / 3; }
+    .card.featured-main .card-inner { padding: 56px; min-height: 580px; }
+    .card-tag {
+      font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold-lt); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+    .card-title {
+      font-family: var(--serif); font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 400; line-height: 1.28; color: var(--white);
+      margin-bottom: 16px; flex: 1;
+    }
+    .card.featured-main .card-title { font-size: clamp(28px, 3vw, 42px); }
+    .card-excerpt {
+      font-size: 13px; line-height: 1.9; color: var(--muted);
+      margin-bottom: 28px; display: -webkit-box;
+      -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card.featured-main .card-excerpt { -webkit-line-clamp: 5; }
+    .card-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto;
+    }
+    .card-date { font-size: 11px; letter-spacing: 0.12em; color: var(--muted); }
+    .card-arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-lt); transition: all 0.25s;
+    }
+    .card:hover .card-arrow { background: var(--gold); border-color: var(--gold); color: var(--navy-900); }
+    .card-num {
+      position: absolute; top: 40px; right: 40px;
+      font-family: var(--serif); font-size: 72px; font-weight: 300;
+      color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none;
+    }
+    /* visual strip on featured-main */
+    .card-visual {
+      height: 6px; width: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-pale) 50%, transparent 100%);
+      margin-bottom: 40px;
+    }
+
+    /* ── Topics Row ───────────────────────── */
+    .topics {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .topics-row { display: flex; gap: 2px; }
+    .topic-item {
+      flex: 1; padding: 32px 28px;
+      border: 1px solid var(--border-lt);
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+    .topic-item:hover {
+      border-color: var(--border);
+      background: rgba(15,45,85,0.35);
+    }
+    .topic-icon { font-size: 24px; margin-bottom: 4px; }
+    .topic-name { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--white); }
+    .topic-desc { font-size: 12px; line-height: 1.8; color: var(--muted); }
+    .topic-count { font-size: 11px; letter-spacing: 0.12em; color: var(--gold-lt); margin-top: auto; }
+
+    /* ── Latest Articles ──────────────────── */
+    .latest { padding: 100px 48px; border-bottom: 1px solid var(--border-lt); }
+    .latest-list { display: flex; flex-direction: column; }
+    .article-row {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      gap: 32px; align-items: start;
+      padding: 32px 0; border-bottom: 1px solid var(--border-lt);
+      transition: opacity 0.25s; cursor: pointer;
+    }
+    .article-row:last-child { border-bottom: none; }
+    .article-row:hover { opacity: 0.75; }
+    .article-row:first-child { border-top: 1px solid var(--border-lt); }
+    .article-idx {
+      font-family: var(--serif); font-size: 36px; font-weight: 300;
+      color: rgba(255,255,255,0.12); line-height: 1; padding-top: 4px;
+    }
+    .article-body { display: flex; flex-direction: column; gap: 10px; }
+    .article-tag {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-lt);
+    }
+    .article-title { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.35; color: var(--white); }
+    .article-excerpt { font-size: 13px; line-height: 1.85; color: var(--muted); max-width: 640px; }
+    .article-right { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; padding-top: 4px; }
+    .article-date { font-size: 11px; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap; }
+    .article-read {
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold-lt); display: flex; align-items: center; gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px; transition: border-color 0.25s;
+    }
+    .article-row:hover .article-read { border-color: var(--gold-lt); }
+
+    /* ── Marquee Region ───────────────────── */
+    .marquee-region {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-lt);
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+    .marquee-track.reverse { animation-direction: reverse; animation-duration: 36s; }
+    .marquee-item {
+      font-family: var(--serif); font-size: clamp(36px,5vw,60px);
+      font-weight: 300; color: rgba(255,255,255,0.06);
+      padding: 0 48px; white-space: nowrap;
+    }
+    .marquee-item em { color: rgba(184,150,62,0.25); font-style: italic; }
+
+    /* ── About Block ──────────────────────── */
+    .about {
+      padding: 100px 48px;
+      border-bottom: 1px solid var(--border-lt);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .about-left {}
+    .about-headline {
+      font-family: var(--serif); font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300; line-height: 1.2; margin-bottom: 32px;
+    }
+    .about-headline em { color: var(--gold-lt); font-style: italic; }
+    .about-body { font-size: 14px; line-height: 2.1; color: var(--muted); }
+    .about-right { display: flex; flex-direction: column; gap: 24px; padding-top: 8px; }
+    .about-card {
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+    }
+    .about-card-title { font-family: var(--serif); font-size: 18px; font-weight: 400; margin-bottom: 8px; }
+    .about-card-body { font-size: 13px; line-height: 1.85; color: var(--muted); }
+
+    /* ── Events Strip ─────────────────────── */
+    .events {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .event-card {
+      padding: 36px 32px;
+      border: 1px solid var(--border-lt);
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color 0.3s; cursor: pointer;
+    }
+    .event-card:hover { border-color: var(--border); }
+    .event-date-badge {
+      width: 52px; height: 52px;
+      border: 1px solid var(--gold);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
+    }
+    .event-date-badge .day { font-family: var(--serif); font-size: 22px; font-weight: 300; line-height: 1; color: var(--gold-lt); }
+    .event-date-badge .mon { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .event-title { font-family: var(--serif); font-size: 17px; font-weight: 400; line-height: 1.4; }
+    .event-location { font-size: 11px; letter-spacing: 0.12em; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+    /* ── Contact / Footer ─────────────────── */
+    .footer-cta {
+      padding: 100px 48px 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      border-bottom: 1px solid var(--border-lt);
+    }
+    .footer-cta-text { font-family: var(--serif); font-size: clamp(32px,3.5vw,48px); font-weight: 300; line-height: 1.25; }
+    .footer-cta-text em { color: var(--gold-lt); font-style: italic; }
+    .footer-cta-form { display: flex; flex-direction: column; gap: 16px; }
+    .input-row { display: flex; gap: 12px; }
+    .form-input {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 18px; font-size: 13px;
+      font-family: var(--sans);
+      border-radius: 2px;
+      outline: none; transition: border-color 0.25s;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--gold); }
+    .form-submit {
+      background: var(--gold); color: var(--navy-900);
+      border: none; padding: 14px 32px;
+      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 500; font-family: var(--sans);
+      cursor: pointer; border-radius: 2px;
+      transition: background 0.25s;
+    }
+    .form-submit:hover { background: var(--gold-lt); }
+    footer {
+      padding: 40px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { font-family: var(--serif); font-size: 18px; color: var(--muted); letter-spacing: 0.06em; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); transition: color 0.25s; }
+    .footer-links a:hover { color: var(--gold-lt); }
+    .footer-copy { font-size: 11px; color: rgba(138,155,181,0.4); letter-spacing: 0.08em; }
+
+    /* ── Animations ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    /* scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- ── TOPBAR ──────────────────────────────── -->
+<header class="topbar">
+  <a href="#" class="topbar-logo">
+    <div class="logo-badge">U</div>
+    <div>
+      <span>增速商谈</span>
+      <em>UTALK</em>
+    </div>
+  </a>
+  <nav class="topbar-nav">
+    <a href="#featured">最新报道</a>
+    <a href="#topics">议题领域</a>
+    <a href="#about">关于栏目</a>
+    <a href="#events">活动日历</a>
+  </nav>
+  <a href="#contact" class="topbar-cta">联系我们</a>
+</header>
+
+<!-- ── HERO ───────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-eyebrow">
+    <div class="line"></div>
+    <span>UTALK · 增速商谈 · Since 2023</span>
+  </div>
+
+  <h1 class="hero-title">
+    <em>对话</em>商业前沿<br/>洞见全球商机
+  </h1>
+
+  <p class="hero-sub">
+    专注商业访谈与国际创投，与企业家、投资人和行业领袖深度对话——
+    在全球化的浪潮中，我们记录每一个关键时刻的声音。
+  </p>
+
+  <div class="hero-actions">
+    <a href="#featured" class="btn-primary">
+      浏览最新报道
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#about" class="btn-ghost">
+      了解增速商谈
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">100<em>+</em></div>
+      <div class="stat-label">专访嘉宾</div>
+      <div class="stat-line"></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20<em>+</em></div>
+      <div class="stat-label">国际论坛</div>
+      <div class="stat-line"></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">15<em>+</em></div>
+      <div class="stat-label">覆盖国家</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ─────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">加纳总统投资论坛 · 北京国贸 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">尼日利亚非洲掘金研讨会 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">中马创业沙龙 · 三里屯 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">UTALK × GEIP 全球经济与创新平台 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">跨境电商新赛道 · 出海先锋系列 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">AI × 国际传播 · 前沿议题 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">加纳总统投资论坛 · 北京国贸 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">尼日利亚非洲掘金研讨会 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">中马创业沙龙 · 三里屯 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">UTALK × GEIP 全球经济与创新平台 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">跨境电商新赛道 · 出海先锋系列 <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">AI × 国际传播 · 前沿议题 <span class="ticker-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- ── FEATURED ARTICLES ───────────────────── -->
+<section class="featured" id="featured">
+  <div class="section-label reveal">
+    <div class="dot"></div>
+    <span>Featured Reports · 重磅报道</span>
+    <div class="hline"></div>
+  </div>
+
+  <div class="featured-grid">
+    <!-- MAIN CARD -->
+    <article class="card featured-main reveal reveal-d1">
+      <div class="card-inner">
+        <div class="card-visual"></div>
+        <div class="card-tag">国际论坛 · International Forum</div>
+        <h2 class="card-title">加纳共和国总统投资论坛在京召开，增速商谈主理人受邀参会</h2>
+        <p class="card-excerpt">
+          2025年10月14日，加纳共和国总统约翰·德拉马尼·马哈马亲临北京国贸中心，以"携手共促繁荣：解锁加纳投资机遇"为主题，汇聚政府、企业、国际组织代表，共同探讨中非合作新路径。增速商谈主理人王霏女士受邀出席，展现中非民间合作蓬勃生机。
+        </p>
+        <div class="card-meta">
+          <span class="card-date">2025 · 10 · 15 &ensp;|&ensp; 北京</span>
+          <div class="card-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-num">01</div>
+    </article>
+
+    <!-- SIDE CARD 1 -->
+    <article class="card reveal reveal-d2">
+      <div class="card-inner">
+        <div class="card-tag">创业访谈 · Entrepreneur Series</div>
+        <h2 class="card-title">00后，211休学创业——在跨境电商赛道走出一条人迹罕至的路</h2>
+        <p class="card-excerpt">从中国地质大学材料专业休学，全职进军TikTok美区内容电商，杨硕分享如何以极小团队捕捉跨境红利期。</p>
+        <div class="card-meta">
+          <span class="card-date">2024 · 04 · 19</span>
+          <div class="card-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-num">02</div>
+    </article>
+
+    <!-- SIDE CARD 2 -->
+    <article class="card reveal reveal-d3">
+      <div class="card-inner">
+        <div class="card-tag">非洲市场 · Africa Insight</div>
+        <h2 class="card-title">非洲掘金线上研讨会圆满落幕——共探尼日利亚投资新机遇</h2>
+        <p class="card-excerpt">Alaro City自贸区中国区顾问李依轩带领百余投资人聚焦尼日利亚市场，深度解析自贸区优势、外汇风险与中企布局路径。</p>
+        <div class="card-meta">
+          <span class="card-date">2024 · 09 · 11</span>
+          <div class="card-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-num">03</div>
+    </article>
+  </div>
+</section>
+
+<!-- ── TOPICS ROW ──────────────────────────── -->
+<section class="topics" id="topics">
+  <div class="section-label reveal">
+    <div class="dot"></div>
+    <span>Topic Areas · 议题领域</span>
+    <div class="hline"></div>
+  </div>
+
+  <div class="topics-row">
+    <div class="topic-item reveal">
+      <div class="topic-icon">🌍</div>
+      <div class="topic-name">非洲与新兴市场</div>
+      <div class="topic-desc">尼日利亚、加纳、肯尼亚等非洲市场深度解析，投资环境与自贸区机遇。</div>
+      <div class="topic-count">Africa & Emerging Markets</div>
+    </div>
+    <div class="topic-item reveal reveal-d1">
+      <div class="topic-icon">🚀</div>
+      <div class="topic-name">创业与投资</div>
+      <div class="topic-desc">对话一线创业者与投资人，记录中国创投生态最鲜活的声音与故事。</div>
+      <div class="topic-count">Startup & Venture Capital</div>
+    </div>
+    <div class="topic-item reveal reveal-d2">
+      <div class="topic-icon">🤖</div>
+      <div class="topic-name">AI与科技前沿</div>
+      <div class="topic-desc">人工智能在商业传播、跨境电商、国际经贸中的创新应用与落地实践。</div>
+      <div class="topic-count">AI & Tech Innovation</div>
+    </div>
+    <div class="topic-item reveal reveal-d3">
+      <div class="topic-icon">🌐</div>
+      <div class="topic-name">国际商务外交</div>
+      <div class="topic-desc">中马、中非、中拉等双边经贸合作论坛，国际商务沙龙与峰会报道。</div>
+      <div class="topic-count">International Business</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LATEST ARTICLES ─────────────────────── -->
+<section class="latest" id="latest">
+  <div class="section-label reveal">
+    <div class="dot"></div>
+    <span>Latest · 精选文章</span>
+    <div class="hline"></div>
+  </div>
+
+  <div class="latest-list">
+    <div class="article-row reveal">
+      <div class="article-idx">01</div>
+      <div class="article-body">
+        <div class="article-tag">国际论坛 · Beijing 2025</div>
+        <div class="article-title">加纳共和国总统投资论坛在京召开，增速商谈主理人受邀参会</div>
+        <div class="article-excerpt">马哈马总统亲临主讲，吴严明、Elizabeth Ofosu-Adjare等重量级嘉宾出席，共议中非投资新纪元。</div>
+      </div>
+      <div class="article-right">
+        <span class="article-date">2025 · 10 · 15</span>
+        <a href="https://mp.weixin.qq.com/s/Qrd81EpmRv4lG7cwVdcNlg" class="article-read">阅读全文 →</a>
+      </div>
+    </div>
+
+    <div class="article-row reveal reveal-d1">
+      <div class="article-idx">02</div>
+      <div class="article-body">
+        <div class="article-tag">中马商业沙龙 · Beijing 2024</div>
+        <div class="article-title">"中马共进——共建繁荣的桥梁"：首届中马商业沙龙成功举办</div>
+        <div class="article-excerpt">UTALK增速商谈与GEIP全球经济与创新平台联合举办，围绕AI技术、国际化发展与中马贸易合作展开深度对话。</div>
+      </div>
+      <div class="article-right">
+        <span class="article-date">2024 · 12 · 09</span>
+        <a href="https://mp.weixin.qq.com/s/BFJtiVedhhsyWSYVAYb21A" class="article-read">阅读全文 →</a>
+      </div>
+    </div>
+
+    <div class="article-row reveal reveal-d2">
+      <div class="article-idx">03</div>
+      <div class="article-body">
+        <div class="article-tag">非洲掘金系列 · Online 2024</div>
+        <div class="article-title">非洲掘金线上研讨会——共探尼日利亚投资新机遇</div>
+        <div class="article-excerpt">Alaro City自贸区中国区顾问李依轩分享：免税政策、便捷物流与中企非洲布局的最优路径选择。</div>
+      </div>
+      <div class="article-right">
+        <span class="article-date">2024 · 09 · 11</span>
+        <a href="https://mp.weixin.qq.com/s/sQIv6YTLz00lJl3ZOjLnLA" class="article-read">阅读全文 →</a>
+      </div>
+    </div>
+
+    <div class="article-row reveal reveal-d3">
+      <div class="article-idx">04</div>
+      <div class="article-body">
+        <div class="article-tag">创业者专访 · Entrepreneur 2024</div>
+        <div class="article-title">00后，211休学创业——在跨境电商赛道走出一条人迹罕至的路</div>
+        <div class="article-excerpt">专访创业者杨硕：放弃地大材料专业，全职进军TikTok美区内容电商，六人团队如何把握蓝海红利期。</div>
+      </div>
+      <div class="article-right">
+        <span class="article-date">2024 · 04 · 19</span>
+        <a href="https://mp.weixin.qq.com/s/bC-VOey_FnbfeCm0seiezQ" class="article-read">阅读全文 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ─────────────────────────────── -->
+<div class="marquee-region">
+  <div class="marquee-track">
+    <span class="marquee-item">商业访谈</span>
+    <span class="marquee-item"><em>Global Investment</em></span>
+    <span class="marquee-item">创投圈声音</span>
+    <span class="marquee-item"><em>Africa Rising</em></span>
+    <span class="marquee-item">国际创业</span>
+    <span class="marquee-item"><em>AI & Innovation</em></span>
+    <span class="marquee-item">商业访谈</span>
+    <span class="marquee-item"><em>Global Investment</em></span>
+    <span class="marquee-item">创投圈声音</span>
+    <span class="marquee-item"><em>Africa Rising</em></span>
+    <span class="marquee-item">国际创业</span>
+    <span class="marquee-item"><em>AI & Innovation</em></span>
+  </div>
+</div>
+
+<!-- ── ABOUT ───────────────────────────────── -->
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <h2 class="about-headline">
+      用深度<em>对话</em><br/>丈量商业世界
+    </h2>
+    <p class="about-body">
+      增速商谈（UTALK）是一档专注于创投圈与国际商务的商业访谈栏目，致力于与杰出企业家、投资人和行业领袖展开深度对话。<br/><br/>
+      自创立以来，我们参与了非洲、东南亚、拉丁美洲等新兴市场的重要投资论坛，与来自十余个国家的商界精英同台对话，记录全球化浪潮中中国商业力量的每一步跃进。<br/><br/>
+      我们相信，真正有价值的商业声音，值得被更多人听见。
+    </p>
+  </div>
+  <div class="about-right">
+    <div class="about-card reveal reveal-d1">
+      <div class="about-card-title">深度访谈</div>
+      <div class="about-card-body">与创业者、投资人一对一深度对话，还原商业决策背后的真实逻辑与人性温度。</div>
+    </div>
+    <div class="about-card reveal reveal-d2">
+      <div class="about-card-title">国际视野</div>
+      <div class="about-card-body">扎根北京，链接全球。从非洲到东南亚，从中马到中拉，聚焦新兴市场的商业机遇与挑战。</div>
+    </div>
+    <div class="about-card reveal reveal-d3">
+      <div class="about-card-title">产业洞察</div>
+      <div class="about-card-body">AI技术、跨境电商、新能源、数字经济——持续追踪重塑商业格局的前沿议题与产业变革。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ──────────────────────────────── -->
+<section class="events" id="events">
+  <div class="section-label reveal">
+    <div class="dot"></div>
+    <span>Events · 往期活动</span>
+    <div class="hline"></div>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card reveal">
+      <div class="event-date-badge"><div class="day">14</div><div class="mon">Oct 2025</div></div>
+      <div class="event-title">加纳共和国总统投资论坛</div>
+      <div class="event-location">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        北京国贸中心
+      </div>
+    </div>
+    <div class="event-card reveal reveal-d1">
+      <div class="event-date-badge"><div class="day">07</div><div class="mon">Dec 2024</div></div>
+      <div class="event-title">中马共进 · 首届中马商业沙龙</div>
+      <div class="event-location">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        三里屯街道商会
+      </div>
+    </div>
+    <div class="event-card reveal reveal-d2">
+      <div class="event-date-badge"><div class="day">30</div><div class="mon">Aug 2024</div></div>
+      <div class="event-title">非洲掘金 · 尼日利亚投资研讨会</div>
+      <div class="event-location">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        线上举办 · Online
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT / FOOTER CTA ───────────────── -->
+<section class="footer-cta" id="contact">
+  <div class="reveal">
+    <div class="section-label" style="margin-bottom:28px">
+      <div class="dot"></div><span>Contact · 联系我们</span>
+    </div>
+    <h2 class="footer-cta-text">
+      有意合作？<br/>让我们<em>一起</em>发声。
+    </h2>
+  </div>
+  <div class="footer-cta-form reveal reveal-d2">
+    <p style="font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:8px;">
+      无论您是希望接受专访的创业者、寻求媒体合作的机构，还是有意赞助的品牌方，欢迎与增速商谈团队联系。
+    </p>
+    <div class="input-row">
+      <input class="form-input" type="text" placeholder="您的姓名 Name" />
+      <input class="form-input" type="text" placeholder="机构 Organization" />
+    </div>
+    <input class="form-input" type="email" placeholder="邮箱 Email" />
+    <input class="form-input" type="text" placeholder="合作意向 Inquiry Type" />
+    <button class="form-submit">发送消息 Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">增速商谈 UTALK</div>
+  <nav class="footer-links">
+    <a href="#featured">报道</a>
+    <a href="#topics">议题</a>
+    <a href="#about">关于</a>
+    <a href="#events">活动</a>
+    <a href="#contact">合作</a>
+  </nav>
+  <div class="footer-copy">© 2026 增速商谈 UTALK · All Rights Reserved</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.topbar-nav a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--gold-lt)' : '';
+    });
+  });
+
+  // Duplicate marquee for seamless loop
+  document.querySelectorAll('.marquee-track').forEach(t => {
+    t.innerHTML += t.innerHTML;
+  });
+</script>
+</body>
+</html>
