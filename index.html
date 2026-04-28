@@ -641,6 +641,197 @@
     .services-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; text-align: center; }
   }
+
+
+  /* ── 预约咨询弹窗 ── */
+#modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+  animation: modalSlideUp 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-logo {
+  width: 32px;
+  height: 32px;
+  background: var(--cyan);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-logo svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.01em;
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  color: #888;
+  margin-top: 1px;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  font-size: 16px;
+  color: #555;
+}
+
+.modal-close:hover {
+  background: #ebebeb;
+}
+
+.modal-body {
+  position: relative;
+  height: 560px;
+  max-height: calc(90vh - 130px);
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.modal-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.iframe-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #999;
+  font-size: 14px;
+  pointer-events: none;
+  background: #fff;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid #e0e0e0;
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+iframe.loaded + .iframe-loading {
+  display: none;
+}
+
+.modal-footer {
+  padding: 10px 24px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.modal-footer a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.modal-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .modal-box {
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .modal-body {
+    height: 460px;
+    min-height: 400px;
+  }
+
+  .modal-header {
+    padding: 16px 18px;
+  }
+
+  .modal-subtitle {
+    display: none;
+  }
+}
+
 </style>
 </head>
 
@@ -656,7 +847,7 @@
     <li><a href="/zhitan/">增速智谈</a></li>
     <li><a href="/utalk/">增速商谈</a></li>
     <li><a href="#philosophy">安全理念</a></li>
-    <li><a href="#contact" class="nav-cta">预约咨询</a></li>
+    <li><a href="#" class="nav-cta" onclick="openModal(); return false;">预约咨询</a></li>
   </ul>
 </nav>
 
@@ -674,7 +865,7 @@
 
   <div class="hero-actions">
     <a href="#services" class="btn-primary">查看服务矩阵</a>
-    <a href="#contact" class="btn-ghost">预约免费咨询</a>
+    <a href="#" class="btn-ghost" onclick="openModal(); return false;">预约免费咨询</a>
   </div>
 
   <div style="margin-top:40px; font-size:12px; font-family:var(--mono); color:var(--white-faint); animation: fadeUp 0.8s 0.45s ease both;">
@@ -904,6 +1095,49 @@
   </div>
 </footer>
 
+<!-- 预约咨询弹窗 -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-logo">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="7" stroke="#fff" stroke-width="1.5"/>
+            <path d="M6 9h6M9 6v6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="modal-title">预约咨询</div>
+          <div class="modal-subtitle">增速科技 · 填写后我们将在 1 个工作日内联系您</div>
+        </div>
+      </div>
+
+      <button class="modal-close" onclick="closeModal()" aria-label="关闭">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <iframe
+        id="feishu-form"
+        src="https://jmx9kgn7nz.feishu.cn/share/base/form/shrcncmbT9nBPSYMpXzW1OaQ1ph"
+        title="预约咨询问卷"
+        allow="clipboard-write"
+        onload="this.classList.add('loaded')"
+      ></iframe>
+
+      <div class="iframe-loading">
+        <div class="spinner"></div>
+        <span>问卷加载中…</span>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      信息仅用于服务沟通，不作其他用途 ·
+      <a href="https://danielrobot.com/" target="_blank">增速科技官网</a>
+    </div>
+
+  </div>
+</div>
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
