@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>增速商谈 UTALK · 对话商业前沿</title>
+  <title>增速商谈 UTALK｜商业访谈、国际创投与企业出海</title>
+<meta name="description" content="增速商谈是北京增速科技有限公司运营的商业媒体，聚焦企业家与投资人访谈、国际创投、企业出海和全球商业机遇。">
+<link rel="canonical" href="https://upspeedtech.com/utalk/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="增速商谈 UTALK｜商业访谈、国际创投与企业出海">
+<meta property="og:description" content="增速商谈是北京增速科技有限公司运营的商业媒体，聚焦企业家与投资人访谈、国际创投、企业出海和全球商业机遇。">
+<meta property="og:url" content="https://upspeedtech.com/utalk/">
+<meta property="og:image" content="https://upspeedtech.com/pics/upspeed_logo.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://upspeedtech.com/#organization","name":"北京增速科技有限公司","legalName":"北京增速科技有限公司","alternateName":["增速科技","Upspeed Tech"],"url":"https://upspeedtech.com/","logo":"https://upspeedtech.com/pics/upspeed_logo.png","brand":[{"@type":"Brand","name":"增速智谈","alternateName":"DanielRobot","url":"https://upspeedtech.com/zhitan/"},{"@type":"Brand","name":"增速商谈","alternateName":"UTALK","url":"https://upspeedtech.com/utalk/"}]},{"@type":"CollectionPage","@id":"https://upspeedtech.com/utalk/#page","url":"https://upspeedtech.com/utalk/","name":"增速商谈 UTALK｜商业访谈、国际创投与企业出海","description":"增速商谈是北京增速科技有限公司运营的商业媒体，聚焦企业家与投资人访谈、国际创投、企业出海和全球商业机遇。","inLanguage":"zh-CN","publisher":{"@id":"https://upspeedtech.com/#organization"}}]}</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -442,6 +451,35 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
+    @media (max-width: 900px) {
+      .topbar { padding: 0 24px; }
+      .topbar-nav { gap: 16px; }
+      .hero-stats { position: static; flex-direction: row; justify-content: space-between; margin-top: 36px; }
+      .stat { text-align: left; }
+      .featured-grid, .about, .footer-cta { grid-template-columns: 1fr; gap: 32px; }
+      .card.featured-main { grid-row: auto; }
+      .card.featured-main .card-inner { min-height: auto; padding: 32px; }
+      .topics-row { flex-wrap: wrap; }
+      .topic-item { flex: 1 1 40%; }
+      footer { flex-wrap: wrap; gap: 24px; }
+    }
+    @media (max-width: 600px) {
+      .topbar-nav { display: none; }
+      .topbar-logo, .topbar-cta { flex-shrink: 0; }
+      .hero { min-height: auto; padding: 144px 24px 56px; }
+      .hero-title { font-size: 42px; }
+      .hero-actions { flex-wrap: wrap; gap: 24px; }
+      .featured, .topics, .latest, .about, .events, .footer-cta { padding: 56px 24px; }
+      .card-inner { padding: 24px; }
+      .topic-item { flex-basis: 100%; }
+      .article-row { grid-template-columns: 32px minmax(0,1fr); gap: 16px; }
+      .article-right { grid-column: 2; align-items: flex-start; }
+      .events-grid { grid-template-columns: 1fr; }
+      .input-row { flex-direction: column; }
+      .form-input { min-width: 0; width: 100%; }
+      footer { padding: 32px 24px; }
+      .footer-links { flex-wrap: wrap; gap: 20px; }
+    }
     /* scroll reveal */
     .reveal {
       opacity: 0; transform: translateY(24px);
@@ -457,7 +495,7 @@
 
 <!-- ── TOPBAR ──────────────────────────────── -->
 <header class="topbar">
-  <a href="#" class="topbar-logo">
+  <a href="/utalk/" class="topbar-logo">
     <div class="logo-badge">U</div>
     <div>
       <span>增速商谈</span>
@@ -491,6 +529,7 @@
     在全球化的浪潮中，我们记录每一个关键时刻的声音。
   </p>
 
+  <nav aria-label="品牌导航" style="display:flex;flex-wrap:wrap;gap:20px;margin:20px 0;color:#e8c78c;font-size:14px"><a href="/">增速科技首页</a><a href="/zhitan/">增速智谈</a><a href="/company.html">北京增速科技有限公司</a></nav>
   <div class="hero-actions">
     <a href="#featured" class="btn-primary">
       浏览最新报道
@@ -814,7 +853,7 @@
     <a href="#events">活动</a>
     <a href="#contact">合作</a>
   </nav>
-  <div class="footer-copy">© 2026 增速商谈 UTALK · All Rights Reserved</div>
+  <div class="footer-copy">© 2026 北京增速科技有限公司 · 增速商谈 UTALK</div>
 </footer>
 
 <script>

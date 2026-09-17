@@ -3,46 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>增速智谈  Danielrobot - 链接创新，增速制造</title>
+    <title>增速智谈 DanielRobot｜机器人、AI 与硬科技产业洞察</title>
+<meta name="description" content="增速智谈是北京增速科技有限公司运营的科技媒体，关注机器人、人工智能、科学家创业与核心零部件，提供深度访谈和产业研究。">
+<link rel="canonical" href="https://upspeedtech.com/zhitan/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="增速智谈 DanielRobot｜机器人、AI 与硬科技产业洞察">
+<meta property="og:description" content="增速智谈是北京增速科技有限公司运营的科技媒体，关注机器人、人工智能、科学家创业与核心零部件，提供深度访谈和产业研究。">
+<meta property="og:url" content="https://upspeedtech.com/zhitan/">
+<meta property="og:image" content="https://upspeedtech.com/pics/upspeed_logo.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://upspeedtech.com/#organization","name":"北京增速科技有限公司","legalName":"北京增速科技有限公司","alternateName":["增速科技","Upspeed Tech"],"url":"https://upspeedtech.com/","logo":"https://upspeedtech.com/pics/upspeed_logo.png","brand":[{"@type":"Brand","name":"增速智谈","alternateName":"DanielRobot","url":"https://upspeedtech.com/zhitan/"},{"@type":"Brand","name":"增速商谈","alternateName":"UTALK","url":"https://upspeedtech.com/utalk/"}]},{"@type":"CollectionPage","@id":"https://upspeedtech.com/zhitan/#page","url":"https://upspeedtech.com/zhitan/","name":"增速智谈 DanielRobot｜机器人、AI 与硬科技产业洞察","description":"增速智谈是北京增速科技有限公司运营的科技媒体，关注机器人、人工智能、科学家创业与核心零部件，提供深度访谈和产业研究。","inLanguage":"zh-CN","publisher":{"@id":"https://upspeedtech.com/#organization"}}]}</script>
+
     <!-- 引入网站图标 Favicon (请在 pics 文件夹放入 favicon.png) -->
-    <link rel="icon" href="./pics/upspeed_logo.png" type="image/png">
+    <link rel="icon" href="/pics/upspeed_logo.png" type="image/png">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/editorial.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts: Inter & Noto Sans SC -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        deepBlue: '#0B1120',    /* 深海蓝：背景主色 */
-                        techBlue: '#1E293B',    /* 次级深蓝 */
-                        tungsten: '#334155',    /* 钨钢灰：工业质感 */
-                        metal: '#94A3B8',       /* 金属灰：文字辅色 */
-                        vitalOrange: '#F97316', /* 活力橙：强调色/按钮 */
-                        lightGray: '#F1F5F9',   /* 浅灰：阅读背景 */
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         /* 自定义滚动条 */
         ::-webkit-scrollbar {
@@ -91,8 +70,8 @@
             <!-- Logo 区域 (替换为图片) -->
             <a href="#home" class="flex items-center gap-3 group">
                 <!-- 请确保 pics 文件夹下有 logo.png，建议高度 32px-40px -->
-                <img src="./pics/upspeed_logo.png" alt="增速智谈 Logo" class="h-10 w-auto object-contain">
-                <span class="font-bold tracking-wider text-lg">UPSPEED</span>
+                <img src="/pics/upspeed_logo.png" alt="增速智谈 Logo" class="h-10 w-auto object-contain">
+                <span class="font-bold tracking-wider text-lg">增速智谈</span>
             </a>
 
             <!-- Desktop Menu -->
@@ -132,7 +111,7 @@
         <!-- 背景层 -->
         <div class="absolute inset-0 z-0">
             <!-- 背景图替换为本地图片，建议使用暗色调科技感图片 (1920x1080) -->
-            <img src="./pics/bg_index.jpg" class="w-full h-full object-cover opacity-80" alt="Background" onerror="this.src='https://placehold.co/1920x1080/050a14/FFF?text=Background+Image'">
+            <img src="/pics/bg_index.jpg" class="w-full h-full object-cover opacity-80" alt="Background">
             
             <!-- 径向渐变，营造中间亮四周暗的聚焦感 -->
             <div class="absolute inset-0 bg-radial-gradient from-transparent to-deepBlue opacity-90"></div>
@@ -146,7 +125,7 @@
             <!-- 1. Logo (Large & Animated) -->
             <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
                 <!-- 首页中央的大 Logo，建议使用透明背景 PNG，尺寸较大 -->
-                <img src="./pics/logo_large.png" alt="增速智谈 Logo" class="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.3)] transform hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <img src="/pics/upspeed_logo.png" alt="增速智谈 Logo" class="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.3)] transform hover:scale-105 transition-transform duration-500">
                 
                 <!-- Fallback 如果图片加载失败显示的备用 CSS Logo -->
                 <div class="hidden w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl items-center justify-center text-white text-6xl md:text-7xl font-bold shadow-[0_0_50px_rgba(249,115,22,0.4)]">U</div>
@@ -154,10 +133,10 @@
 
             <!-- 2. Brand Name (Massive) -->
             <h1 class="text-6xl md:text-8xl font-black text-white mb-4 tracking-tight animate-fade-in-up text-glow" style="animation-delay: 0.3s;">
-                增速科技
+                增速智谈
             </h1>
             <p class="text-xl md:text-2xl text-gray-400 font-light tracking-[0.3em] uppercase mb-8 animate-fade-in-up" style="animation-delay: 0.4s;">
-                UPSPEED TECH
+                DANIELROBOT
             </p>
 
             <!-- 3. Slogan -->
@@ -227,9 +206,8 @@
                                 <i class="fa-brands fa-weixin text-gray-400 hover:text-green-600 text-xl cursor-pointer"></i>
                                 <i class="fa-brands fa-bilibili text-gray-400 hover:text-pink-500 text-xl cursor-pointer"></i>
                             </div>
-                            <button onclick="openContactModal()" class="text-blue-700 font-semibold hover:underline flex items-center">
-                                访问官方频道 <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
-                            </button>
+                            <a href="/zhitan/#insights" class="text-blue-700 font-semibold hover:underline flex items-center">阅读增速智谈 <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -255,9 +233,8 @@
                                 <i class="fa-brands fa-weixin text-gray-400 hover:text-green-600 text-xl cursor-pointer"></i>
                                 <i class="fa-solid fa-podcast text-gray-400 hover:text-purple-600 text-xl cursor-pointer"></i>
                             </div>
-                            <button onclick="openContactModal()" class="text-vitalOrange font-semibold hover:underline flex items-center">
-                                访问官方频道 <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
-                            </button>
+                            <a href="/utalk/" class="text-vitalOrange font-semibold hover:underline flex items-center">进入增速商谈 <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -267,32 +244,32 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-xl font-bold text-deepBlue border-l-4 border-deepBlue pl-3">过往嘉宾</h3>
-                    <a href="#" class="text-sm text-gray-500 hover:text-deepBlue">查看全部嘉宾 ></a>
+                    <span class="text-sm text-gray-500">访谈嘉宾</span>
                 </div>
                 <div class="flex gap-8 overflow-x-auto pb-4 no-scrollbar">
                     <!-- 嘉宾头像均改为本地引用 -->
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="./pics/goutiancong.jpg" onerror="this.src='https://placehold.co/100x100/333/FFF?text=Prof.L'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <img src="/pics/goutiancong.jpg" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
                         <h4 class="font-bold text-sm text-gray-800">苟天聪</h4>
                         <p class="text-xs text-gray-500 mt-1">英龙制造科技 CEO</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="./pics/zhuangziwen.jpg" onerror="this.src='https://placehold.co/100x100/444/FFF?text=CEO.Z'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <img src="/pics/zhuangziwen.jpg" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
                         <h4 class="font-bold text-sm text-gray-800">庄子文</h4>
                         <p class="text-xs text-gray-500 mt-1">清华大学叉院博士生</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="./pics/guangai.png" onerror="this.src='https://placehold.co/100x100/555/FFF?text=Partner.W'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <img src="/pics/guangai.png" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
                         <h4 class="font-bold text-sm text-gray-800">管盖</h4>
                         <p class="text-xs text-gray-500 mt-1">远科资本 合伙人</p>
                     </div>
                     <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="./pics/gaozelin.jpg" onerror="this.src='https://placehold.co/100x100/666/FFF?text=Dr.C'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <img src="/pics/gaozelin.jpg" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
                         <h4 class="font-bold text-sm text-gray-800">高泽林</h4>
                         <p class="text-xs text-gray-500 mt-1">AI Hero 主理人</p>
                     </div>
                      <div class="flex flex-col items-center min-w-[120px] text-center">
-                        <img src="./pics/lixiaoxuan.jpg" onerror="this.src='https://placehold.co/100x100/888/FFF?text=VP.S'" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
+                        <img src="/pics/lixiaoxuan.jpg" class="w-20 h-20 rounded-full object-cover mb-3 border-2 border-white shadow-md">
                         <h4 class="font-bold text-sm text-gray-800">李小轩</h4>
                         <p class="text-xs text-gray-500 mt-1">尼日利亚自贸区中国区顾问</p>
                     </div>
@@ -302,7 +279,8 @@
     </section>
 
     <!-- 3. 行业洞察 -->
-    <section id="insights" class="py-24 bg-white">
+    <nav aria-label="品牌与内容导航" class="bg-deepBlue text-white py-4 px-6 flex flex-wrap justify-center gap-6"><a href="/">增速科技首页</a><a href="/company.html">北京增速科技有限公司</a><a href="/zhitan/">增速智谈</a><a href="/utalk/">增速商谈</a><a href="/reports/">全部调研报告</a></nav>
+<section id="insights" class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-end mb-12">
                 <div>
@@ -310,7 +288,7 @@
                     <h2 class="text-4xl font-bold text-deepBlue mt-2">行业洞察与智库</h2>
                     <p class="text-gray-500 mt-2">以厚度丈量产业，用数据定义未来</p>
                 </div>
-                <a href="#" class="hidden md:inline-flex items-center text-deepBlue hover:text-vitalOrange font-medium transition-colors">
+                <a href="/reports/" class="hidden md:inline-flex items-center text-deepBlue hover:text-vitalOrange font-medium transition-colors">
                     查看所有文章 <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -321,59 +299,59 @@
                         <div class="absolute top-0 right-0 p-4 opacity-10">
                             <i class="fa-solid fa-file-contract text-9xl"></i>
                         </div>
-                        <span class="bg-vitalOrange text-white text-xs px-3 py-1 rounded-full mb-4 inline-block">2025 年度重磅</span>
+                        <span class="bg-vitalOrange text-white text-xs px-3 py-1 rounded-full mb-4 inline-block">产业研究</span>
                         <div class="flex flex-col items-center my-8">
                             <!-- 报告封面也改为可插入图片 -->
                             <div class="relative w-48 h-64 shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
-                                <img src="./pics/report_cover.jpg" onerror="this.src='https://placehold.co/200x300/334155/FFF?text=Report+Cover'" class="w-full h-full object-cover rounded border-l-4 border-gray-600" alt="报告封面">
+                                <img src="/pics/upspeed_logo.png" class="w-full h-full object-cover rounded border-l-4 border-gray-600" alt="报告封面">
                                 <!-- 如果没有图片，用这个遮罩增加质感 -->
                                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 rounded"></div>
                                 <div class="absolute bottom-4 left-4 text-white font-bold text-shadow">Upspeed Research</div>
                             </div>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">2025 人形机器人供应链图谱</h3>
+                        <h3 class="text-2xl font-bold mb-3"><a href="/reports/robot_market_summary.html">中国机器人产业及商业化模式洞察</a></h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                            深度拆解减速器、丝杠、电机三大核心部件国产化率。包含长三角、珠三角100+隐形冠军企业实地调研数据。
+                            从工业机器人到服务与特种机器人，梳理产业发展、应用场景与商业化模式。
                         </p>
                     </div>
                     <!-- 研报下载入口改为按钮 -->
                     <div class="bg-techBlue/50 p-4 rounded border border-gray-700">
-                        <p class="block text-xs text-gray-400 mb-3">联系官方客服，免费获取完整版 PDF</p>
-                        <button onclick="openContactModal()" class="w-full bg-vitalOrange hover:bg-orange-600 text-white font-bold px-4 py-3 rounded text-sm transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-download"></i> 点击获取完整报告
-                        </button>
+                        <p class="block text-xs text-gray-400 mb-3">在线阅读完整研究</p>
+                        <a href="/reports/robot_market_summary.html" class="w-full bg-vitalOrange hover:bg-orange-600 text-white font-bold px-4 py-3 rounded text-sm transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> 阅读完整报告
+                        </a>
                     </div>
                 </div>
                 <div class="lg:col-span-7 flex flex-col gap-6">
                     <!-- 文章配图本地化 -->
                     <div class="group flex gap-4 md:gap-6 border-b border-gray-100 pb-6">
                         <div class="w-32 md:w-48 h-24 md:h-32 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                            <img src="./pics/factory_daily.jpg" onerror="this.src='https://placehold.co/400x300/334155/FFF?text=Factory+Daily'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/pics/bg_index.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </div>
                         <div>
                             <div class="flex gap-2 mb-2">
-                                <span class="text-xs font-bold text-vitalOrange">#工厂实录</span>
-                                <span class="text-xs text-gray-400">2025.05.20</span>
+                                <span class="text-xs font-bold text-vitalOrange">#关节研究</span>
+
                             </div>
                             <h3 class="text-xl font-bold text-deepBlue group-hover:text-vitalOrange transition-colors mb-2 cursor-pointer">
-                                探厂日记：走进苏州某精密丝杠黑灯工厂
+                                <a href="/reports/robot_engineering_report.html">机器人动力关节：技术、市场与未来展望</a>
                             </h3>
-                            <p class="text-sm text-gray-600 line-clamp-2">我们实地走访了这条号称“良品率99%”的产线，不仅看到了自动化，更看到了工艺的沉淀...</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">梳理机器人动力关节的核心技术、产业链与市场发展。</p>
                         </div>
                     </div>
                     <div class="group flex gap-4 md:gap-6 border-b border-gray-100 pb-6">
                         <div class="w-32 md:w-48 h-24 md:h-32 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                            <img src="./pics/robot_market.jpg" onerror="this.src='https://placehold.co/400x300/334155/FFF?text=Global+Market'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/pics/bg_index.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </div>
                         <div>
                             <div class="flex gap-2 mb-2">
-                                <span class="text-xs font-bold text-blue-600">#出海观察</span>
-                                <span class="text-xs text-gray-400">2025.05.18</span>
+                                <span class="text-xs font-bold text-blue-600">#产业研究</span>
+
                             </div>
                             <h3 class="text-xl font-bold text-deepBlue group-hover:text-vitalOrange transition-colors mb-2 cursor-pointer">
-                                欧洲机器人集成商生存现状：中国品牌的突围机会
+                                <a href="/reports/robot_market_summary.html">中国机器人产业及商业化模式洞察</a>
                             </h3>
-                            <p class="text-sm text-gray-600 line-clamp-2">德国展会归来后的深度思考，价格战不是唯一解法，服务本地化才是关键。</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">了解机器人产业发展与工业、服务、特种机器人的商业化模式。</p>
                         </div>
                     </div>
                 </div>
@@ -469,7 +447,7 @@
                 <div class="md:w-2/3 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 shadow-sm flex flex-col md:flex-row">
                     <div class="md:w-1/2 relative">
                         <!-- 本地图片 -->
-                        <img src="./pics/factory_event.jpg" onerror="this.src='https://placehold.co/600x400/334155/FFF?text=Factory+Event'" class="w-full h-full object-cover">
+                        <img src="/pics/bg_index.jpg" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-vitalOrange text-white text-center px-3 py-1 rounded shadow">
                             <span class="block text-xs uppercase font-bold">OCT</span>
                             <span class="block text-2xl font-bold">24</span>
@@ -507,7 +485,7 @@
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="order-2 md:order-1">
                     <!-- 本地图片 -->
-                    <img src="./pics/team.jpg" onerror="this.src='https://placehold.co/600x400/1E293B/FFF?text=Our+Team'" class="rounded-lg shadow-xl w-full" alt="我们的团队">
+                    <img src="/pics/bg_index.jpg" class="rounded-lg shadow-xl w-full" alt="增速智谈品牌背景">
                 </div>
                 <div class="order-1 md:order-2 space-y-6">
                     <h3 class="text-2xl font-bold text-gray-800">链接全球智慧，加速产业未来</h3>
@@ -546,17 +524,14 @@
 
             <div class="text-center mb-8">
                 <!-- 模态框 Logo 也改为本地图片 -->
-                <img src="./pics/logo.png" class="w-12 h-12 mx-auto mb-4 object-contain" alt="Logo">
+                <img src="/pics/upspeed_logo.png" class="w-12 h-12 mx-auto mb-4 object-contain" alt="Logo">
                 <h2 class="text-2xl font-bold text-deepBlue">官方合作通道</h2>
                 <p class="text-gray-500 text-sm mt-2">找工厂 · 领报告 · 商务合作</p>
             </div>
 
             <!-- 联系方式核心区 -->
             <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                <div class="w-48 h-48 bg-white rounded-lg mx-auto mb-6 p-2 shadow-sm border border-gray-100">
-                    <!-- 二维码本地图片 -->
-                    <img src="./pics/qrcode.jpg" onerror="this.src='https://placehold.co/200x200/22c55e/FFF?text=WeChat+QR'" class="w-full h-full object-cover rounded" alt="微信二维码">
-                </div>
+                <p class="text-center mb-6"><a href="/#contact" class="text-blue-700 font-bold">前往增速科技官网咨询 →</a></p>
 
                 <div class="space-y-4 text-center">
                     <div class="flex items-center justify-center gap-3 text-gray-800">
@@ -569,11 +544,11 @@
                     </div>
                     <div class="flex items-center justify-center gap-3 text-gray-800">
                         <i class="fa-solid fa-phone text-blue-600 text-xl w-6"></i>
-                        <span class="font-bold">138-0000-0000</span>
+                        <span class="font-bold">010-8827 4866</span>
                     </div>
                     <div class="flex items-center justify-center gap-3 text-gray-800">
                         <i class="fa-solid fa-envelope text-red-600 text-xl w-6"></i>
-                        <span class="font-bold">bd@upspeed.tech</span>
+                        <span class="font-bold">contact@speedup-ai.com</span>
                     </div>
                 </div>
             </div>
@@ -591,7 +566,7 @@
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
                         <!-- Footer Logo 图片 -->
-                        <img src="./pics/logo_white.png" onerror="this.src='./pics/logo.png'" class="w-8 h-8 object-contain" alt="Logo">
+                        <img src="/pics/upspeed_logo.png" class="w-8 h-8 object-contain" alt="Logo">
                         <span class="text-xl font-bold text-white ml-2">增速智谈</span>
                     </div>
                     <p class="text-sm leading-relaxed mb-6">
@@ -615,14 +590,11 @@
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6">关注公众号</h4>
-                    <div class="bg-white p-2 w-32 mx-auto md:mx-0 rounded">
-                        <!-- 公众号二维码本地图片 -->
-                        <img src="./pics/upspeed_qrcode.jpg" onerror="this.src='https://placehold.co/150x150/000/FFF?text=QR+Code'" alt="QR Code" class="w-full">
-                    </div>
+                    <p class="text-sm">增速智谈 · 增速商谈</p>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-xs">
-                <p>&copy; 2025 Upspeed Tech. All rights reserved.</p>
+                <p>&copy; 2026 北京增速科技有限公司 · 增速智谈</p>
             </div>
         </div>
     </footer>

@@ -44,3 +44,17 @@ python3 deployment/publish.py --connection /path/to/local/connection.json rollba
 - 报告中心：`reports/index.html`；独立 HTML 可放入 `reports/`。
 
 根据文章归属更新对应入口；正文、封面、标题、摘要、日期和链接应一起更新。
+
+## 搜索引擎与样式
+
+网站主域名为 `https://upspeedtech.com/`。新文章应有独立网址、唯一标题、摘要、同域 canonical，以及栏目中的真实链接；发布时一起更新根目录 `sitemap.xml`。站点地图只列正式发布的页面，修改日期仅在有可信日期时填写。
+
+`robots.txt` 允许抓取公开页面，并标明站点地图。百度搜索资源平台、Google Search Console 的网站验证与站点地图提交需要站点所有者账号；提交不保证收录时间或排名。
+
+增速智谈及报告的 Tailwind 样式已用 3.4.17 预编译到 `assets/css/editorial.css`，浏览器不再依赖 Tailwind CDN。新增样式类时用已安装的 Tailwind 3 CLI 执行：
+
+```bash
+tailwindcss -c deployment/tailwind.config.cjs -i deployment/tailwind.css -o assets/css/editorial.css --minify
+```
+
+发布 HTML 时需要一起发布改动后的 CSS。`deployment/` 是开发工具目录，不应发布到网页目录。

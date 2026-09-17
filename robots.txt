@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /deployment/
+Disallow: /artifacts/
+Disallow: /outputs/
+Disallow: /scripts/
+Disallow: /tools/
+
+Sitemap: https://upspeedtech.com/sitemap.xml
