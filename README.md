@@ -36,3 +36,8 @@ python3 -m http.server 8000
 ```
 
 然后访问 `http://localhost:8000/`。
+
+## 阿里云网站发布
+
+`upspeedtech.com` 托管在阿里云服务器，使用专用 SSH 密钥和 `deployment/publish.py` 发布指定文件，保存备份并校验线上内容。
+文章更新、发布与回滚步骤见 [deployment/README.md](deployment/README.md)。连接配置和私钥保存在本机，不放入网站仓库。
