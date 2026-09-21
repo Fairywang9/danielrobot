@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}｜增速智谈</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="{{CANONICAL_URL}}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{TITLE}}｜增速智谈">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:url" content="{{CANONICAL_URL}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="article:published_time" content="{{DATE_PUBLISHED}}">
+<meta property="article:section" content="{{SECTION}}">
+<script type="application/ld+json">{{JSON_LD}}</script>
+<link rel="icon" href="/pics/upspeed_logo.png" type="image/png">
+<link rel="stylesheet" href="/assets/css/editorial.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 antialiased">
+{{NAV}}
+<main class="container mx-auto px-4 py-10 max-w-3xl">
+  <nav class="text-sm text-gray-500 mb-6" aria-label="面包屑">
+    <a href="/zhitan/" class="hover:text-vitalOrange">增速智谈</a>
+    <span class="mx-2">/</span>
+    <span>{{SECTION}}</span>
+  </nav>
+  <header class="mb-8">
+    <p class="text-vitalOrange text-sm font-semibold mb-2">{{SECTION}}</p>
+    <time datetime="{{DATE_PUBLISHED}}" class="text-sm text-gray-500">发布日期 {{DATE_PUBLISHED}}</time>
+  </header>
+  <article class="prose-zhitan">
+{{BODY_HTML}}
+  </article>
+  <div class="mt-14 pt-8 border-t border-gray-200">
+    <a href="/zhitan/#articles" class="inline-flex items-center gap-2 text-vitalOrange font-semibold">← 返回最新文章</a>
+  </div>
+</main>
+{{FOOTER}}
+</body>
+</html>

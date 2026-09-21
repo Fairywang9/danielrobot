@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李飞飞一直在说的“世界模型”，到底是什么？｜增速智谈</title>
+<meta name="description" content="增速智谈世界模型技术篇01：讲清观察与状态、潜在空间与行动前预测。">
+<link rel="canonical" href="https://upspeedtech.com/zhitan/articles/world-model-01-what-is-a-world-model.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李飞飞一直在说的“世界模型”，到底是什么？｜增速智谈">
+<meta property="og:description" content="增速智谈世界模型技术篇01：讲清观察与状态、潜在空间与行动前预测。">
+<meta property="og:url" content="https://upspeedtech.com/zhitan/articles/world-model-01-what-is-a-world-model.html">
+<meta property="og:image" content="https://upspeedtech.com/pics/zhitan/world-model-01-hero.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "李飞飞一直在说的“世界模型”，到底是什么？", "datePublished": "2026-09-21", "image": "https://upspeedtech.com/pics/zhitan/world-model-01-hero.png", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司"}}</script>
+<link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png" type="image/png">
+<link rel="stylesheet" href="/assets/css/zhitan.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header sans">
+  <div class="wrap header-bar">
+    <a class="brand" href="/zhitan/">
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈">
+      <span class="brand-name">增速智谈<em>DanielRobot</em></span>
+    </a>
+    <button class="mobile-toggle" type="button" aria-label="菜单" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+    <ul class="nav" id="mainNav">
+      <li><a href="/zhitan/">首页</a></li>
+      <li>
+        <button type="button" data-mega>最新文章 ▾</button>
+        <div class="mega" role="menu">
+          <h4>内容流</h4>
+          <a href="/zhitan/#articles">全部最新文章<span>已上线与即将发布</span></a>
+          <div class="sub">
+            <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
+            <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
+          </div>
+          <a href="/zhitan/#series">进入专题索引</a>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>专题 ▾</button>
+        <div class="mega wide" role="menu">
+          <div>
+            <h4>一级专题</h4>
+            <a href="/zhitan/#series">世界模型<span>技术 / 人物 / 判断</span></a>
+            <div class="sub">
+              <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">技术篇 01</a>
+              <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">人物篇：李飞飞</a>
+            </div>
+            <a href="/zhitan/#series">机器人小脑<span>身体控制与具身</span></a>
+          </div>
+          <div>
+            <h4>栏目</h4>
+            <a href="/zhitan/#series">造机器人的人</a>
+            <a href="/zhitan/#series">产业观察</a>
+            <a href="/reports/">研究报告库</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>研究报告 ▾</button>
+        <div class="mega" role="menu">
+          <h4>报告中心</h4>
+          <a href="/reports/">全部报告</a>
+          <a href="/reports/china-embodied-intelligence-world-model-2026.html">具身智能与世界模型 2026</a>
+          <a href="/zhitan/#report-hook">索取 / 下载报告</a>
+          <a href="/reports/robot_market_summary.html">机器人商业化模式</a>
+          <a href="/reports/robot_engineering_report.html">动力关节</a>
+          <a href="/reports/robot_hand_market.html">灵巧手</a>
+        </div>
+      </li>
+      <li>
+        <a href="/zhitan/services.html">服务 ▾</a>
+        <div class="mega" role="menu">
+          <h4>我们做什么</h4>
+          <a href="/zhitan/services.html">深度访谈与特稿<span>人物与商业故事</span></a>
+          <a href="/zhitan/services.html">访谈视频<span>实景采访与短视频</span></a>
+          <a href="/zhitan/services.html">媒体发布与搜索占位</a>
+          <a href="/zhitan/services.html">行业研究与图谱</a>
+          <a href="/zhitan/#contact">商务合作</a>
+        </div>
+      </li>
+      <li><a href="/zhitan/about.html">关于</a></li>
+      <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
+    </ul>
+  </div>
+</header>
+<main class="article-wrap">
+  <div class="crumb sans"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">最新文章</a> / 世界模型 · 技术篇</div>
+  <div class="meta" style="margin-bottom:1rem">世界模型 · 技术篇 · <time datetime="2026-09-21">2026-09-21</time></div>
+  <article class="article-body"><h1>李飞飞一直在说的“世界模型”，到底是什么？</h1>
+<figure><img src="/pics/zhitan/world-model-01-hero.png" alt="世界模型到底是什么：机器如何在行动前预演未来" loading="lazy"><figcaption>世界模型到底是什么：机器如何在行动前预演未来</figcaption></figure>
+<p>一只杯子，一张桌子，一个挡在前面的纸盒。</p>
+<p>你让机器人把杯子拿过来。它的摄像头已经认出了杯子，语言系统也听懂了指令。接下来，只要伸手就行了吗？</p>
+<p>手直着伸过去，可能先碰到纸盒；绕到旁边，又得知道那里是否留得下机械臂。杯子被遮住以后，它还在原来的位置吗？手指碰上杯壁，杯子会被握住、推走，还是带着里面的水一起晃起来？</p>
+<p>对人来说，这些判断常常在一瞬间完成。我们甚至感觉不到自己做了一次推演。机器却需要把这一瞬间拆开：记住刚才看到了什么，估计现在有什么，再想一想动作会把它们带向哪里。</p>
+<aside>世界模型的技术问题，就藏在这只尚未被拿起的杯子里。</aside>
+<p>今天，“世界模型”也被用于描述可交互的视频、三维场景等不同系统。这篇先抓住一条清晰的主线：<strong>机器怎样学习环境的变化，并利用预测支持行动。</strong>它能解释这条路线的技术骨架，也能帮助我们看懂那些令人惊艳的演示，到底跨过了哪一道门槛。</p>
+<h2>01｜杯子离开画面，机器还能记住它吗？</h2>
+<p>先做一个小小的区分：环境本身，和机器看见的环境，是两回事。</p>
+<p>桌上有杯子，摄像头拍到了它。你把纸盒挪到前面，杯子从画面里消失了，桌面上却未必发生了同样的变化。</p>
+<p>摄像头得到的叫作<strong>观察</strong>。它只是世界从某个角度投来的证据。物体的位置、速度、接触关系，以及被遮挡的部分，共同构成环境的<strong>状态</strong>。一张图片通常交代不完这些信息：同一个位置上的杯子，可能静止，也可能正在滑动；同一片遮挡后面，可能有东西，也可能已经空了。</p>
+<p>机器因此需要一种内部状态，把当前观察接到历史上。</p>
+<figure><img src="/pics/zhitan/world-model-01-fig-01.png" alt="图1：杯子被遮挡后，机器如何结合观察、记忆和不确定性估计状态" loading="lazy"><figcaption>图1：杯子被遮挡后，机器如何结合观察、记忆和不确定性估计状态</figcaption></figure>
+<p class="cap">图1｜画面里没有杯子，不能直接推出杯子已经消失。内部状态需要保留过去的证据，也要给未知留下位置。增速智谈原创教学示意。</p>
+<p>在这个例子里，一个合理的判断是：“杯子刚才在这里，目前只是被遮住了，所以它可能仍在原处。”</p>
+<p>“可能”很重要。如果遮挡期间有人把杯子拿走，旧记忆就过时了。内部状态保存的是依据现有证据形成的估计，里面应当容得下误差和不确定性。</p>
+<p>这也解释了为什么许多用于控制的世界模型带有记忆结构。它们会综合连续的观察与过去的动作，推断当前隐藏状态；单张图片遗漏的信息，有机会由时间补上。PlaNet 就明确使用历史信息来估计当前状态，再在这个内部空间里规划。<a href="https://arxiv.org/html/1811.04551v5" rel="noopener">论文：Learning Latent Dynamics for Planning from Pixels</a></p>
+<p><strong>相机交来一张照片，行动需要一段上下文。</strong></p>
+<h2>02｜机器的“内部世界”，长什么样？</h2>
+<p>它未必是一间缩小的三维房间，也未必能被直接画出来。</p>
+<p>在一类典型方法中，模型把感官信息转成一组数值，用这组数值承载预测需要的信息。这种紧凑的表征，常被称为<strong>潜在状态</strong>；这些状态所在的计算空间，就是潜在空间（latent space）。</p>
+<p>可以把它想成一份会更新的工作摘要。但这个比喻有一个边界：人写摘要，会明确写下“杯子距桌沿十厘米”；神经网络学到的数值，通常没有这样清楚的逐项标签。我们不能指着某一维，就认定它代表杯子重量，另一维代表摩擦系数。</p>
+<p>判断表征是否有用，要看它有没有保住关键区别。</p>
+<p>两只杯子看起来相近，一只空着，一只装满水。对图像分类来说，它们都可以被正确识别为“杯子”；对抓取来说，重量和液体晃动可能影响动作。假如这些区别在压缩过程中丢失，后面的预测再精致，也救不回来。</p>
+<p>反过来，杯壁上某一道反光没有被精确保留，未必妨碍抓取。这就是潜在预测吸引人的地方：计算资源可以更多地花在与任务有关的变化上。</p>
+<p>不过，“紧凑”不会自动带来“懂物理”。保留哪些信息，由训练目标、数据和模型能力共同决定。一个只在平整桌面上见过杯子的模型，到了湿滑桌面，可能仍拿着旧经验做判断。</p>
+<p>还要区分<strong>在哪里预测</strong>与<strong>训练时用什么监督</strong>。有些模型在潜在空间里推演，同时通过重建图像来帮助训练。它们行动前不需要生成高清画面，训练阶段却仍可能借助像素信号。Dreamer 的论文比较了重建等不同学习目标；潜在状态、状态转移和奖励预测共同服务于后续行为学习。<a href="https://arxiv.org/html/1912.01603v3" rel="noopener">论文：Dream to Control</a></p>
+<p>所以，内部世界的价值不取决于它有没有被画得漂亮。关键是：那些会改变行动结果的细节，它有没有记住。</p>
+<h2>03｜它怎样学会“推一下，杯子会动”？</h2>
+<p>模型并不会天然知道推力、接触和滑动之间的关系。它需要从经历中学习。</p>
+<p>想象机器人收集了许多段操作记录：动作前的画面、机械臂做了什么、动作后的画面，以及任务是否推进。一次轻推，杯子挪了一小段；再推一次，杯子靠近桌沿；没有接触到杯壁，手动了，杯子却没动。</p>
+<p>这些前后对照，让模型有机会学习一条关系：</p>
+<p><strong>当前内部状态 + 候选动作 → 下一步内部状态的预测。</strong></p>
+<p>这里的动作必须进入预测。只问“杯子接下来会怎样”，信息往往不够；轻碰杯壁、握紧杯身和抬起手臂，会通向不同的后果。</p>
+<figure><img src="/pics/zhitan/world-model-01-fig-02.png" alt="图2：从真实操作轨迹中学习动作条件化的预测，并用实际结果校正模型" loading="lazy"><figcaption>图2：从真实操作轨迹中学习动作条件化的预测，并用实际结果校正模型</figcaption></figure>
+<p class="cap">图2｜这是一类动作条件化世界模型的学习过程。图中用轻推杯子说明“预测—证据对照”；具体算法的训练目标还会包含更多约束。增速智谈原创教学示意。</p>
+<p>为了看清这个过程，可以先把一次训练拆成三件事。</p>
+<p>第一，模型根据动作之前的经验，形成当前的内部状态。</p>
+<p>第二，把记录中的动作输入进去，预测下一步会发生什么。此时它还不能偷看动作之后的那张图片，否则只是事后描述，算不上预测。</p>
+<p>第三，拿出真实结果，检查预测有没有得到支持，再调整参数。预测杯子移动了，实际却没动，模型就需要修正自己对接触或运动的估计。</p>
+<p>真实算法的目标通常比“两个位置相减”复杂。环境的隐藏状态没有现成答案，模型既要学习表征，也要学习变化规律。以 PlaNet 为例，观察和奖励提供学习信号，状态转移模型则学习如何向前预测；它还通过多步训练约束改善连续推演。<a href="https://arxiv.org/html/1811.04551v5" rel="noopener">PlaNet 方法说明</a></p>
+<p>这里有两种“更新”，容易被混在一起。</p>
+<p><strong>更新内部状态</strong>，是新证据来了，机器改变对当前情况的判断。发现杯子被移走，就不再沿用刚才的位置估计。这可以在运行时发生，不要求每次都训练网络。</p>
+<p><strong>更新模型参数</strong>，是从一批经历中调整预测规律。它关心的更像是：“我过去对这种接触的预测经常偏了，应该怎样修正？”这通常发生在训练或专门安排的在线学习阶段。</p>
+<p>前者让机器跟上眼前的变化，后者让机器逐渐学会变化的规律。</p>
+<p>那只看视频，能不能学？能学到许多东西：运动的连续性、物体如何被遮挡、不同视角之间的联系。但普通视频未必记录了机器人可执行的动作、接触力和关节状态。从“看到别人推杯子”走到“知道自己的手该怎么推”，还需要补上动作与结果之间的对应关系。</p>
+<p>而且，经验中的相关性也有陷阱。如果训练记录里每次手靠近杯子，杯子都会移动，模型可能过早学出“靠近就会动”。只有见过靠近却没接触、接触却没推动等情况，它才更有机会分辨真正重要的条件。这是对数据设计的要求，不能靠一个宏大的模型名称省略掉。</p>
+<h2>04｜预测了未来，下一步怎么选？</h2>
+<p>到这里，机器人终于可以问：“如果我这样做，会发生什么？”</p>
+<p>它可以从当前内部状态出发，输入一个假设动作，得到下一步预测；再把这个预测接着往前推。这样展开的一串未来，叫作<strong>想象轨迹</strong>。</p>
+<p>“想象”是一个形象的说法。实际发生的是数值计算：模型沿着候选动作，连续预测内部状态的变化。</p>
+<p>回到桌上的杯子。直着伸手，可能撞到纸盒；绕开纸盒，可能留出更好的接近路线；如果遮挡太严重，先换个视角观察，也可能值得。</p>
+<figure><img src="/pics/zhitan/world-model-01-fig-03.png" alt="图3：比较候选行动的预测后果，执行后再用真实观察更新判断" loading="lazy"><figcaption>图3：比较候选行动的预测后果，执行后再用真实观察更新判断</figcaption></figure>
+<p class="cap">图3｜同一任务可以展开不同的候选未来。方案 C 假设机器人能够调整相机位置。图中的结果只是条件性示意，具体路线是否可行，还取决于空间、接触和机器人自身能力。增速智谈原创教学示意。</p>
+<p>世界模型提供这些后果的估计。<strong>怎么权衡后果，要交给规划器或策略。</strong></p>
+<p>多绕一点路是否值得？碰撞的风险有多大？拿到杯子的收益怎样计量？这些问题，需要目标、奖励或约束参与。预测模块本身并不会凭空知道“我们更在意不洒水”。</p>
+<p>利用世界模型做决策，也有不同方式。</p>
+<p>一种是在行动时搜索候选动作序列，比较预测结果，选出下一步。PlaNet 属于这条路线：它在潜在空间里做在线规划，执行后再根据新观察继续决策。<a href="https://arxiv.org/abs/1811.04551" rel="noopener">PlaNet 论文</a></p>
+<p>另一种是把模型变成训练场，先在想象轨迹中学习行动策略。Dreamer 属于这条路线：策略和价值模型通过内部推演学习，回到环境中再执行学到的行为。它不等于每次动作之前都重新搜索一棵庞大的未来树。<a href="https://arxiv.org/abs/1912.01603" rel="noopener">Dreamer 论文</a></p>
+<p>两条路都让预测参与行动，计算花在何时、动作怎样产生，却有区别。</p>
+<p>机器也不能一直沿着自己预测的未来走下去。机械臂真实伸出去以后，要重新看一眼：纸盒是否被碰歪了，杯子有没有滑动，刚才的判断还成立吗？</p>
+<p><strong>内部试演节省试错，真实反馈防止它越想越偏。</strong></p>
+<h2>05｜为什么这条老路线，今天又被推到台前？</h2>
+<p>这个想法有很长的研究脉络。控制与模型式强化学习一直在追问：能否学习环境的变化，再用这套变化规律改善决策？</p>
+<p>2018 年，David Ha 和 Jürgen Schmidhuber 的《World Models》给出了一个鲜明的演示：先压缩视觉信息，再学习随时间变化的内部模型，最后让控制器利用它行动。在他们的一个游戏实验里，策略可以在模型生成的内部环境中训练，再放回原来的游戏测试。这为“在机器的梦境里练习”提供了可见的技术实例。<a href="https://worldmodels.github.io/" rel="noopener">World Models 原论文与演示</a></p>
+<p>后来的 PlaNet、Dreamer，把潜在预测与行为学习发展成更系统的方法。DreamerV3 的研究进一步展示了同一套配置在多种控制任务上的适用性。这些结果来自有明确任务、反馈和评测条件的实验，并不直接等同于机器人已经掌握开放现实世界。<a href="https://danijar.com/project/dreamerv3/" rel="noopener">DreamerV3 官方研究页</a></p>
+<p>一个更具体的例子，是 DreamerV3 在《我的世界》中学会收集钻石。这个目标需要一串前后相依的行动，而反馈又很稀疏，适合检验智能体能否为较远的结果组织行为。研究页也披露了学习的代价：展示的首次获得钻石发生在约三千万个环境步之后，相当于约十七天的游戏时长。“在内部练习”能够帮助学习，仍然需要大量真实环境中的经验来打底。<a href="https://danijar.com/project/dreamerv3/" rel="noopener">DreamerV3：Minecraft 实验</a></p>
+<p>今天的讨论范围明显变宽了。视频生成让时间变化变得可见，三维生成让场景有了可探索的空间，机器人又要求这些表征真正参与操作。过去常在受控任务里研究的“内部世界”，开始与更丰富的数据、生成能力和应用需求相遇。</p>
+<p>李飞飞推动的空间智能，正处在这条连接线上。World Labs 将目标表述为发展空间与物理智能，让模型能够跨越空间和时间，对物体、场所及相互作用进行建模和推理。<a href="https://www.worldlabs.ai/about" rel="noopener">World Labs 官方介绍</a></p>
+<p>这与本文解释的预测式世界模型有交集，但两者不能直接画等号。三维场景生成首先要解决几何、视角和空间一致性；抓取杯子还会追问接触、动力学和行动后果。前一道能力很强，后面的能力仍需要单独证明。</p>
+<h2>06｜它最容易在哪些地方失手？</h2>
+<p>第一处，是<strong>越往后推，越容易偏</strong>。</p>
+<p>一步预测里，杯子的位置只偏了一点。下一步把这个偏掉的位置当作起点，手与杯子的接触就可能被算错；再下一步，整个抓取结果都会不同。</p>
+<p>连续预测时，模型不得不反复使用自己的输出。一开始很小的误差，可能在后面被放大。这也是为什么只展示下一帧很逼真，交代不了长任务的可靠性。</p>
+<p>第二处，是<strong>未来本来就不只有一种</strong>。</p>
+<p>同样一个抓取动作，杯子可能稳稳被拿起，也可能因微小的姿态或摩擦差异滑落。模型需要表达多种可能结果；只给出一个顺滑的未来，很容易把风险藏起来。早期《World Models》就用概率分布建模未来，也讨论了控制器利用模型漏洞的问题。<a href="https://worldmodels.github.io/" rel="noopener">World Models：预测与模型漏洞讨论</a></p>
+<p>但输出概率也不意味着概率可信。模型说某条路线“很安全”，仍要通过独立测试核对，尤其是遇到训练中很少出现的情况时。</p>
+<p>第三处，是<strong>在自己的世界里成功，回到现实却失败</strong>。</p>
+<p>如果内部模型漏掉了某种碰撞，决策系统可能偏偏找到一条利用这个漏洞的“捷径”。在它的想象中，动作漂亮而高效；真实机械臂却会撞上纸盒。</p>
+<p>这时，聪明的搜索会放大模型错误。它擅长优化给定规则，却不会自动发现规则漏写了什么。</p>
+<p>因此，看一套世界模型是否真的有进展，可以顺着杯子追问四件具体的事：</p>
+<p>- 被遮挡后，模型是否还能维持合理的位置估计，并在新证据出现时改正？ - 换一个动作，预测后果是否也相应变化，尤其在接触发生的那一刻？ - 连续推演多步以后，物体、空间和运动是否仍保持一致？ - 最后，这些预测有没有让真实任务做得更好，而非只让演示画面更好看？</p>
+<p>这些是本文给出的观察角度，不是一套通用于所有产品的评测标准。具体系统仍需用对应任务的指标、测试范围和失败案例来说明能力。</p>
+<h2>世界模型的价值，落在动作发生之前</h2>
+<p>再回到那只杯子。机器已经看见它，记住它，也试着预测了几条接近路线。</p>
+<p>它离“理解整个世界”还很远。但在伸手之前，它多了一次检查后果的机会；伸手之后，它也有办法把真实结果带回判断中。</p>
+<p>我们看见的是一只杯子被拿起来。支撑这个动作的，是观察、记忆、预测和反馈之间那条逐渐接上的线。</p>
+<blockquote>[!HIGHLIGHT] <strong>世界模型让尚未发生的事，先成为可以讨论、比较和练习的对象。</strong>这份能力的分量，要由机器回到现实之后的表现来回答。</blockquote>
+<p>---</p>
+<h3>参考与配图说明</h3>
+<p>本文以用于控制的潜在世界模型为技术主线，杯子与纸盒为贯穿全文的教学例子，不代表文中论文完成了这一具体机器人实验。三张图为增速智谈原创示意，未使用虚构成功率或性能数据。</p>
+<p>1. Ha &amp; Schmidhuber，2018，<a href="https://worldmodels.github.io/" rel="noopener">World Models</a>。 2. Hafner 等，2018 / ICML 2019，<a href="https://arxiv.org/abs/1811.04551" rel="noopener">Learning Latent Dynamics for Planning from Pixels（PlaNet）</a>。 3. Hafner 等，2019 / ICLR 2020，<a href="https://arxiv.org/abs/1912.01603" rel="noopener">Dream to Control: Learning Behaviors by Latent Imagination（Dreamer）</a>。 4. Hafner 等，2025，<a href="https://danijar.com/project/dreamerv3/" rel="noopener">Mastering Diverse Control Tasks through World Models（DreamerV3）</a>。 5. <a href="https://www.worldlabs.ai/about" rel="noopener">World Labs：About</a>，用于说明其空间与物理智能研究目标，未将目标表述当作已经实现的能力。</p>
+<p>配图路径见正文。PNG 可直接用于发布；同名 SVG 为可编辑矢量版，图内已嵌入品牌 logo。请保留正文与“插图”文件夹的相对位置，Markdown 中的图片即可正常显示。</p></article>
+  <p class="sans" style="margin-top:2rem"><a href="/zhitan/#articles">← 返回最新文章</a> · <a href="/zhitan/#report-hook">索取报告</a> · <a href="/zhitan/#contact">合作</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">
+      <p>增速智谈关注机器人、AI 与硬科技。深度内容、研究报告与媒体服务。</p>
+    </div>
+    <div>
+      <strong>阅读</strong>
+      <a href="/zhitan/#articles">最新文章</a><br>
+      <a href="/zhitan/#series">专题</a><br>
+      <a href="/reports/">研究报告</a>
+    </div>
+    <div>
+      <strong>服务</strong>
+      <a href="/zhitan/services.html">我们做什么</a><br>
+      <a href="/zhitan/#contact">合作咨询</a><br>
+      <a href="/company.html">增速科技</a>
+    </div>
+    <div>
+      <strong>联系</strong>
+      <a href="https://jmx9kgn7nz.feishu.cn/share/base/form/shrcncmbT9nBPSYMpXzW1OaQ1ph" target="_blank" rel="noopener noreferrer">飞书合作问卷</a><br>
+      <a href="mailto:contact@speedup-ai.com">contact@speedup-ai.com</a><br>
+      
+      公众号：增速智谈
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 北京增速科技有限公司 · 增速智谈 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026024443号</a> · <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802048887" target="_blank" rel="noopener noreferrer">京公网安备11010802048887号</a></div>
+</footer>
+<script>
+(function(){
+  const nav=document.getElementById('mainNav');
+  if(!nav) return;
+  nav.querySelectorAll('button[data-mega]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      if(!window.matchMedia('(max-width:980px)').matches) return;
+      e.preventDefault();
+      const li=btn.parentElement;
+      const open=li.classList.contains('open');
+      nav.querySelectorAll('li.open').forEach(x=>x.classList.remove('open'));
+      if(!open) li.classList.add('open');
+    });
+  });
+  // close mega when pointer leaves the whole li (desktop safety)
+  nav.querySelectorAll(':scope > li').forEach(li=>{
+    let t;
+    li.addEventListener('mouseleave', ()=>{
+      t=setTimeout(()=>li.blur(), 10);
+      const b=li.querySelector('button'); if(b) b.blur();
+    });
+    li.addEventListener('mouseenter', ()=>clearTimeout(t));
+  });
+})();
+</script></body></html>

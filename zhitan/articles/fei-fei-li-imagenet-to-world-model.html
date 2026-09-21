@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从 ImageNet 到世界模型：李飞飞的两次豪赌｜增速智谈</title>
+<meta name="description" content="增速智谈人物篇：从 ImageNet 到 World Labs 的两次关键押注。">
+<link rel="canonical" href="https://upspeedtech.com/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从 ImageNet 到世界模型：李飞飞的两次豪赌｜增速智谈">
+<meta property="og:description" content="增速智谈人物篇：从 ImageNet 到 World Labs 的两次关键押注。">
+<meta property="og:url" content="https://upspeedtech.com/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">
+<meta property="og:image" content="https://upspeedtech.com/pics/zhitan/feifei-hero.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "从 ImageNet 到世界模型：李飞飞的两次豪赌", "datePublished": "2026-09-21", "image": "https://upspeedtech.com/pics/zhitan/feifei-hero.png", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司"}}</script>
+<link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png" type="image/png">
+<link rel="stylesheet" href="/assets/css/zhitan.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header sans">
+  <div class="wrap header-bar">
+    <a class="brand" href="/zhitan/">
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈">
+      <span class="brand-name">增速智谈<em>DanielRobot</em></span>
+    </a>
+    <button class="mobile-toggle" type="button" aria-label="菜单" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+    <ul class="nav" id="mainNav">
+      <li><a href="/zhitan/">首页</a></li>
+      <li>
+        <button type="button" data-mega>最新文章 ▾</button>
+        <div class="mega" role="menu">
+          <h4>内容流</h4>
+          <a href="/zhitan/#articles">全部最新文章<span>已上线与即将发布</span></a>
+          <div class="sub">
+            <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
+            <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
+          </div>
+          <a href="/zhitan/#series">进入专题索引</a>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>专题 ▾</button>
+        <div class="mega wide" role="menu">
+          <div>
+            <h4>一级专题</h4>
+            <a href="/zhitan/#series">世界模型<span>技术 / 人物 / 判断</span></a>
+            <div class="sub">
+              <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">技术篇 01</a>
+              <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">人物篇：李飞飞</a>
+            </div>
+            <a href="/zhitan/#series">机器人小脑<span>身体控制与具身</span></a>
+          </div>
+          <div>
+            <h4>栏目</h4>
+            <a href="/zhitan/#series">造机器人的人</a>
+            <a href="/zhitan/#series">产业观察</a>
+            <a href="/reports/">研究报告库</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>研究报告 ▾</button>
+        <div class="mega" role="menu">
+          <h4>报告中心</h4>
+          <a href="/reports/">全部报告</a>
+          <a href="/reports/china-embodied-intelligence-world-model-2026.html">具身智能与世界模型 2026</a>
+          <a href="/zhitan/#report-hook">索取 / 下载报告</a>
+          <a href="/reports/robot_market_summary.html">机器人商业化模式</a>
+          <a href="/reports/robot_engineering_report.html">动力关节</a>
+          <a href="/reports/robot_hand_market.html">灵巧手</a>
+        </div>
+      </li>
+      <li>
+        <a href="/zhitan/services.html">服务 ▾</a>
+        <div class="mega" role="menu">
+          <h4>我们做什么</h4>
+          <a href="/zhitan/services.html">深度访谈与特稿<span>人物与商业故事</span></a>
+          <a href="/zhitan/services.html">访谈视频<span>实景采访与短视频</span></a>
+          <a href="/zhitan/services.html">媒体发布与搜索占位</a>
+          <a href="/zhitan/services.html">行业研究与图谱</a>
+          <a href="/zhitan/#contact">商务合作</a>
+        </div>
+      </li>
+      <li><a href="/zhitan/about.html">关于</a></li>
+      <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
+    </ul>
+  </div>
+</header>
+<main class="article-wrap">
+  <div class="crumb sans"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">最新文章</a> / 人物 · 世界模型</div>
+  <div class="meta" style="margin-bottom:1rem">人物 · 世界模型 · <time datetime="2026-09-21">2026-09-21</time></div>
+  <article class="article-body"><h1>从 ImageNet 到世界模型：李飞飞的两次豪赌</h1>
+<figure><img src="/pics/zhitan/feifei-hero.png" alt="" loading="lazy"><figcaption></figcaption></figure>
+<aside>她曾经花了数年时间，让机器看见世界。如今，她想让机器走进去。</aside>
+<p class="cap">文｜增速智谈</p>
+<p>2012 年秋天，佛罗伦萨。</p>
+<p>一场计算机视觉会议的分会场里挤满了人。后来成为深度学习重要推动者的 Yann LeCun 没找到座位，只能站在后面。台上即将揭晓这一年的 ImageNet 图像识别挑战赛结果，李飞飞已经知道，有一组数字会让现场不再平静。</p>
+<p>几周前，她接到学生 Jia Deng 的电话。一支名为 SuperVision 的队伍提交了远远甩开其他参赛者的成绩。那支队伍来自多伦多大学，成员是 Alex Krizhevsky、Ilya Sutskever 和 Geoffrey Hinton。他们训练的深度卷积神经网络，后来有了一个更响亮的名字：AlexNet。</p>
+<p>它的 Top-5 错误率是 15.3%，第二名是 26.2%。两组数字之间隔着 10.9 个百分点。</p>
+<p>这已经不像一次寻常的领先。像是有人在墙上推开了一扇门，门后站着一个沉寂多年的名字：神经网络。</p>
+<p>聚光灯很快追向 AlexNet，也照亮了它脚下那片不太起眼的土地——ImageNet。这个由李飞飞发起、耗费数年建立的图像数据库，终于等到了能够吞下它的算法。</p>
+<p>今天回看，一切都像被历史提前安排好了。可在 ImageNet 启动之初，它显得庞大、笨重，甚至有些不合时宜。研究人员不断打磨算法，李飞飞却带着团队去互联网上收集图片，再请人一张张辨认、清理和标注。</p>
+<p>她的远见常常没有未来感。起初，它甚至像一份没人愿意接手的苦活。</p>
+<p>十几年后，李飞飞又押下了一枚更大的筹码。</p>
+<p>这一次，认出图片里的猫、汽车和咖啡杯只成了起点。机器还要理解杯子为什么停在桌面，手伸过去会发生什么；它要分辨一扇门是开着还是关着，知道狭窄的走廊容不下两个人并肩通过，也要在信息不足时意识到：有些地方自己从未看见。</p>
+<p>她把这种能力称为“空间智能”，把通往它的路径指向“世界模型”。</p>
+<p>从 ImageNet 到 World Labs，李飞飞像是绕了很远，又回到了那个陪伴她二十多年的问题：机器究竟要怎样，才能看见我们所看见的世界？</p>
+<h2>在许多个世界之间</h2>
+<p>李飞飞在回忆录《我看见的世界》里，写下了另一段赶路。</p>
+<p>那一次，她从母亲所在的重症监护室赶往美国国会。证词有一部分是在医院外狭小的椅子上修改的，周围是来往的医护人员和不时响起的呼叫声。随后，她登上红眼航班，前往华盛顿讨论人工智能。</p>
+<p>会议桌上的名牌写着“DR. LI”。它指向一位斯坦福教授、前 Google Cloud AI/ML 首席科学家，也指向一个即将在国会谈论技术未来的公共知识分子。</p>
+<p>可她想起的，是另一个更早的身份：移民。</p>
+<p>15 岁来到美国后，她的世界忽然换了语言，也换了生活的尺度。家庭从原先熟悉的社会位置跌落下来，母亲长期被疾病纠缠，经济压力紧跟着每一天。她在餐馆打工，和家人经营干洗店，在谋生的缝隙里读书。</p>
+<p>干洗店的柜台与人工智能实验室相距很远。多年以后，当 Google 成为她人生中的第一位非学术雇主时，她才意识到，自己上一份离开校园的工作，竟然还在那里。</p>
+<p>科学是她很早抓住的一条线。</p>
+<p>她喜欢物理。那些公式背后，藏着一个表面纷乱、内部却可能拥有秩序的世界。1999 年，她从普林斯顿大学物理系毕业；2005 年，在加州理工学院取得电气工程博士学位。此后，她把目光转向计算机视觉，问题依然带着物理学式的野心：一束光抵达眼睛之后，如何变成对物体、空间和整个场景的理解？</p>
+<p>回忆录把家庭、疾病、移民和科研放在一起，没有将它们修剪成一条笔直的成功道路。人生总有许多岔路，很多选择发生时，也看不见终点。</p>
+<p>李飞飞似乎很早就熟悉这种感觉。</p>
+<p>移民要在陌生环境里寻找坐标，科学家也一样。眼前没有完整地图，只能循着少量迹象往前走，走得足够远，才知道自己最初看见的是方向，还是幻觉。</p>
+<h2>ImageNet：先为机器打开一扇窗</h2>
+<p>李飞飞进入计算机视觉研究时，机器能够见到的世界小得惊人。</p>
+<p>那时的研究人员经常在几十类物体、几千张图片上训练算法。二十种物体被放进数据集，算法在里面取得更好的成绩，人们便向“视觉智能”靠近了一步。</p>
+<p>李飞飞总觉得哪里不对。</p>
+<p>她的办公室里就不止二十种东西。椅子、书桌、电话、台灯，各有不同的形状；同一把椅子换一个角度，落进阴影，或者被桌子挡住一半，像素都会剧烈变化。人一眼仍能认出它，机器却可能迷失。</p>
+<p>现实从来不会把物体摆放得像标准答案。</p>
+<p>如果机器只在一个狭小而整洁的样本世界里长大，它很容易熟悉考题，却很难学会看。</p>
+<p>于是有了 ImageNet。</p>
+<p>团队以 WordNet 的语义体系为骨架，把现实中的概念安放在一棵巨大的树上，再为每一个节点寻找成百上千张图片。2009 年的首篇论文中，ImageNet 已经包含 5247 个概念节点和 320 万张图片。此后，它继续扩展，最终收录约 1420 万张图片，覆盖 21841 个节点。</p>
+<p>这些数字后来听起来像传奇，在当时却意味着一眼望不到头的琐碎工作。</p>
+<p>搜索、下载、去重、分类、标注。为了解决规模问题，团队借助众包平台，请来自 167 个国家的近 5 万名工作者参与图片清理。整个过程花了两年半。有人需要反复确认，屏幕上的动物究竟是不是某种犬；有人要在一批相似图片里，找出不属于那个概念的异类。</p>
+<p>宏大的改变，有时就是这样开始的：许多人低着头，处理一件又一件微小到近乎乏味的事情。</p>
+<p>当时的学术界更愿意把创造性留给算法。建立数据集更像幕后劳动，很难带来一条陡峭上扬的性能曲线。李飞飞和团队做的，是在演员出现以前先搭舞台，在比赛真正开始以前先修建跑道。</p>
+<p>算法直到 2012 年才追上来。</p>
+<p>AlexNet 在 ImageNet 挑战赛上大幅击败传统方法，算法、GPU 算力与大规模数据第一次紧紧咬合。随后几年，深度神经网络迅速席卷计算机视觉，又进入语音、语言和更多领域。</p>
+<p>李飞飞没有发明 AlexNet。她的贡献安静地留在另一层：她提前看见，算法的进步需要一片足够广阔的现实作为参照，也需要一把全行业共同使用的尺子。</p>
+<p>ImageNet 给机器打开了一扇窗，也给人工智能建立了新的坐标。</p>
+<p>当然，窗户从来不会自动呈现一个完整、公平的世界。网络图片里原有的偏见进入数据集，一些涉及人物的冒犯性类别和标签后来引发争议。团队移除了部分内容，重新研究人物类别的过滤与平衡。此后，李飞飞推动“以人为本的人工智能”、参与创办 AI4ALL，也不断提醒人们：机器看见了什么固然重要，谁被它误解、忽略和伤害，同样重要。</p>
+<h2>世界还在那里，图片已经不够了</h2>
+<p>ImageNet 回答的是一个相对静止的问题：这张图片里有什么？</p>
+<p>可真正生活在世界中，物体从来不会只等着被命名。</p>
+<p>一把椅子可以坐，也可以被挪到门边挡住通道；杯子停在桌面上，轻推一下会滑动，推到边缘会坠落；一个人已经伸手去接，另一个人便可能改变动作。</p>
+<p>现实每时每刻都在展开。空间限制行动，行动带来结果，结果又会改变下一步选择。</p>
+<p>婴儿不会先读完一本物理教材再伸手抓玩具。他们看、摸、推、摔，也看照料者皱眉、微笑或者伸手阻止。在无数次细小的尝试里，重力、遮挡、因果、他人的意图和自己的能力边界，慢慢沉进头脑。</p>
+<p>成年人把这些称为常识，因为它们早已沉到认知的水面之下。</p>
+<p>机器没有这样的童年。</p>
+<p>语言模型读过海量文字，能够复述杯子掉在地上可能会碎，却很难从文字中穷尽不同材质、力度、角度和地面带来的变化。更棘手的是，现实行动没有“撤回生成”按钮。机器人抓错一个杯子，损失的不只是一段不够准确的文字。</p>
+<p>世界模型试图补上这部分经验。它在内部建立环境的表征，记录物体、空间与时间的关系，再根据行动预测接下来可能发生什么。</p>
+<blockquote>[!BLUE] ImageNet 给机器看的是世界的切片，世界模型想补回切片之间消失的空间、时间与因果。</blockquote>
+<p>李飞飞把目标称为“空间智能”：让 AI 感知三维环境，在其中推理、行动，并理解行动的后果。她与三位长期从事计算机视觉、图形学和生成式 AI 的研究者共同创立 World Labs，开始了第二次押注。</p>
+<p>这一次，他们试图推开的已经不只是一扇窗。</p>
+<h2>走进一张图片</h2>
+<p>2024 年 12 月，World Labs 公布了最初的成果。</p>
+<p>输入一张照片，模型可以把它扩展成一个能够浏览的三维场景。镜头向前、向后、转到原图没有拍摄的角度，新的墙面、道路和物体随之出现。缺失的部分由模型推测并补全。</p>
+<p>它像是在邀请人走进一张图片。</p>
+<p>早期结果并不完美。场景规模有限，细节会失真，几何关系也可能露出破绽。但方向已经显形：生成式 AI 不再满足于给出一张扁平的结果，它开始维持一个可以持续观看和探索的空间。</p>
+<p>2025 年，Marble 从预览走向公开产品。文字、图片、视频和粗略的 3D 布局都可以成为入口，用户能够生成、编辑、扩展和导出三维场景。电影预演、游戏、虚拟空间和设计工具，也由此成为最先摸到的应用。</p>
+<p>到 2026 年，World Labs 推出 Atlas。这个模型把文字、图像、视频、相机位置和深度信息放进同一套空间上下文，能力延伸到受控视角生成、三维重建和时空模拟。World Labs 也开始把模型生成的场景用于机器人训练：让机器人先在由真实环境重建的模拟世界中尝试，再把学到的策略带回现实。</p>
+<p>两年时间里，World Labs 的叙事从“生成一个可浏览的场景”，走向了“生成、重建和模拟世界”。迭代速度确实惊人。</p>
+<p>而争议也在此时变得清晰。</p>
+<h2>画出世界的样子，还要掌握世界的脾气</h2>
+<p>“世界模型”已经成为 AI 行业最热闹的词之一。不同团队把生成视频、三维重建、自动驾驶预测、机器人仿真都放进这个宽阔的概念里。它们彼此有关，能力层次却相隔很远。</p>
+<p>从照片补出一间房，可以证明模型拥有一定的空间先验；不同视角之间保持几何一致，说明它开始抓住场景结构；预测物体碰撞、人的反应和行动的长期后果，则要面对物理、因果与不确定性。</p>
+<p>目前，World Labs 最成熟、也最容易被感知的能力，集中在三维生成与重建。它能够把二维输入“抬升”为可浏览的空间，让原本看不见的区域以合理的方式出现。</p>
+<p>这种能力很惊艳，也有真实的产品价值。但合理的画面，未必遵循可靠的规律。</p>
+<p>一间生成的厨房可以拥有柔和的光线、连贯的墙面和摆放自然的餐具。让玻璃杯从台面滚落，问题便突然多了起来：杯壁有多薄，台面是否倾斜，地板是什么材质，碰撞发生在哪个角度？细小的误差会一路累积，最后把一个看似可信的世界推向错误的结果。</p>
+<blockquote>[!BLUE] 画出世界的样子，和掌握世界的脾气，中间还隔着物理、因果，以及无数次会失败的行动。</blockquote>
+<p>Atlas 展示了受控视角生成和三维重建上的进展，也给出了公司自己的评测结果。可是模型仍处于早期访问阶段，公开证据大多来自 World Labs 自身。它能否稳定学习物理规律，能否支持复杂环境中的长期规划，能否让机器人把模拟经验可靠地带回现实，都要等待外部测试和真实部署。</p>
+<p>有人因此认为，World Labs 目前的“世界”更像一个高级三维生成器，“理解世界”的说法走在了能力前面。这种质疑有它的分量。</p>
+<p>但把早期能力的不完整直接等同于方向失败，也可能错过新技术最真实的生长方式。第一代产品往往只露出未来的一小块。用户从那里进入，场景与数据从那里积累，研究团队再沿着真实使用中暴露的问题继续向深处挖。</p>
+<p>World Labs 能不能走远，取决于它是否真的拥有这样的学习循环。</p>
+<h2>速度把人带向哪里</h2>
+<p>ImageNet 的历史很容易给今天制造一种诱人的类比。</p>
+<p>当年，李飞飞相信更多、更有结构的视觉数据会推动智能进步。事实证明，她押中了。今天，她相信空间数据、多模态模型和持续迭代会带来空间智能。于是人们自然会问：历史会不会再次发生？</p>
+<p>答案还藏在雾里。</p>
+<p>三维内容生成可以先成为产品，为 World Labs 带来用户、真实场景和反馈；机器人仿真会提出更高价值、也更残酷的问题。如果两者形成闭环，每一次产品迭代都有机会反过来推动模型理解更复杂的空间与行动。</p>
+<p>速度因此很重要。一个仍在快速变化的方向里，等待完美通常意味着错过现实。模型要进入产品，被人使用、挑错，再带着新的问题回到实验室。</p>
+<p>不过，跑得快并不会自动接近终点。画质更高、场景更大、生成更快，可能只是让演示变得漂亮。真正有意义的进步，要落到一组更难的问题上：几何关系能保持多久？物体状态会不会在视野之外悄悄改变？动作与结果之间的联系是否可靠？模型能不能分辨合理的想象与忠实的重建？遇到陌生环境时，它知不知道自己不知道？</p>
+<blockquote>[!BLUE] 迭代速度决定团队能跑多快，问题的选择和验证标准决定它会跑向哪里。</blockquote>
+<p>这也让李飞飞的两次押注有了微妙的差别。</p>
+<p>ImageNet 面对的是一个相对清晰的缺口：视觉数据太少，行业缺少共同基准。世界模型面对的缺口更宽，甚至连“理解一个世界”应该如何测量，都没有统一答案。</p>
+<p>第一次成功给了李飞飞经验，也可能带来路径依赖。三维世界能否像当年的图片一样，通过规模积累催生能力？空间智能缺少的是更多数据，还是尚未被发现的学习机制？世界如此开放、连续，又充满偶然，一套标准答案还能不能承担当年 ImageNet 那样的角色？</p>
+<p>这些问题让她的第二次豪赌更加迷人，也更加危险。</p>
+<h2>她看见的世界，是复数</h2>
+<p>《我看见的世界》的英文书名是 The Worlds I See。</p>
+<p>Worlds，是复数。</p>
+<p>书里有一个少女离开中国后进入的移民世界，有父母用劳作维持的家庭世界，有物理学公式展开的世界，也有人工智能走出实验室之后突然变得复杂的社会世界。</p>
+<p>李飞飞的一生，似乎总在不同世界的边界上移动。她寻找入口，也寻找坐标。</p>
+<p>如今，这个书名又多出一层近乎巧合的含义。她曾经让机器看见由千万张图片组成的世界，现在，她想知道机器能否进入世界，在其中试探、判断，并承担行动带来的后果。</p>
+<p>第一次押注已经进入 AI 历史。第二次仍在发生。</p>
+<p>World Labs 也许会再次击中人工智能的关键瓶颈，也可能最终留下一个强大的三维创作平台。更可能出现的结果没有这么整齐：世界模型先在游戏、影视和设计中生长，随后一点点靠近机器人和物理智能；真实突破与商业包装并肩向前，工程妥协夹在其间，很难由一场发布会决定结局。</p>
+<p>李飞飞已经见过一次改变如何到来。它没有在最初就显露出革命的样子，只是一群人对着数百万张图片，做着缓慢、细小、重复的工作。直到算法追上来，那些图片才突然连成一个时代。</p>
+<p>世界还在等待下一次显影。</p>
+<blockquote>[!HIGHLIGHT] 当年，她问机器要看过多少图片，才能真正学会看。   今天，她的问题更大了一些：机器要经历多少个世界，才能理解世界？</blockquote>
+<p>---</p>
+<h2>资料来源</h2>
+<p>- <a href="https://profiles.stanford.edu/fei-fei-li" rel="noopener">Stanford Profiles：Fei-Fei Li 个人履历</a> - <a href="https://hai.stanford.edu/news/fei-fei-li-candid-look-young-immigrants-rise-ai-trailblazer" rel="noopener">Stanford HAI：李飞飞谈《The Worlds I See》、移民经历与 ImageNet</a> - <a href="https://us.macmillan.com/books/9781250897930/theworldsisee/" rel="noopener">Macmillan：《The Worlds I See》图书介绍及节选</a> - <a href="https://www.image-net.org/static_files/papers/imagenet_cvpr09.pdf" rel="noopener">ImageNet：A Large-Scale Hierarchical Image Database，CVPR 2009</a> - <a href="https://www.image-net.org/challenges/LSVRC/2012/" rel="noopener">ImageNet：ILSVRC 2012 官方记录</a> - <a href="https://www.image-net.org/update-sep-17-2019.php" rel="noopener">ImageNet：关于人物类别过滤与平衡的研究更新</a> - <a href="https://engineering.stanford.edu/news/fei-fei-li-how-do-we-teach-computers-understand-visual-world" rel="noopener">Stanford Engineering：How do we teach computers to understand the visual world?</a> - <a href="https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" rel="noopener">NeurIPS 2012：ImageNet Classification with Deep Convolutional Neural Networks</a> - <a href="https://www.worldlabs.ai/blog/generating-worlds" rel="noopener">World Labs：Generating Worlds，2024</a> - <a href="https://www.worldlabs.ai/blog/marble-world-model" rel="noopener">World Labs：Marble，2025</a> - <a href="https://www.worldlabs.ai/blog/atlas" rel="noopener">World Labs：Atlas，2026</a> - <a href="https://www.worldlabs.ai/blog/taxonomy-of-world-models" rel="noopener">World Labs：A Functional Taxonomy of World Models</a></p></article>
+  <p class="sans" style="margin-top:2rem"><a href="/zhitan/#articles">← 返回最新文章</a> · <a href="/zhitan/#report-hook">索取报告</a> · <a href="/zhitan/#contact">合作</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">
+      <p>增速智谈关注机器人、AI 与硬科技。深度内容、研究报告与媒体服务。</p>
+    </div>
+    <div>
+      <strong>阅读</strong>
+      <a href="/zhitan/#articles">最新文章</a><br>
+      <a href="/zhitan/#series">专题</a><br>
+      <a href="/reports/">研究报告</a>
+    </div>
+    <div>
+      <strong>服务</strong>
+      <a href="/zhitan/services.html">我们做什么</a><br>
+      <a href="/zhitan/#contact">合作咨询</a><br>
+      <a href="/company.html">增速科技</a>
+    </div>
+    <div>
+      <strong>联系</strong>
+      <a href="https://jmx9kgn7nz.feishu.cn/share/base/form/shrcncmbT9nBPSYMpXzW1OaQ1ph" target="_blank" rel="noopener noreferrer">飞书合作问卷</a><br>
+      <a href="mailto:contact@speedup-ai.com">contact@speedup-ai.com</a><br>
+      
+      公众号：增速智谈
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 北京增速科技有限公司 · 增速智谈 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026024443号</a> · <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802048887" target="_blank" rel="noopener noreferrer">京公网安备11010802048887号</a></div>
+</footer>
+<script>
+(function(){
+  const nav=document.getElementById('mainNav');
+  if(!nav) return;
+  nav.querySelectorAll('button[data-mega]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      if(!window.matchMedia('(max-width:980px)').matches) return;
+      e.preventDefault();
+      const li=btn.parentElement;
+      const open=li.classList.contains('open');
+      nav.querySelectorAll('li.open').forEach(x=>x.classList.remove('open'));
+      if(!open) li.classList.add('open');
+    });
+  });
+  // close mega when pointer leaves the whole li (desktop safety)
+  nav.querySelectorAll(':scope > li').forEach(li=>{
+    let t;
+    li.addEventListener('mouseleave', ()=>{
+      t=setTimeout(()=>li.blur(), 10);
+      const b=li.querySelector('button'); if(b) b.blur();
+    });
+    li.addEventListener('mouseenter', ()=>clearTimeout(t));
+  });
+})();
+</script></body></html>
