@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="0; url=https://upspeedtech.com/">
-<script>window.location.replace("https://upspeedtech.com/" + window.location.search + window.location.hash);</script>
+<!-- 旧域名仍使用本页作为迁移入口；新官网不得跳转到自身。 -->
+<script>
+  if (/^(www\.)?danielrobot\.com$/i.test(window.location.hostname)) {
+    window.location.replace("https://upspeedtech.com/" + window.location.search + window.location.hash);
+  }
+</script>
 
 <title>北京增速科技有限公司｜增速科技 · 增速智谈 · 增速商谈</title>
 <meta name="description" content="北京增速科技有限公司（增速科技 Upspeed Tech）提供企业网络安全与 AI 安全服务，并运营增速智谈与增速商谈，关注机器人、人工智能、商业访谈和国际创投。">
@@ -14,7 +18,7 @@
 <meta property="og:description" content="北京增速科技有限公司（增速科技 Upspeed Tech）提供企业网络安全与 AI 安全服务，并运营增速智谈与增速商谈，关注机器人、人工智能、商业访谈和国际创投。">
 <meta property="og:url" content="https://upspeedtech.com/">
 <meta property="og:image" content="https://upspeedtech.com/pics/upspeed_logo.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://upspeedtech.com/#organization","name":"北京增速科技有限公司","legalName":"北京增速科技有限公司","alternateName":["增速科技","Upspeed Tech"],"url":"https://upspeedtech.com/","logo":"https://upspeedtech.com/pics/upspeed_logo.png","brand":[{"@type":"Brand","name":"增速智谈","alternateName":"DanielRobot","url":"https://upspeedtech.com/zhitan/"},{"@type":"Brand","name":"增速商谈","alternateName":"UTALK","url":"https://upspeedtech.com/utalk/"}]},{"@type":"WebPage","@id":"https://upspeedtech.com/#page","url":"https://upspeedtech.com/","name":"北京增速科技有限公司｜增速科技 · 增速智谈 · 增速商谈","description":"北京增速科技有限公司（增速科技 Upspeed Tech）提供企业网络安全与 AI 安全服务，并运营增速智谈与增速商谈，关注机器人、人工智能、商业访谈和国际创投。","inLanguage":"zh-CN","publisher":{"@id":"https://upspeedtech.com/#organization"}},{"@type":"WebSite","@id":"https://upspeedtech.com/#website","name":"增速科技","url":"https://upspeedtech.com/","publisher":{"@id":"https://upspeedtech.com/#organization"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://upspeedtech.com/#organization","name":"北京增速科技有限公司","legalName":"北京增速科技有限公司","alternateName":["增速科技","Upspeed Tech"],"url":"https://upspeedtech.com/","logo":"https://upspeedtech.com/pics/upspeed_logo.png","description":"增速科技（Upspeed Tech）由北京增速科技有限公司运营，提供企业网络安全与 AI 安全服务，并运营增速智谈与增速商谈。","brand":[{"@type":"Brand","name":"增速智谈","alternateName":"DanielRobot","url":"https://upspeedtech.com/zhitan/"},{"@type":"Brand","name":"增速商谈","alternateName":"UTALK","url":"https://upspeedtech.com/utalk/"}]},{"@type":"WebPage","@id":"https://upspeedtech.com/#page","url":"https://upspeedtech.com/","name":"北京增速科技有限公司｜增速科技 · 增速智谈 · 增速商谈","description":"北京增速科技有限公司（增速科技 Upspeed Tech）提供企业网络安全与 AI 安全服务，并运营增速智谈与增速商谈，关注机器人、人工智能、商业访谈和国际创投。","inLanguage":"zh-CN","publisher":{"@id":"https://upspeedtech.com/#organization"}},{"@type":"WebSite","@id":"https://upspeedtech.com/#website","name":"增速科技","alternateName":["Upspeed Tech","北京增速科技有限公司","upspeedtech.com"],"url":"https://upspeedtech.com/","publisher":{"@id":"https://upspeedtech.com/#organization"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -221,7 +225,7 @@
     font-size: clamp(16px, 2.2vw, 22px);
     font-weight: 400;
     color: var(--white-dim);
-    margin-bottom: 56px;
+    margin-bottom: 18px;
     letter-spacing: 0.04em;
     animation: fadeUp 0.8s 0.25s ease both;
   }
@@ -231,6 +235,18 @@
     font-style: normal;
     font-weight: 600;
   }
+
+  .hero-entity {
+    max-width: 760px;
+    margin: 0 auto 36px;
+    color: var(--white-dim);
+    font-size: 14px;
+    line-height: 1.9;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-entity a { color: var(--cyan); text-decoration: none; }
+  .hero-entity a:hover { text-decoration: underline; }
   
   .hero-actions {
     display: flex;
@@ -864,11 +880,16 @@ iframe.loaded + .iframe-loading {
   <p class="hero-eyebrow">UPSPEED TECH</p>
 
   <h1 class="hero-title">
-    <span class="accent">「增速」</span>守护<br>您的企业安全
+    <span class="accent">增速科技</span><br>守护您的企业安全
   </h1>
 
   <p class="hero-slogan">
     从<em>意识培训</em>到<em>漏洞诊断</em>，构建企业网络安全的第一道防线
+  </p>
+
+  <p class="hero-entity">
+    增速科技（Upspeed Tech）由<a href="/company.html">北京增速科技有限公司</a>运营，
+    提供企业网络安全与 AI 安全服务，并运营“增速智谈”和“增速商谈”。
   </p>
 
   <div class="hero-actions">
