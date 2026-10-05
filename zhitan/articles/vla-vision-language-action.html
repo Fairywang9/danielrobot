@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLA 把看懂和动手接上了，但最后一厘米仍然很难｜增速智谈</title>
+<meta name="description" content="视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。">
+<link rel="canonical" href="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html">
+<meta property="og:type" content="article"><meta property="og:title" content="VLA 把看懂和动手接上了，但最后一厘米仍然很难">
+<meta property="og:description" content="视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html">
+<meta property="og:image" content="https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png"><meta property="article:published_time" content="2026-10-05">
+<meta property="article:section" content="增速智谈·科普系列"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "VLA 把看懂和动手接上了，但最后一厘米仍然很难", "description": "视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "image": "https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html", "articleSection": "增速智谈·科普系列", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司", "logo": {"@type": "ImageObject", "url": "https://upspeedtech.com/pics/zhitan/logo-zhitan-horizontal.png"}}}</script>
+<link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css">
+</head><body>
+<header class="site-header sans">
+  <div class="wrap header-bar">
+    <a class="brand" href="/zhitan/">
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈">
+      <span class="brand-name">增速智谈<em>DanielRobot</em></span>
+    </a>
+    <button class="mobile-toggle" type="button" aria-label="菜单" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+    <ul class="nav" id="mainNav">
+      <li><a href="/zhitan/">首页</a></li>
+      <li>
+        <button type="button" data-mega>最新文章 ▾</button>
+        <div class="mega" role="menu">
+          <h4>内容流</h4>
+          <a href="/zhitan/#articles">全部最新文章<span>站内全文阅读</span></a>
+          <div class="sub"><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
+            <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
+            <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
+          </div>
+          <a href="/zhitan/#series">进入专题索引</a>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>专题 ▾</button>
+        <div class="mega wide" role="menu">
+          <div>
+            <h4>一级专题</h4>
+            <a href="/zhitan/#series">世界模型<span>技术 / 人物 / 判断</span></a>
+            <div class="sub">
+              <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">技术篇 01</a>
+              <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">人物篇：李飞飞</a>
+            </div>
+            <a href="/zhitan/#series">机器人小脑<span>身体控制与具身</span></a>
+          </div>
+          <div>
+            <h4>栏目</h4>
+            <a href="/zhitan/#series">造机器人的人</a>
+            <a href="/zhitan/#series">产业观察</a>
+            <a href="/reports/">研究报告库</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>研究报告 ▾</button>
+        <div class="mega" role="menu">
+          <h4>报告中心</h4>
+          <a href="/reports/">全部报告</a>
+          <a href="/reports/china-embodied-intelligence-world-model-2026.html">具身智能与世界模型 2026<span>撰写中 · 可预约</span></a>
+          <a href="/reports/robot_market_summary.html">机器人商业化模式</a>
+          <a href="/reports/robot_engineering_report.html">动力关节</a>
+          <a href="/reports/robot_hand_market.html">灵巧手</a>
+        </div>
+      </li>
+      <li>
+        <a href="/zhitan/services.html">服务 ▾</a>
+        <div class="mega" role="menu">
+          <h4>我们做什么</h4>
+          <a href="/zhitan/services.html">服务总览</a>
+          <a href="/zhitan/services.html#interview">深度访谈与特稿</a>
+          <a href="/zhitan/services.html#video">访谈视频</a>
+          <a href="/zhitan/services.html#publish">媒体发布与搜索占位</a>
+          <a href="/zhitan/services.html#research">行业研究与图谱</a>
+        </div>
+      </li>
+      <li><a href="/zhitan/about.html">关于</a></li>
+      <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
+    </ul>
+  </div>
+</header>
+<main class="article-wrap published-article">
+<nav class="crumb sans" aria-label="面包屑"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">最新文章</a> / 科普系列</nav>
+<header class="article-heading"><p class="tag">增速智谈·科普系列 · 具身智能基础技术｜VLA 01</p><h1>VLA 把看懂和动手接上了，但最后一厘米仍然很难</h1>
+<p class="article-deck">视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。</p><p class="meta">文｜增速智谈 · 网站发布 <time datetime="2026-10-05">2026-10-05</time> · 资料截至 2026-09-27</p>
+<img class="article-cover" src="/pics/zhitan/vla-vision-language-action/cover.png" alt="VLA 把看懂和动手接上了，但最后一厘米仍然很难" width="1200" height="514"></header>
+<article aria-label="文章正文"><div class="wechat-content">
+<p style="margin:0 0 42px;color:#9d9d9d;font-size:13px;line-height:1.7;letter-spacing:0.12em;text-align:left;">ZENGSU INTELLIGENCE<br><strong style="color:#1947d1;font-size:16px;letter-spacing:0.08em;">增速智谈·科普系列</strong></p>
+<p style="margin:0 0 14px;color:#a2a2a2;font-size:17px;font-weight:700;text-align:left;">具身智能基础技术｜VLA 01 <span style="display:inline-block;width:6px;height:17px;margin-left:12px;background:#e6a08e;vertical-align:-2px;"></span></p>
+<p style="margin:0 0 18px;">“把快要掉下桌的袋子捡起来。”</p>
+<p style="margin:0 0 18px;">传统机器人很难处理这类指令。它没有给出袋子的坐标，也没有规定机械臂该沿哪条轨迹运动。“快要掉下去”描述的是人对眼前局势的判断。</p>
+<p style="margin:0 0 18px;">Google DeepMind 在 2023 年用 RT-2 演示过这个任务。模型先从图像里认出哪个袋子处在桌边，再把语言目标变成一串动作：机械臂往哪个方向移动、末端怎样旋转、夹爪何时闭合。研究团队把这类模型叫作 Vision-Language-Action model，视觉—语言—动作模型，也就是后来被频繁提起的 VLA。</p>
+<p style="margin:0 0 18px;">工业机械臂早已能更快、更准地捡起袋子。RT-2 的技术价值在于把<strong>视觉识别、语言理解和动作策略</strong>放进一条可共同训练的链路。机器人由此可以利用图像和语言知识，判断“该对哪个东西做什么”，再生成相应动作。</p>
+<p style="margin:0 0 18px;">但从“看懂快掉下去的袋子”到“稳稳把它抓住”，中间还隔着机器人最难的最后一厘米。物体会滑，镜头有延迟，手臂有误差，夹爪碰到袋子后，下一步观察已经和模型原先预想的不一样。语言模型说错一句话，最多需要重写；机器人动错一步，可能把东西碰落、撞到人，或者让后面几十步全部失去意义。</p>
+<section style="margin:0 0 18px;padding:20px 22px;border:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">VLA 把视觉语义、语言目标和可执行动作接进同一个学习接口。机器人开发因此开始从“每个任务单独写一套策略”，转向“预训练动作底座，再用较少数据适配任务和身体”。实时控制、接触反馈、长程记忆、失败恢复和安全仍由完整系统共同承担。</p></section>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">01</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">VLA 的基本接口：从图像和语言到动作块</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">一套常见的 VLA，在时刻 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">t</code> 会接收三类信息：<strong>摄像头图像、语言目标和机器人自身状态</strong>，例如关节位置、夹爪开合和末端位姿。模型随后给出机器人接下来要执行的一步或一小段动作。</p>
+<p style="margin:0 0 18px;">用一个极简写法表示，就是：</p>
+<p style="margin:0 0 18px;"><code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">未来动作 = VLA（当前画面，语言目标，机器人状态）</code></p>
+<p style="margin:0 0 18px;">动作具体是什么，差别很大。</p>
+<p style="margin:0 0 18px;">对桌面机械臂，它可能是末端向前、向左、向上各移动多少，旋转多少，夹爪打开还是闭合。对双臂机器人，它要同时安排左右手。对人形机器人，它还可能覆盖腰、腿、手臂和手指。也有模型直接输出各个关节的目标位置。</p>
+<p style="margin:0 0 18px;">理解 VLA 需要先明确一点：<strong>“A”没有统一格式。</strong>相同的“把杯子放进水槽”，在轮式双臂、固定机械臂和人形机器人上，会变成长度不同、物理意义不同的动作向量。摄像头位置、关节数和控制方式一变，模型与身体之间的接口也会改变。</p>
+<p style="margin:0 0 18px;">VLA 输出的动作通常还要交给下一层。轨迹控制器、全身控制器和电机伺服会以更高频率处理动力学、平衡、碰撞和力。这里的“端到端”主要指<strong>感知到动作可以联合学习</strong>，控制链仍会继续延伸到高频控制器和电机伺服。</p>
+<p style="margin:0 0 22px;color:#315dff;">VLA 把“看见什么、要做什么”转成动作目标；高频控制与安全继续由下一层系统承担。</p>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/vla-vision-language-action/figure-01.png" alt="VLA 的输入、动作块与底层控制闭环：图像、语言和机器人状态进入视觉语言骨干与动作头，输出未来动作块，再交给低层控制和安全系统。" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">增速智谈原创教学示意｜依据 RT-2、OpenVLA、π0、GR00T 公开架构整理。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">02</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">动作表示：离散 token、连续生成与动作分块</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">VLA 最早的一条直观路线，是把动作也变成 <strong>token</strong>。</p>
+<p style="margin:0 0 18px;">RT-2 沿用了 RT-1 的离散动作，把连续的位移、旋转和夹爪状态切成一个个区间，再写成语言模型能够处理的字符串。这样一来，已经具备图像和语言能力的模型可以沿用原有输出框架，在训练中同时学习网页图文与机器人动作。</p>
+<p style="margin:0 0 18px;">这条路线表明，互联网上学到的“草莓是什么”“哪个袋子快掉下去了”“什么东西可以临时当锤子”，可以迁移到机器人任务里。RT-2 在自己的未见场景测试中，把成功率从 <strong>RT-1 的 32% 提高到 62%</strong>。这组结果说明，视觉语言预训练能够补充机器人数据中昂贵又稀缺的语义知识；它仍然受具体机器人、任务和评测设置约束。</p>
+<p style="margin:0 0 18px;">机器人动作对时间、精度和连续性更加敏感。</p>
+<p style="margin:0 0 18px;">一句话晚半秒出现，读者通常察觉不到；机械臂每一步都晚半秒，轨迹会变得断断续续。把连续动作切成离散格子，还会带来精度损失。逐个生成动作 token，也很难满足需要快速反馈的任务。RT-1 的实机闭环频率是 <strong>3 Hz</strong>，每秒做三次高层动作决定，适合它的移动操作任务；高速接触和动态平衡仍需要更快的控制回路。</p>
+<p style="margin:0 0 18px;">后来越来越多模型让语义理解与动作生成分工。π0 在视觉语言骨干之外增加<strong>动作专家（action expert）</strong>，用<strong>流匹配（flow matching）</strong>生成连续动作；Octo 和 GR00T 等路线使用扩散式动作生成；OpenVLA-OFT 则结合连续动作、并行解码和<strong>动作分块（action chunking）</strong>。</p>
+<p style="margin:0 0 18px;">动作分块让模型一次生成未来一小段动作。机器人先执行其中一部分，再根据新画面滚动重算。人伸手拿杯子时也会先形成一段连贯动作，并根据视觉和接触变化中途纠正。</p>
+<p style="margin:0 0 18px;">动作分块解决了两个问题：一是减少大模型反复推理带来的延迟，二是让动作在短时间内更连贯。代价也很清楚：块越长，运行越顺，却越可能在环境变化后继续执行一段已经过时的计划；块越短，反馈更及时，但计算压力又回来。</p>
+<p style="margin:0 0 18px;">OpenVLA-OFT 的作者在指定评测中报告，相比基础版 OpenVLA，其方法让动作生成提速 <strong>25—50 倍</strong>，并提高了任务成功率。这组结果只适用于论文给定的机器人和任务，但它突出了实机部署的一项关键指标：动作策略既要生成正确动作，也要在控制周期内完成计算。</p>
+<p style="margin:0 0 22px;color:#315dff;">动作策略需要同时满足三个条件：动作准确、生成及时、反馈可用。</p>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/vla-vision-language-action/figure-02.png" alt="离散动作 token、连续动作生成与动作分块的区别。" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">增速智谈原创教学示意｜动作接口因模型与机器人而异。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">03</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">网页教它“是什么”，机器人数据教它“怎么做”</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">大语言模型可以从互联网吸收万亿级 token，机器人没有这样的现成语料。</p>
+<p style="margin:0 0 18px;">RT-1 为<strong>约 13 万段真实轨迹</strong>动用了 13 台机器人，连续采集 17 个月，覆盖 700 多项任务。</p>
+<p style="margin:0 0 18px;">到 2023 年，Open X-Embodiment 汇集 34 个实验室的 60 个数据集，形成<strong>超过 100 万段真实轨迹、覆盖 22 种机器人本体</strong>的数据池。OpenVLA 从中整理约 97 万段轨迹，训练出一个 70 亿参数的开源 VLA。</p>
+<p style="margin:0 0 18px;">百万级轨迹与网页数据的规模仍相差很远，轨迹之间也存在明显差异。不同实验室使用不同的相机、控制频率和机械臂，对“动作”的定义也不统一：有的记录末端位姿，有的记录关节目标；有的配有腕部相机，有的只有外部视角；任务语言有时精细，有时只是模糊标签。</p>
+<p style="margin:0 0 18px;">Open X-Embodiment 和 RT-X 尝试把不同机器人的动作投到相对夹爪坐标系下，用统一的七维向量表示位移、旋转和夹爪开合。Octo 进一步接收不同的相机与本体状态，并允许下游更换动作空间。共享预训练由此提供了一个见过多种任务的策略起点，换身体后仍需继续适配。</p>
+<p style="margin:0 0 18px;">现有训练数据大致沿<strong>三条互补路线</strong>扩展。</p>
+<p style="margin:0 0 18px;">一条追求<strong>异构性</strong>。Open X-Embodiment 让模型见到更多身体、环境和任务，希望不同机器人的经验可以相互迁移。另一条追求<strong>一致性和质量</strong>。AgiBot World 的论文披露，它用 100 多台同构机器人采集约 100 万段轨迹、2976.4 小时数据，覆盖 217 个具体任务、87 项技能和 106 个场景。只用人工审核通过的数据训练时，任务完成度分数从 0.41 提高到 0.59。这组实验体现了数据质量对结果的直接影响。</p>
+<p style="margin:0 0 18px;">第三条路线使用合成数据。GraspVLA 在仿真中生成<strong>约 1000 万条抓取轨迹、10 亿帧画面</strong>，用纯合成动作数据预训练，再迁移到真实抓取。几何主导、动作边界清楚的任务可以借此迅速扩大数据规模；插拔、系结、擦拭等接触更复杂的任务仍需单独验证。</p>
+<p style="margin:0 0 18px;">三类数据承担不同作用：</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;网页图文提供物体、概念和常识，但没有真实机器人动作；</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;真机示范提供动作与后果的对应关系，但昂贵、分布窄；</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;仿真提供规模、可控变量和失败样本，但必须跨过现实差距。</p>
+<p style="margin:0 0 18px;">训练的关键在于识别共享边界：哪些知识可以跨机器人复用，哪些动作只对某具身体有效，哪些视觉差异只改变外观，哪些细微变化会直接改变接触结果。</p>
+<p style="margin:0 0 22px;color:#315dff;">数据规模扩大任务覆盖面，数据对齐决定不同机器人之间能共享多少经验。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">04</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">泛化能力：六个不同层次</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">讨论 VLA 的“泛化”时，需要先说明测试究竟换了什么。新杯子、新房间和新机器人对应不同层次，技术难度相差很大。</p>
+<p style="margin:0 0 18px;"><strong>第一层是语义泛化。</strong>机器人没见过“能解渴的东西”这句指令，但能借助视觉语言知识选中水。这是 VLM 最容易带给 VLA 的能力。</p>
+<p style="margin:0 0 18px;"><strong>第二层是视觉和场景泛化。</strong>桌布、光线、背景和物体外观变了，机器人仍能找到目标。RT-2 的未见场景结果主要证明的是这一类迁移。</p>
+<p style="margin:0 0 18px;"><strong>第三层是动作泛化。</strong>模型认出新物体后，还要形成训练中没有逐字出现过的操作方式。识别拉链和灯泡只提供语义前提，真正操作仍需要合适的轨迹、力度和接触时机。</p>
+<p style="margin:0 0 18px;"><strong>第四层是跨本体。</strong>把在 Franka 机械臂上学到的经验迁移到双臂或人形机器人。动作维度、相机视角、可达空间和动力学都变了，通常需要新的示范与后训练。Gemini Robotics On-Device 2 官方称，用少于 200 个样本、数小时数据即可适配新的双臂本体。这项结果体现的是适配成本下降，部署过程仍包含新数据和后训练。</p>
+<p style="margin:0 0 18px;"><strong>第五层是时间泛化。</strong>从几秒钟的抓放，走向数分钟、多房间、多步骤任务。动作越长，任何一步的小误差都可能改变后续状态。π0.5 的论文展示了在训练集之外的新住宅完成 10—15 分钟整理任务；Gemini Robotics ER 2 把任务跟踪扩展到数分钟和数百次决定。这些结果推动了长程任务能力，全天候可靠性仍需更长期测试。</p>
+<p style="margin:0 0 18px;"><strong>第六层是失败恢复。</strong>抓偏了能不能再抓，抽屉没拉开能不能改变策略，找不到目标时会不会求助。只用成功示范做行为克隆的模型，最容易在这里暴露短板：一旦偏离示范走过的状态，错误会层层累积。</p>
+<p style="margin:0 0 18px;">2025 年发布的 REALM 基准专门用 15 类扰动、7 种操作技能和 3500 多个物体测试 VLA。作者对 π0、π0-FAST 和 GR00T N1.5 的评估结论仍然克制：泛化与鲁棒性是开放问题。它提醒我们，漂亮演示往往展示“能做到什么”，系统评测才开始回答“换一点条件后，还剩多少”。</p>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/vla-vision-language-action/figure-03.png" alt="VLA 泛化能力的六个层次：语义、场景、动作、本体、时间与失败恢复。" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">增速智谈原创教学示意｜演示里的“换新”必须说明究竟换了哪一层。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">05</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">联合训练与分层运行</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">如果大模型足够强，能不能把看、想、走、抓全部塞进同一个网络？</p>
+<p style="margin:0 0 18px;">当前前沿系统普遍选择<strong>联合训练、分层运行</strong>。</p>
+<p style="margin:0 0 18px;">π0.5 在预训练阶段把动作离散成 token，以便和图文、目标检测、高层子任务等异构数据共同训练；后训练阶段再加入连续动作 action expert。推理时，模型先产生一个语义子任务，再让动作专家生成低层动作。</p>
+<p style="margin:0 0 18px;">Gemini Robotics 2 的公开系统把分工写得更清楚。Gemini Robotics ER 2 负责与人沟通、理解场景、拆解多步任务、跟踪进度；VLA 负责把当前目标变成机器人动作；低层控制系统继续管理身体稳定和物理安全。NVIDIA 在 GR00T N1.6 之外，也在公开研究中加入高层规划与记忆模块，去补动作模型缺少长期记忆的问题。</p>
+<p style="margin:0 0 18px;">这种分工来自机器人任务天然存在的不同时间尺度：</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;规划和记忆可能几秒更新一次，决定接下来做哪件事；</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;VLA 以更快频率观察环境，生成一小段动作；</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;全身控制、碰撞检测和电机伺服需要几十到上千赫兹地维持稳定与安全。</p>
+<p style="margin:0 0 18px;">三层可以共享训练目标和信息，但各自仍需适合自身任务的模型、表示与运行频率。</p>
+<p style="margin:0 0 22px;color:#315dff;">联合训练负责共享知识，分层运行负责匹配物理世界的不同时间尺度。</p>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/vla-vision-language-action/figure-04.png" alt="机器人系统的三层时间尺度：推理规划与记忆、VLA 动作块、底层控制伺服与安全。" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">增速智谈原创教学示意｜实际频率因本体与系统设计而异。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">06</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">最后一厘米，难在模型必须对现实负责</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">VLA 已经把机器人的能力上限往前推了一大步，但部署中的麻烦往往藏在演示视频之外。</p>
+<p style="margin:0 0 18px;"><strong>动作误差会积累。</strong>GR00T N1.6 团队报告，相对动作通常更平滑、更准确，但在小数据任务上容易积累误差，削弱纠正能力。单次 2 毫米偏差很小；连续几十步都以偏差后的状态为起点，最终结果就会改变。</p>
+<p style="margin:0 0 18px;"><strong>视觉缺少接触细节。</strong>只看 RGB 图像，模型很难精确知道夹持力、摩擦、物体是否已经卡住。力觉、触觉和机器人自身状态可以补充信息，数据采集、传感器校准和跨平台统一也会随之变得更难。</p>
+<p style="margin:0 0 18px;"><strong>系统还要判断何时停止。</strong>模型需要识别任务是否完成、能力是否足够，以及何时请求人类接管。Google DeepMind 在 ASIMOV-Agentic 中专门测试智能体能否拒绝违反约束的任务、在硬件故障或人类靠近时触发保护、屏蔽超出 VLA 分布的动作，并在指令模糊时主动求助。这类评测把动作成功率和系统安全分开衡量。</p>
+<p style="margin:0 0 18px;"><strong>安全需要独立控制回路。</strong>Gemini Robotics 的官方安全说明仍然保留传统机器人措施：碰撞避免、接触力限制、动态稳定性和安全停机。语言模型可以理解“不要把热锅递给孩子”；电机超速和身体失衡则由确定性的监控与控制回路处理。</p>
+<p style="margin:0 0 18px;">短期内，VLA 更适合被理解为一层<strong>逐渐通用的动作能力</strong>：向上连接自然语言、视觉常识和任务规划，向下连接不同身体、控制器和安全机制。它的产业价值将体现为更少的新增任务数据、更短的本体适配周期，以及更低的技能开发工程量。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">07</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">看一个 VLA 演示，先问这七个问题</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">模型名字会继续变化，但判断框架可以稳定下来。</p>
+<p style="margin:0 0 18px;"><strong>第一，使用的是什么机器人、哪些传感器？</strong>同一任务在固定机械臂、轮式双臂和人形机器人上的难度不同；是否有腕部相机、力觉和触觉，也会改变结果。</p>
+<p style="margin:0 0 18px;"><strong>第二，模型实际输出什么动作？</strong>需要区分末端位姿、关节目标和全身动作，并说明上层 VLA 与底层控制各自负责什么。</p>
+<p style="margin:0 0 18px;"><strong>第三，控制频率、动作块长度和延迟是多少？</strong>实时闭环需要结合原始运行速度与延迟数据判断，剪辑后的流畅画面无法提供这些信息。</p>
+<p style="margin:0 0 18px;"><strong>第四，测试到底换了什么？</strong>换杯子、换房间、换动作、换身体、换任务时长，代表六种不同的泛化。</p>
+<p style="margin:0 0 18px;"><strong>第五，上新机器人或新任务用了多少数据和后训练？</strong>“基础模型”通常提供更好的初始化，新本体和新任务依然需要适配成本。</p>
+<p style="margin:0 0 18px;"><strong>第六，成功率的分母是什么？</strong>试验次数、初始状态、失败定义、是否允许复位或人工接管，都应与最佳演示一起披露。</p>
+<p style="margin:0 0 18px;"><strong>第七，失败后怎样恢复，安全由谁兜底？</strong>长期运行还要统计失败发现、恢复策略、人工接管和安全停机。</p>
+<p style="margin:0 0 18px;">这七个问题对应着 VLA 接下来更有价值的指标：新任务所需数据量、换身体的适配时间、长任务中的人工接管率、失败发现与恢复能力，以及安全边界的可验证性。</p>
+<section data-component="chapter-heading" style="margin:52px 0 34px;text-align:left;"><span style="display:block;color:#315dff;font-size:44px;line-height:1;font-weight:700;letter-spacing:-0.02em;">08</span><span style="display:block;width:40px;height:4px;margin:13px 0 14px;border-radius:2px;background:#e6a08e;"></span><span style="display:block;color:#10233f;font-size:24px;line-height:1.48;font-weight:700;letter-spacing:0.02em;">从动作底座走向完整机器人系统</span><span style="display:block;height:0;margin-top:18px;border-top:1px solid #dbe4f6;"></span></section>
+<p style="margin:0 0 18px;">从 RT-1、RT-2 到 OpenVLA、π0.5、GR00T 和 Gemini Robotics 2，VLA 的能力沿着一条连续路线扩展：更多任务进入同一个策略，视觉语言知识帮助模型理解新物体和新指令，连续动作与动作分块改善执行，跨本体和长任务继续扩大适用范围。记忆、失败恢复与安全则把动作能力接入完整机器人系统。</p>
+<p style="margin:0 0 18px;">越接近真实部署，系统分工越需要清楚：可从大数据中学习的部分交给模型，高频稳定性由控制器保证，安全边界由独立机制约束，超出能力的情况交给人处理。</p>
+<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;"><strong>VLA 正在把“看懂以后怎样动手”变成可规模化预训练的能力。下一阶段的差距将落在更具体的指标上：新任务需要多少数据，换一具身体要适配多久，长任务需要多少次人工接管，以及安全边界能否被验证。</strong></p></section>
+</div><section class="article-sources"><h2>资料来源</h2><ul><li><a href="https://robotics-transformer1.github.io/">RT-1: Robotics Transformer</a></li><li><a href="https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action/">RT-2: New model translates vision and language into action</a></li><li><a href="https://robotics-transformer-x.github.io/">Open X-Embodiment: Robotic Learning Datasets and RT-X Models</a></li><li><a href="https://octo-models.github.io/">Octo: An Open-Source Generalist Robot Policy</a></li><li><a href="https://openvla.github.io/">OpenVLA: An Open-Source Vision-Language-Action Model</a></li><li><a href="https://openvla-oft.github.io/">OpenVLA-OFT: Fine-Tuning Vision-Language-Action Models</a></li><li><a href="https://www.physicalintelligence.company/download/pi0.pdf">π0: A Vision-Language-Action Flow Model for General Robot Control</a></li><li><a href="https://www.physicalintelligence.company/download/pi05.pdf">π0.5: a VLA Model with Open-World Generalization</a></li><li><a href="https://research.nvidia.com/labs/gear/gr00t-n1_6/">GR00T N1.6</a></li><li><a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/">Gemini Robotics 2 brings whole body intelligence to robots</a></li><li><a href="https://agibot-world.com/blog/agibot_go1.pdf">AgiBot World Colosseo / GO-1</a></li><li><a href="https://arxiv.org/abs/2505.03233">GraspVLA: a Grasping Foundation Model Pre-trained on Billion-scale Synthetic Action Data</a></li><li><a href="https://arxiv.org/abs/2512.19562">REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation</a></li><li><a href="https://deepmind.google/research/evals/">ASIMOV-Agentic-v1</a></li><li><a href="https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/">Introducing Gemini Robotics and Gemini Robotics-ER</a></li><li><a href="https://research.nvidia.com/labs/gear/vesta/">Vesta</a></li></ul></section></article>
+<aside class="read-next sans"><p>继续阅读</p><a href="/zhitan/articles/jev-agent-decision-model.html">Jev 到底新在哪：从分类器到 Agent 决策层 →</a><br><a href="/zhitan/#articles">返回全部文章 →</a></aside>
+</main><footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">
+      <p>增速智谈关注机器人、AI 与硬科技。深度内容、研究报告与媒体服务。</p>
+    </div>
+    <div>
+      <strong>阅读</strong>
+      <a href="/zhitan/#articles">最新文章</a><br>
+      <a href="/zhitan/#series">专题</a><br>
+      <a href="/reports/">研究报告</a>
+    </div>
+    <div>
+      <strong>服务</strong>
+      <a href="/zhitan/services.html">我们做什么</a><br>
+      <a href="/zhitan/#contact">合作咨询</a><br>
+      <a href="/company.html">增速科技</a>
+    </div>
+    <div>
+      <strong>联系</strong>
+      <a href="https://jmx9kgn7nz.feishu.cn/share/base/form/shrcncmbT9nBPSYMpXzW1OaQ1ph" target="_blank" rel="noopener noreferrer">飞书合作问卷</a><br>
+      <a href="mailto:contact@speedup-ai.com">contact@speedup-ai.com</a><br>
+      公众号：增速智谈
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 北京增速科技有限公司 · 增速智谈 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026024443号</a> · <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802048887" target="_blank" rel="noopener noreferrer">京公网安备11010802048887号</a></div>
+</footer><script>
+(function(){
+  const nav=document.getElementById('mainNav');
+  if(!nav) return;
+  nav.querySelectorAll('button[data-mega]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      if(!window.matchMedia('(max-width:980px)').matches) return;
+      e.preventDefault();
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+})();
+</script></body></html>

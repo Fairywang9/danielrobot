@@ -1,0 +1,17 @@
+/* 成品文章入口和正文：封面保持原始比例。 */
+#articles .story-main img{aspect-ratio:1200/514;object-fit:contain;background:#fff}
+#articles .story-side img{height:auto;aspect-ratio:1200/514;object-fit:contain;background:#fff}
+.published-article{width:min(760px,calc(100% - 2rem))}
+.article-heading h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.35;margin:.6rem 0 1rem;overflow-wrap:anywhere}
+.article-deck{font-size:1.05rem;color:#555;margin:0 0 1rem}
+.article-cover{width:100%;height:auto;margin:1.6rem 0 2.2rem}
+.wechat-content{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;color:#262626;font-size:16px;line-height:1.95;letter-spacing:.03em;overflow-wrap:anywhere}
+.wechat-content img{height:auto;max-width:100%}
+.wechat-content a{overflow-wrap:anywhere}
+.wechat-content code{white-space:normal;overflow-wrap:anywhere}
+.article-sources,.read-next{margin:3rem 0 0;padding:1.5rem 0;border-top:1px solid var(--line)}
+.article-sources h2{font-size:1.25rem}
+.article-sources ul{padding-left:1.2rem}
+.article-sources a,.read-next a{color:#315dff;overflow-wrap:anywhere}
+.read-next p{font-weight:700}
+@media(max-width:600px){.article-heading h1{font-size:1.8rem}.wechat-content{font-size:16px}.published-article{margin-top:1.3rem}}
