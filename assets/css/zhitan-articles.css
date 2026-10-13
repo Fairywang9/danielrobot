@@ -15,3 +15,6 @@
 .article-sources a,.read-next a{color:#315dff;overflow-wrap:anywhere}
 .read-next p{font-weight:700}
 @media(max-width:600px){.article-heading h1{font-size:1.8rem}.wechat-content{font-size:16px}.published-article{margin-top:1.3rem}}
+
+/* Expanded article catalogue. */
+#articles .article-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}#articles .article-catalog .story-main{min-width:0}#articles .article-catalog h3{overflow-wrap:anywhere}@media(max-width:700px){#articles .article-catalog{grid-template-columns:1fr}}

@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jev 到底新在哪：从分类器到 Agent 决策层｜增速智谈</title>
-<meta name="description" content="从分类器、零样本 NLI 到 Agent 决策层，拆解 Jev 的技术来路、近期论文、真实应用与可靠性边界。">
-<link rel="canonical" href="https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html">
-<meta property="og:type" content="article"><meta property="og:title" content="Jev 到底新在哪：从分类器到 Agent 决策层">
-<meta property="og:description" content="从分类器、零样本 NLI 到 Agent 决策层，拆解 Jev 的技术来路、近期论文、真实应用与可靠性边界。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html">
-<meta property="og:image" content="https://upspeedtech.com/pics/zhitan/jev-agent-decision-model/cover.png"><meta property="article:published_time" content="2026-10-05">
-<meta property="article:section" content="增速智谈·科普系列"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Jev 到底新在哪：从分类器到 Agent 决策层", "description": "从分类器、零样本 NLI 到 Agent 决策层，拆解 Jev 的技术来路、近期论文、真实应用与可靠性边界。", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "image": "https://upspeedtech.com/pics/zhitan/jev-agent-decision-model/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html", "articleSection": "增速智谈·科普系列", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司", "logo": {"@type": "ImageObject", "url": "https://upspeedtech.com/pics/zhitan/logo-zhitan-horizontal.png"}}}</script>
-<link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css">
-</head><body>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层｜增速智谈</title><meta name="description" content="从分类器到概率接口，解释Jev如何接入Agent决策，以及判断和执行的可靠性边界。"><link rel="canonical" href="https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html">
+<meta property="og:type" content="article"><meta property="og:title" content="【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层"><meta property="og:description" content="从分类器到概率接口，解释Jev如何接入Agent决策，以及判断和执行的可靠性边界。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html"><meta property="og:image" content="https://upspeedtech.com/pics/zhitan/jev-agent-decision-model/cover.png"><meta property="article:published_time" content="2026-10-05">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层", "description": "从分类器到概率接口，解释Jev如何接入Agent决策，以及判断和执行的可靠性边界。", "datePublished": "2026-10-05", "dateModified": "2026-10-13", "image": "https://upspeedtech.com/pics/zhitan/jev-agent-decision-model/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/jev-agent-decision-model.html", "articleSection": "增速·科普", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司"}}</script><link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css"></head><body>
 <header class="site-header sans">
   <div class="wrap header-bar">
     <a class="brand" href="/zhitan/">
@@ -24,7 +16,7 @@
         <div class="mega" role="menu">
           <h4>内容流</h4>
           <a href="/zhitan/#articles">全部最新文章<span>站内全文阅读</span></a>
-          <div class="sub"><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
+          <div class="sub"><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远</a><a href="/zhitan/articles/fde-enterprise-ai-delivery.html">【增速·观察】FDE 越火，越说明 AI 还没准备好</a><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？</a><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
             <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
             <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
           </div>
@@ -77,180 +69,123 @@
       <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
     </ul>
   </div>
-</header>
-<main class="article-wrap published-article">
-<nav class="crumb sans" aria-label="面包屑"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">最新文章</a> / 科普系列</nav>
-<header class="article-heading"><p class="tag">增速智谈·科普系列 · AI 决策模型技术篇 01</p><h1>Jev 到底新在哪：从分类器到 Agent 决策层</h1>
-<p class="article-deck">从分类器、零样本 NLI 到 Agent 决策层，拆解 Jev 的技术来路、近期论文、真实应用与可靠性边界。</p><p class="meta">文｜增速智谈 · 网站发布 <time datetime="2026-10-05">2026-10-05</time> · 资料截至 2026-09-29</p>
-<img class="article-cover" src="/pics/zhitan/jev-agent-decision-model/cover.png" alt="Jev 到底新在哪：从分类器到 Agent 决策层" width="1200" height="514"></header>
+</header><main class="article-wrap published-article"><nav class="crumb sans"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">全部文章</a> / 科普</nav>
+<header class="article-heading"><p class="tag">增速·科普</p><h1>【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层</h1><p class="article-deck">从分类器到概率接口，解释Jev如何接入Agent决策，以及判断和执行的可靠性边界。</p><p class="meta">文｜增速智谈 · 网站发布 2026-10-05 · 网站更新 2026-10-13 · 资料截至 2026-09-29</p><img class="article-cover" src="/pics/zhitan/jev-agent-decision-model/cover.png" alt="【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层" width="1200" height="514"></header>
 <article aria-label="文章正文"><div class="wechat-content">
 <p style="margin:0 0 42px;color:#9d9d9d;font-size:13px;line-height:1.7;letter-spacing:0.12em;text-align:left;">ZENGSU INTELLIGENCE<br><strong style="color:#1947d1;font-size:16px;letter-spacing:0.08em;">增速智谈·科普系列</strong></p>
 <p style="margin:0 0 14px;color:#a2a2a2;font-size:17px;font-weight:700;text-align:left;">AI 决策模型技术篇 01 <span style="display:inline-block;width:6px;height:17px;margin-left:12px;background:#e6a08e;vertical-align:-2px;"></span></p>
-<section style="margin:0 0 18px;padding:20px 22px;border:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">一封客户邮件进来，系统真正需要的也许不是一段漂亮回复，而只是三个判断：它属于退款、物流还是账户问题？风险高不高？要不要交给人？Jev 把这类“小判断”从大语言模型里单独拆了出来。它可能不是一种从零开始的新技术，却准确击中了 Agent 时代最昂贵、也最容易被忽略的一层。</p></section>
-<p style="margin:0 0 18px;">2026 年 9 月，一个不会写文章、不会聊天、甚至不能输出一句完整解释的 AI 模型，突然成了开发者社区的热门话题。</p>
-<p style="margin:0 0 18px;">它叫 Jev，由旧金山创业公司 TypeSafe AI 发布。官方把它称作第一个 “System One Model”：给模型一段状态，再给它若干封闭问题，它不生成文本，只返回选择、分数、真假概率和置信度。TypeSafe 给它的口号是 “Decisions, not strings”——要决定，不要字符串。[1][2]</p>
-<p style="margin:0 0 18px;">这套说法很容易让人产生两种相反的误读。一种把它视为“反 LLM 革命”，仿佛生成式 AI 将被判断式 AI 取代；另一种则认为它无非是一个重新包装的分类器，没有任何新意。</p>
-<p style="margin:0 0 18px;">两种判断都漏掉了真正值得看的变化。</p>
-<p style="margin:0 0 18px;">Jev 的关键不在于它会不会分类，而在于它把<strong>自然语言理解、开放标签、概率输出、并行判断和软件类型接口</strong>压缩成了一次模型调用。它不是为了回答人，而是为了让程序在毫秒级做出下一步动作。</p>
-<p style="margin:0 0 18px;">这篇文章试图回答四个问题：Jev 到底怎样工作；它与分类器、NLI、结构化输出 LLM 有什么关系；最近一周涌现的论文究竟证明了什么；以及企业如果真想把它放进 Agent 或自动化系统，应该怎样判断它是否值得用。</p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">01</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">Jev 做的事，其实是一条“模糊的 if 语句”</p></section>
-<p style="margin:0 0 18px;">传统代码擅长精确规则：金额大于 10 万元就进入复核，库存为零就停止下单，用户没有权限就拒绝操作。</p>
-<p style="margin:0 0 18px;">真正难写的是另一类规则：这封邮件是不是在隐晦地投诉？这段检索结果是否真的支持回答？当前页面上哪个按钮最符合下一步目标？某次工具调用看起来是否危险？</p>
-<p style="margin:0 0 18px;">这些问题都有有限答案，却很难用固定关键词或手写规则覆盖。过去两年，很多团队直接调用一个通用 LLM，让它输出 JSON，再从 JSON 里取出一个标签。能力够强，但代价也明显：模型要逐 token 生成，必须约束格式、处理解析失败，还要为一段最终只剩 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">true</code> 或 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">billing</code> 的答案支付整次推理成本。</p>
-<p style="margin:0 0 18px;">Jev 试图把这一层直接做成模型接口。</p>
+<section style="margin:0 0 18px;padding:20px 22px;border:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">客户发来一句话：“东西还没到，钱倒是扣得挺快。”客服系统要先弄清楚：这是物流问题还是付款问题？客户有多不满？要不要交给人工？Jev 专门处理这类判断。它读懂材料，从预设答案里做选择，再给出概率，供软件决定下一步。</p></section>
+<p style="margin:0 0 18px;">我们熟悉的 AI 通常出现在聊天框里：问它一个问题，它写一段回答。2026 年 9 月受到关注的 Jev，却把“写回答”这一步省掉了。</p>
+<p style="margin:0 0 18px;">它由 TypeSafe AI 发布。你可以给它一封邮件、一份订单记录，再问几个问题。它返回的是选项、评分或真假概率。软件拿到结果，便能分派工单、筛选资料、决定是否需要人工检查。</p>
+<p style="margin:0 0 18px;">要理解它，先记住一个分工：<strong>Jev 负责判断，业务程序负责决定是否执行。</strong>例如 Jev 认为一封邮件有很高概率属于投诉，客服系统仍要根据客户等级、投诉内容和自己的规则决定处理方式。</p>
+<p style="margin:0 0 18px;">标题里的“分类器”，指把材料归入不同类别的模型，例如识别垃圾邮件。“Agent”则指能连续完成任务的 AI 系统：它会制定计划、使用工具、观察结果，再选择下一步。Jev 想服务的“决策层”，就是这套系统中反复做小判断的部分。</p>
+<p style="margin:0 0 18px;">它与已有分类技术有什么关系？为什么要专门做一个判断模型？速度提高之后，判断还能不能信？下面从一封客服邮件说起。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">01</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">一封邮件进来，Jev 怎样完成判断</p></section>
+<p style="margin:0 0 18px;">有些判断很容易写进代码：订单超过七天没有发货，就提醒客服；账户没有退款权限，就禁止操作。条件明确，照规则执行即可。</p>
+<p style="margin:0 0 18px;">语言里的含义更难处理。“钱扣得挺快”可能带着不满，但并没有直接写“我要投诉”。仅靠几个关键词，容易漏掉语气和上下文。于是很多团队会请通用大模型读邮件，再写出一份结果。</p>
+<p style="margin:0 0 18px;">大语言模型，也就是常说的 LLM，生成答案时通常要一步步输出小块文字。这些小块叫 token，可能是一个字、一个词，或词的一部分。如果系统最后只需要“物流”这个选项，生成和读取整段回答也会带来时间与费用。</p>
+<p style="margin:0 0 18px;">Jev 把这个任务限定得更明确：先把可选答案列好，再请模型做选择。</p>
 <section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/jev-agent-decision-model/figure-01.png" alt="Jev 单次调用工作流" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
-<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 1：Jev 读取共享 state，并行回答 Choice、Score、Noul 问题；业务代码再按概率与风险决定执行、确认或升级。增速智谈原创教学示意。</p>
-<p style="margin:0 0 18px;">一次调用里有两个核心输入：</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;<code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">state</code>：模型需要读取的状态，可以是文本，也可以是由文本字段组成的 JSON，例如客服对话、订单记录、当前页面元素或检索到的证据。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;<code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">questions</code>：程序预先定义的判断问题，每个问题都限定输出类型和可选答案。</p>
-<p style="margin:0 0 18px;">TypeSafe 公开了三种原语：[2][3]</p>
-<p style="margin:0 0 18px;"><strong>Choice</strong> 从一组候选项中选一个，例如把工单路由到 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">billing / shipping / account</code>；返回选中的项、每个候选项的概率，以及一个由分布计算出的 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">confidence</code>。</p>
-<p style="margin:0 0 18px;"><strong>Score</strong> 在有序等级上打分，例如把风险分成低、中、高，或按多个等级评估客户情绪；同样返回各等级概率和整体置信度。</p>
-<p style="margin:0 0 18px;"><strong>Noul</strong> 来自 Bernoulli（伯努利）的缩写，本质是一个真假概率：例如“这段证据是否支持该结论？”输出一个 0 到 1 的值。Noul 本身不另带 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">confidence</code> 字段，因为它的概率就是最直接的信号。[4]</p>
-<p style="margin:0 0 18px;">从形式上看，Choice 可以写成：</p>
-<p style="margin:0 0 18px;"><code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">p(cᵢ | state, question, criteria)</code></p>
-<p style="margin:0 0 18px;">模型对候选集合中的每个 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">cᵢ</code> 给出概率，默认决策是取概率最大的选项；真正是否执行，则由业务代码再应用阈值、权限和风险规则。</p>
-<p style="margin:0 0 18px;">这一步很重要。Jev 并没有把“模型判断”直接等同于“系统动作”。它只是把以前藏在一段生成文本里的判断显式化，让代码可以看到完整分布，并决定：自动执行、请求用户确认、交给更强模型，还是升级给人。</p>
-<p style="margin:0 0 22px;color:#315dff;">Jev 真正提供的不是一个更聪明的 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">if</code>，而是一个能把模糊语义压成可观测概率，再交回普通代码治理的判断函数。</p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">02</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">“类型安全”解决的是输出形状，不是事实正确</p></section>
-<p style="margin:0 0 18px;">TypeSafe 强调，Jev 不会输出未定义选项，也不会生成格式错误的 JSON。从类型系统的角度，这个保证是成立的：当答案空间只有 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">allow / block / review</code>，模型不可能突然返回一段散文。</p>
-<p style="margin:0 0 18px;">但这只能消灭一种错误：<strong>无效输出</strong>。它不能消灭另一种更危险的错误：<strong>在有效选项里选错</strong>。</p>
-<p style="margin:0 0 18px;">如果一张橙子的照片被模型高置信地判成苹果，<code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">apple</code> 当然仍然符合 schema。类型正确和语义正确是两条不同的轴。</p>
-<p style="margin:0 0 18px;">TypeSafe 自己的文档已经明确承认，Jev 的校准描述的是一组预测，而不是某一次答案的保证。如果模型对一批事件都给出 0.8，那么理想状态下大约 80% 应该正确；这不意味着某个具体的 0.8 一定可靠。[2][6]</p>
-<p style="margin:0 0 18px;">这就是“校准”与“准确率”的区别。</p>
-<p style="margin:0 0 18px;">准确率问的是：一百道题答对了多少。校准问的是：模型报出的概率能不能对应真实发生频率。一个模型可能准确率很高，却总把 70% 报成 99%；也可能准确率略低，但知道哪些样本不确定。对于自动化系统，后者往往更有用，因为它允许系统只接管高置信部分，把剩余流量交给人或更强模型。</p>
-<p style="margin:0 0 18px;">神经网络概率校准不是新问题。2017 年的经典研究已经指出，现代深度网络常常过度自信，简单的 temperature scaling 就能显著改善校准。[19] Jev 的新主张，是把校准从部署后的修补项提升为训练目标，并给这一路径命名为 Reinforcement Learning for Calibrated Decisions，简称 RLCD。[6]</p>
-<p style="margin:0 0 18px;">但必须划清目前的证据边界：TypeSafe 尚未公开 RLCD 的算法、奖励构造、训练数据或消融实验，也没有发布 Jev 的参数量、底层架构和权重。官方说明了它“优化什么”，却没有说明具体“怎样做到”。在 Hacker News 的公开讨论中，TypeSafe CEO 也表示架构暂时不会披露，团队考虑未来写论文。[27]</p>
-<p style="margin:0 0 18px;">因此，今天可以确认的是 Jev 的<strong>外部行为和接口契约</strong>：不做自回归文本生成、返回有限选项上的概率、多个问题可共享同一个 state 并行处理。至于它在模型内部究竟是新的 encoder、特制 decision head、经过 RLCD 后训练的预训练模型，还是多种已知方法的组合，目前都不能当作事实写死。</p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">03</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">它不是从天而降，而是五条技术路线在 2026 年汇合</p></section>
-<p style="margin:0 0 18px;">Jev 看起来新，是因为它以一个完整产品形态同时踩中了几条此前分散存在的路线。</p>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 1：把同一份材料交给 Jev，一次询问类别、等级和是否成立；软件再根据结果决定自动处理、请求确认或交给人工。state 指输入材料，Choice、Score、Noul 是三种判断方式；billing、shipping、account 分别指付款、物流和账户。增速智谈原创教学示意。</p>
+<p style="margin:0 0 18px;">输入分为两部分。第一部分叫 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">state</code>，可以理解为“判断所需的材料”，例如邮件、订单状态和此前的客服对话。第二部分是问题与答案要求，例如：“这封邮件主要涉及什么？从付款、物流、账户三项中选择。”</p>
+<p style="margin:0 0 18px;">它提供三种判断方式：</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;<strong>Choice：选一项。</strong>例如在付款、物流、账户之间选择，并返回各选项的概率。软件因此可以看出哪个选项最可能，以及几个选项是否难以区分。</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;<strong>Score：评一个等级。</strong>例如把客户的不满程度分为低、中、高。等级有先后顺序，各等级同样有对应概率。</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;<strong>Noul：判断是否成立。</strong>例如“这封邮件是否需要人工处理？”返回一个 0 到 1 的概率值。这个名字只是产品里的叫法，读者可以直接把它理解为“是或否”的判断。</p>
+<p style="margin:0 0 18px;">Choice 和 Score 还会返回一个置信度字段，也就是模型对这次选择有多确定的信号。置信度和各选项概率的具体含义，应按官方接口定义理解，不能随意互换。</p>
+<p style="margin:0 0 18px;">同一份材料可以支撑多个问题。邮件类别、情绪和是否需要人工处理，如果彼此独立，就可以放在一次请求中一起问，减少反复发送相同材料的开销。</p>
+<p style="margin:0 0 18px;">如果付款与物流两个选项的概率很接近，程序可以暂缓自动分派。若付款问题的概率明显更高，也还要按业务规则判断是否允许自动处理。</p>
+<p style="margin:0 0 22px;color:#315dff;">有用的地方在于，软件能看到模型倾向哪个答案，也能看到它是否犹豫，再据此安排后续处理。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">02</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">答案格式正确，为什么还会判断错</p></section>
+<p style="margin:0 0 18px;">TypeSafe 用“类型安全”描述 Jev 的一项特点。这里的“类型”指程序允许收到什么样的答案。</p>
+<p style="margin:0 0 18px;">假设答案只能是“允许、拒绝、人工复核”，接口就必须返回这三项中的一个。它不会突然写一段说明，导致程序无法读取。工程师常把答案格式写成 JSON，你可以把它看成一张字段固定的电子表格。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>格式合格，只能保证程序读得懂；选项选错，仍会造成业务错误。</strong>一封客户明确要求退款的邮件，被分到“账户问题”，答案形式完全合法，判断却偏了。</p>
+<p style="margin:0 0 18px;">概率也需要检验。模型给出“八成把握”，我们自然希望类似判断大约十次能对八次。让模型报出的概率与实际表现相称，这件事叫“概率校准”。</p>
+<p style="margin:0 0 18px;">准确率和校准关注不同问题。准确率统计一百次判断有多少次正确；校准检查模型说得有多确定，是否符合它实际答对的比例。</p>
+<p style="margin:0 0 18px;">如果一个模型经常答错，却每次都报出接近百分之百的概率，自动化系统很难知道何时该停。概率比较可信时，程序才有依据把更确定的任务自动处理，把拿不准的交给人。</p>
+<p style="margin:0 0 18px;">但这种对应关系是对一批样本而言的。即使模型整体校准良好，也不能保证某个概率为 0.8 的答案正确，更不能直接把英文邮件上的表现套到中文投诉上。</p>
+<p style="margin:0 0 18px;">概率校准已有多年的研究。2017 年的一项经典研究就展示过，通过调整模型输出分数，可以缓解深度学习模型过度自信的问题。Jev 的官方主张是把“概率要与正确程度相称”直接纳入训练目标，并将这条训练路线称为 RLCD。</p>
+<p style="margin:0 0 18px;">截至本文资料截止的 2026 年 9 月 29 日，TypeSafe 尚未公开这套方法的具体算法、训练数据，以及 Jev 的完整模型结构和参数量。因此，我们能够分析它公开的接口和外部测试，暂时无法验证其内部训练方法究竟有多大创新。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">03</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">从邮件分类，到软件里的连续判断</p></section>
+<p style="margin:0 0 18px;">Jev 的来路可以沿着五条技术路线理解。图里有一些研究名称，下面用它们各自解决的问题解释。</p>
 <section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/jev-agent-decision-model/figure-02.png" alt="从分类器到决策模型的技术演进" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
-<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 2：Jev 并非替代此前技术，而是在监督分类、零样本语义分类、结构化输出与模型路由之间重新划定产品边界。增速智谈原创教学示意。</p>
-<p style="margin:0 0 18px;">第一条是<strong>监督分类器</strong>。</p>
-<p style="margin:0 0 18px;">从逻辑回归、SVM 到 BERT 分类头，机器学习系统早就能把文本分到有限标签里。它们便宜、稳定、速度快，而且非常适合固定任务。问题是，传统分类器往往需要针对每个任务收集标注、训练和部署；一旦业务标签变了，模型就可能需要重训。</p>
-<p style="margin:0 0 18px;">第二条是<strong>零样本文本分类与自然语言推断</strong>。</p>
-<p style="margin:0 0 18px;">2019 年的研究已经系统地把零样本分类改写为 NLI：把输入当作 premise，把“这段文本属于体育”写成 hypothesis，再让模型判断蕴含关系。[18] 这让标签不再只是一个内部 ID，而可以用自然语言描述。后续工作进一步证明，给标签写好定义，本身就能明显提升零样本分类的准确率与鲁棒性。[20]</p>
-<p style="margin:0 0 18px;">换句话说，“给任意标签写一段定义，让模型零样本分类”并不是 Jev 首创。</p>
-<p style="margin:0 0 18px;">第三条是<strong>结构化输出与受约束解码</strong>。</p>
-<p style="margin:0 0 18px;">LLM 时代，function calling、JSON schema 和 constrained decoding 让生成模型可以被限制在合法格式内。2025 年的 JSONSchemaBench 已经评估了 Guidance、Outlines、XGrammar、OpenAI、Gemini 等多种约束生成框架。[21] 它们解决了“输出必须可解析”的问题，却没有改变生成模型逐 token 解码的基本路径。</p>
-<p style="margin:0 0 18px;">Jev 的区别在于，它根本不生成那串 JSON 文本，而是直接给出有限答案空间上的分布。前者是“让写作者严格填表”，后者更像“只保留判卷器”。</p>
-<p style="margin:0 0 18px;">第四条是<strong>奖励模型、LLM-as-a-Judge 与路由器</strong>。</p>
-<p style="margin:0 0 18px;">RLHF 里的 reward model，本质上就在比较候选回答；LLM-as-a-Judge 把生成模型当评委；RouteLLM 等研究则用轻量模型判断某个请求应该交给便宜模型还是强模型。[22] 这些工作共同证明，AI 系统内部有大量任务不是生成内容，而是选择、排序和门控。</p>
-<p style="margin:0 0 18px;">第五条是<strong>Agent 系统的兴起</strong>。</p>
-<p style="margin:0 0 18px;">当一个 AI 只是回答一次问题，生成成本还可以被看作单次体验的一部分。到了 Agent，模型需要连续选择工具、过滤记忆、判断风险、点击界面、验证结果。一项任务可能包含几十次甚至上百次微决策。如果每一步都调用最强 LLM，成本和延迟会沿着轨迹累积。</p>
-<p style="margin:0 0 18px;">Jev 在 2026 年突然爆火，并不是因为分类技术刚刚出现，而是因为 Agent 把“每秒做很多次小判断”从幕后工程问题推到了前台。</p>
-<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;">Jev 的“新”，更像一次系统架构创新：把通用模型中的判断能力拆成独立服务，重新定义它的接口、计费、延迟和治理方式。</p></section>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">04</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">为什么是现在：AI 的单位正在从“回答”变成“决策”</p></section>
-<p style="margin:0 0 18px;">TypeSafe 把模型命名为 Jev，来自经济学家 William Stanley Jevons。杰文斯悖论说的是：当一项资源的使用效率提高、单位成本下降，总消耗量反而可能上升。TypeSafe 的赌注也类似——当一次机器判断足够便宜，软件不会只把原有 LLM 调用换成更便宜的调用，而会在过去根本不值得用 AI 的地方增加成千上万次判断。[1]</p>
-<p style="margin:0 0 18px;">这个叙事有很强的营销色彩，但底层经济逻辑是成立的。</p>
-<p style="margin:0 0 18px;">一方面，Agent 的成本不只来自 token 数，还来自串行等待。生成式模型每一步都需要解码，如果下一步动作依赖上一步文本，延迟会不断累积。Jev 把多个针对同一 state 的问题放在一次请求里并行回答，适合那些彼此独立、答案空间有限的判断。[1][3]</p>
-<p style="margin:0 0 18px;">另一方面，企业真正缺的往往不是再多一个聊天窗口，而是把 AI 放进既有软件流程。生产系统关心的是：输入是什么，输出有哪些类型，版本有没有变化，概率能否记录，阈值能否审计，错误能否回放。Jev 把这些要求直接写进接口。</p>
-<p style="margin:0 0 18px;">截至 2026 年 9 月 29 日，官方公开的稳定版本是 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">jev-1.13.0</code>。文档标价为每百万输入 token 0.042 美元，输出免费；单请求总预算 64K token，其中 state 加最长单个问题不超过 32K。模型只接受文本或由文本组成的结构化字段，不处理图片、音频和视频。英文是主要训练语言，中文等其他语言需要单独测试。[3]</p>
-<p style="margin:0 0 18px;">TypeSafe 的官方 workflow eval 声称，在其选定任务上 Jev 可达到 193.6 倍速度和 444.6 倍成本优势；官方也主动注明，这套评测用最强外部模型的平均预测作为参考，而非任务真实标签，并且演示中的短而密集 state 对 Jev 有利。[1]</p>
-<p style="margin:0 0 18px;">因此这些数字最多说明：<strong>在高度适配的封闭判断任务里，取消自回归输出可能带来数量级优势</strong>。它们不能被外推为“Jev 对所有 LLM 都快 200 倍”。</p>
-<p style="margin:0 0 18px;">热度同样需要拆开看。据 VentureBeat 引述公司和平台数据，Jev 上线 36 小时内放行了约 14 万名等待用户，接入 Vercel AI Gateway 后 24 小时内约 13% 的付费团队使用过它；Cloudflare、LangChain、Langfuse 也迅速增加了集成。[24] 这些数字证明了开发者兴趣，却不等于大规模生产验证。</p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">05</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">最近论文给出的答案：效率优势是真的，可靠性红线也很清楚</p></section>
-<p style="margin:0 0 18px;">Jev 发布仅一周，arXiv 上已经出现一批直接研究。速度本身很罕见，但也意味着所有结果都还非常早期：它们是预印本，不是经过长期复现和同行评审的稳定共识。</p>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 2：分类、概率校准、答案格式约束和任务分派，已经分别发展多年；Jev 把这些需求集中到一个判断服务里。增速智谈原创教学示意。</p>
+<p style="margin:0 0 18px;"><strong>第一条：让模型学会固定分类。</strong>早期系统会收集大量已标注的邮件，告诉模型哪些是垃圾邮件、哪些是正常邮件。它学会之后，就能处理新邮件。任务稳定、训练数据足够时，这种专用模型通常很实用。业务类别变化较大时，可能需要重新准备数据和训练。</p>
+<p style="margin:0 0 18px;"><strong>第二条：用文字描述新类别。</strong>研究者进一步尝试让模型直接阅读类别定义。比如问一段报道是否属于体育新闻，并解释“体育新闻包括赛事、运动员和训练”。这类方法常被称为零样本分类：不必先收集当前任务的标注样本再训练。它不代表模型从未学习过相关知识。</p>
+<p style="margin:0 0 18px;">其中一条路线叫自然语言推断，简称 NLI。它把分类改写为：“读完这段材料，能否支持‘这是一篇体育报道’这个判断？”2019 年及后续研究已经探索过这类方法，也发现类别定义的写法会影响结果。</p>
+<p style="margin:0 0 18px;"><strong>第三条：让大模型按规定格式回答。</strong>工程师给生成模型规定字段、可选值和填写规则，让它更容易接入软件。这样能减少格式问题，但通常仍需要逐步生成答案文本。Jev 公开接口的区别在于，直接提供有限选项的概率结果。</p>
+<p style="margin:0 0 18px;"><strong>第四条：让模型给答案评分、为任务选工具。</strong>有些模型专门比较哪份回答更好，有些模型决定简单问题交给便宜模型、复杂问题交给更强模型。这说明选择与评分本来就是 AI 系统的重要工作。Jev 把它们作为主要服务来提供。</p>
+<p style="margin:0 0 18px;"><strong>第五条：AI 开始连续办事。</strong>当 Agent 要完成“打开设置、找到通知、关闭某个开关”这样的任务，每一步都要判断当前页面在哪里、应该点击什么、操作是否成功。几十个小判断连在一起，单次等待就会累积成明显的延迟。</p>
+<p style="margin:0 0 22px;color:#315dff;">Jev 把这几条需求组合起来：类别可以用语言描述，输出方便程序读取，多道问题可以一起处理，概率能供后续规则使用。它的产品价值，需要放到整个软件流程里衡量。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">04</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">一次判断便宜了，软件会怎样变化</p></section>
+<p style="margin:0 0 18px;">继续看客服系统。假如每封邮件只问“属于哪一类”，判断次数有限。当单次费用下降，系统可能进一步检查是否重复投诉、是否涉及隐私、是否缺少订单信息，以及回复是否回应了客户的问题。</p>
+<p style="margin:0 0 18px;">TypeSafe 将模型命名为 Jev，取意于经济学家杰文斯。他提出的一个著名现象是：资源使用效率提高之后，总消耗有时反而增加，因为使用它变得更划算。这也是公司期待的方向：让更多原来嫌贵的小判断进入软件。</p>
+<p style="margin:0 0 18px;">它能否实现，要看整套任务实际节省多少。单次模型调用很快，如果系统仍要反复等待、补材料、重试和人工返工，用户感受到的改善可能很小。</p>
+<p style="margin:0 0 18px;">截至 2026 年 9 月 29 日，官方稳定版本是 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">jev-1.13.0</code>，标价为每百万输入 token 0.042 美元，输出免费。token 是模型处理文字的计量单位，不能直接等同于一百万个汉字。</p>
+<p style="margin:0 0 18px;">官方允许一次请求合计最多 64K token，也就是约 6.4 万个计量单位；其中输入材料加上最长的单个问题，不超过 32K。这里说明的是容量限制，材料越长越杂也可能越难判断。模型主要面向英文训练，接受文本及由文本组成的结构化字段，不直接处理图片、音频或视频。</p>
+<p style="margin:0 0 18px;">官方曾在选定的工作流测试中报告约 194 倍速度和约 445 倍成本优势。但测试把其他模型的平均预测作为参考答案，未使用逐项核实的真实标签；输入又是比较短、信息密集的材料，对 Jev 有利。</p>
+<p style="margin:0 0 22px;color:#315dff;">这些条件需要与数字一起看。它们展示了适合场景中的潜力，无法据此推断任意业务都能获得同样收益。</p>
+<p style="margin:0 0 18px;">媒体报道的等待名单、开发者接入和平台采用数据，也主要反映早期兴趣。接入过一次、做过演示，与长期稳定运行是不同的验证阶段。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">05</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">论文测出了什么：省钱、省时，也会自信地出错</p></section>
+<p style="margin:0 0 18px;">Jev 发布初期已有一批研究上传到 arXiv。arXiv 是研究者公开论文的平台；这些论文当时属于预印本，结论还需要更多复现和同行审查。</p>
+<p style="margin:0 0 18px;">读它们时，最重要的是看清楚任务、对照对象和失败条件。不同实验里的速度或成本倍数，不能直接排成一个排行榜。</p>
 <section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/jev-agent-decision-model/figure-03.png" alt="Jev 近期论文证据地图" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
-<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 3：近期预印本同时给出效率收益和鲁棒性风险。不同论文任务、基线与指标不同，数字不能直接横向比较。增速智谈整理制图。</p>
-<p style="margin:0 0 18px;">先看支持面。</p>
-<p style="margin:0 0 18px;"><strong>作为低成本评审器。</strong>《JEV-as-a-Judge》把 Jev 与 16 个生成式和奖励模型评审器比较。在普通偏好判断和基于证据的事实性任务上，Jev 与最强对照模型相差不到 3 个百分点，费用只有对方的 0.36%；把低置信样本升级给更强模型的冻结级联，保留了对照模型 99% 的准确率。[8]</p>
-<p style="margin:0 0 18px;"><strong>作为移动 Agent 的高频执行器。</strong>《Jev-Mobile》让 VLM 低频做规划，让 Jev 根据无障碍树高频选动作。在完整 AndroidWorld 任务上，Jev-Mobile 成功率为 79%，低于逐步 VLM 基线的 84%，但在成功轨迹中平均端到端时间降低 32.7%，API 成本降低 73.4%。[12]</p>
-<p style="margin:0 0 18px;"><strong>作为边缘服务的意图入口。</strong>一项 6G/边缘服务编排实验显示，相比短结构化输出的 DeepSeek 部署，Jev 的客户端决策中位延迟下降 15.9%—26.5%；在双方都正确完成的请求上，端到端中位延迟下降 11.1%—25.3%，每次正确完成的 API 费用下降约 69%—71%。但论文也发现，一旦重复请求被缓存，延迟优势大幅消失。[13]</p>
-<p style="margin:0 0 18px;"><strong>作为安全与对齐检测器。</strong>《Just Ask Jev》覆盖谄媚、越狱、欺骗、提示注入、幻觉等十类失败，在 44 个基准上使用通用问题获得 0.886 的中位 AUROC，并报告相对 LLM judge 约 63 倍的成本优势。更值得注意的是：问题措辞影响较小，输入 state 里有没有真正与标签相关的字段影响更大。[15]</p>
-<p style="margin:0 0 18px;">这些结果共同支持一个有限但有价值的结论：当任务可以被压缩成<strong>共享上下文上的大量封闭判断</strong>，Jev 很可能是一个有效的第一阶段模型。</p>
-<p style="margin:0 0 18px;">再看反证面。</p>
-<p style="margin:0 0 18px;"><strong>类型安全不等于定义安全。</strong>《Type-Safe Is Not Error-Free》只改变选项名称与定义之间的绑定，就观察到显著翻转。在其 1200 个 workflow 决策设置中，把选项名从 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">0/1</code> 改成 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">no/yes</code>，每百个样本多改变 70.4 个答案，AUC 从 0.94 变到 0.23；在托管 Jev 上，交换也让 AUC 从 0.8146 降到 0.5806，并产生远高于重复调用噪声的翻转。[9]</p>
-<p style="margin:0 0 18px;"><strong>自然上下文可以诱导高置信错误。</strong>《JevOut》从 Jev 原本答对的 508 个决策出发，在不改题目、选项和正确答案的前提下，加入自然且看似相关的背景句。经过最多 64 次目标评估，312 个决策被定向翻到预设错误选项，翻转率 61.4%；其中 229 个错误选项最终获得至少 0.7 的概率。[14] 这是一种带优化预算的攻击结果，不代表随便加一句话就有六成翻转，但它说明概率接口本身也会成为攻击面。</p>
-<p style="margin:0 0 18px;"><strong>提示注入会移动概率，但不必然接管动作。</strong>《Decision Hijacking》在 510 个直接伤害场景上发现，原始攻击的目标动作选择率为 1.8%；经过 24 轮确定性优化并用新调用复验后，验证攻击成功率升至 3.5%，置信度不低于 0.7 的目标动作仍只占 0.2%。最危险的主要是本来就靠近决策边界的样本。[17] 这项结果和 JevOut 并不矛盾：前者测常见注入能否把 Agent 推到恶意动作，后者主动搜索能翻转分类的上下文。两者共同提醒我们，不能把“概率被影响”和“动作被劫持”写成同一件事。</p>
-<p style="margin:0 0 18px;"><strong>便宜模型与昂贵模型可能错在同一个地方。</strong>Rao 与 Callison-Burch 的研究发现，在九组 rubric judge 面板上，LLM 每项准则单独调用时的总成本是 Jev 的 29—325 倍，耗时是 30—220 倍；但更强 LLM 往往会重复 Jev 最自信的错误。于是“Jev 先筛，LLM 兜底”虽然省钱，却最多只带来有限的准确率提升。[11]</p>
-<p style="margin:0 0 18px;"><strong>总分相近，不代表个体决策稳定。</strong>法律文档研究显示，Jev 在被测配置里成本和中位延迟最低，但托管 LLM 的基线准确率更高；改变假设可见性、输出顺序或请求配置后，模型排名和个体判断会变化。[10]</p>
-<p style="margin:0 0 18px;">把正反两面合起来，真正稳妥的结论不是“Jev 可靠”或“Jev 不可靠”，而是：<strong>它把判断成本降了下来，也把判断接口暴露得更清楚；这既方便治理，也让我们更容易看见模型原本就有的偏差、注入和分布漂移。</strong></p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">06</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">最适合的四类应用，以及不该交给它的事</p></section>
-<p style="margin:30px 0 12px;padding-left:12px;border-left:3px solid #315dff;text-align:left;font-size:18px;line-height:1.65;"><strong>第一类：高频路由与分类</strong></p>
-<p style="margin:0 0 18px;">客服工单分流、内容标签、销售线索分级、邮件意图识别、模型选择、工具选择，都是 Jev 最自然的场景。它们有明确答案空间，错误通常可以通过置信度门槛、重试或人工复核控制。</p>
-<p style="margin:0 0 18px;">相较固定分类器，Jev 的优势是标签和定义可以随请求改变，不必为每套标签重新训练；相较通用 LLM，优势是没有文本生成和解析层。</p>
-<p style="margin:0 0 18px;">但如果标签长期稳定、训练数据充足、吞吐量巨大，一个针对任务训练的 BERT、ModernBERT 或更小分类器往往仍然更便宜、更可控。开发者自测也普遍指向同一边界：Jev 最有价值的时刻，是<strong>没有标注、需要今天上线，或者标签经常变化</strong>。[28]</p>
-<p style="margin:30px 0 12px;padding-left:12px;border-left:3px solid #315dff;text-align:left;font-size:18px;line-height:1.65;"><strong>第二类：Agent 的低层执行与状态判断</strong></p>
-<p style="margin:0 0 18px;">规划模型可以先给出局部目标，例如“打开设置并关闭通知”；Jev 再对每一屏的可执行元素做选择。它也可以判断哪段记忆值得保留、哪个工具符合当前意图、某个动作是否需要确认。</p>
-<p style="margin:0 0 18px;">这类架构不是让 Jev 代替推理，而是把 Agent 拆成两种节奏：慢模型负责计划、处理新情况和解释，快模型负责重复、局部、可枚举的动作。Jev-Mobile 的结果正是这个方向的早期证据。[12]</p>
-<p style="margin:0 0 18px;">最近刷屏的 Pokémon Red 演示也说明了同一件事。Jev 最终在 9 月 23 日击败四天王和冠军，但它不是独立读屏、独立规划：Opus 5 持续监控游戏日志并实时修改 Jev 可见的状态、选项和 harness，项目累计记录了 474 次 harness 变更。[29][30] 它证明专用决策模型可以低成本运行在长轨迹里，也证明演示成败往往属于整个系统，而不能只归功于一个模型。</p>
-<p style="margin:30px 0 12px;padding-left:12px;border-left:3px solid #315dff;text-align:left;font-size:18px;line-height:1.65;"><strong>第三类：评测、安全与内容门控</strong></p>
-<p style="margin:0 0 18px;">当平台需要对每条生成内容检查几十项 rubric，逐项调用 LLM 会很昂贵。Jev 可以一次并行回答“是否有事实支持”“是否泄露隐私”“是否需要人工复核”等多个问题，再把不确定或高风险样本升级。</p>
-<p style="margin:0 0 18px;">但安全门控必须假设输入是敌对的。TypeSafe 自己的 jaggedness 文档明确提醒：Jev 1.13 不会默认把 state 当成敌对内容，提示注入、误导性框架和自我辩护文本都可能移动答案。[5]</p>
-<p style="margin:30px 0 12px;padding-left:12px;border-left:3px solid #315dff;text-align:left;font-size:18px;line-height:1.65;"><strong>第四类：检索、排序与数据整理</strong></p>
-<p style="margin:0 0 18px;">在 RAG 系统里，它可以判断检索段落是否相关、某个引文是否支持结论、候选实体是否匹配，或从已有候选值中选出正确字段。TypeSafe 官方 cookbook 已展示法律检索重排、引用检查、层级分类、预解析值抽取等模式。[2]</p>
-<p style="margin:0 0 18px;">它不适合做的事情同样清楚。</p>
-<p style="margin:0 0 18px;">需要写作、总结、翻译、代码生成和开放式解释时，应该用生成模型；需要精确数学、计数、日期比较和权限校验时，应该用普通代码；需要多跳推理、复杂因果分析或处理大量无关长上下文时，Jev 1.13 的官方文档已经承认能力会明显下降。[5]</p>
-<section style="margin:0 0 42px;padding:20px 22px;border-left:2px solid #315dff;border-top:1px solid #dfe6f7;border-right:1px solid #dfe6f7;border-bottom:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">一个简单判断标准：如果输出可以提前枚举，错误可以被门控，且这个判断会被高频重复，Jev 值得测试；如果答案本身必须被创造、证明或解释，它就不是主角。</p></section>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">07</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">真正的生产架构，不是“让 Jev 接管”，而是让它学会退出</p></section>
-<p style="margin:0 0 18px;">一个可靠的 Jev 系统，不应该是 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">state → Jev → 执行动作</code> 的直线。它更像一个有多个出口的决策级联。</p>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 3：这组研究同时测试了判断成本与错误风险。图中的 AUC 衡量模型区分两类情况的能力，API 成本指调用模型的费用，“级联”指先由一个模型检查，再把部分任务转交其他模型；不同指标不能直接互相比高低。增速智谈整理制图。</p>
+<p style="margin:0 0 18px;"><strong>第一组实验，测试它能否低成本评审答案。</strong>《JEV-as-a-Judge》让 Jev 与多种模型比较，判断回答是否更好、是否有事实依据。在部分任务上，它与最强对照模型相差不到 3 个百分点，费用约为对方的 0.36%。将 Jev 拿不准的样本再交给更强模型处理，能够保留大部分对照模型的准确率。</p>
+<p style="margin:0 0 18px;">这里的启发是，许多重复的初步检查可能适合先交给 Jev。但前提是任务本身能够通过明确问题和有限选项表达。</p>
+<p style="margin:0 0 18px;"><strong>第二组实验，测试它能否帮助 AI 操作手机。</strong>《Jev-Mobile》让一个能理解图像和文字的模型先制定计划，Jev 再读取系统提供的按钮、文字和控件列表，反复选择下一步操作。这个控件列表叫“无障碍树”，因此实验并不表示 Jev 自己能看懂屏幕截图。</p>
+<p style="margin:0 0 18px;">在 AndroidWorld 测试中，这套系统完成了 79% 的任务，逐步使用图文模型的对照方案完成了 84%。在成功完成的任务中，前者平均耗时下降约 33%，模型调用费用下降约 73%。它节省了时间与费用，同时也牺牲了一部分成功率。</p>
+<p style="margin:0 0 18px;">边缘服务编排研究同样观察到节省：根据用户请求为其选择和安排服务时，部分延迟和调用费用下降。但重复请求直接使用缓存结果后，速度优势明显缩小。缓存就是把已有结果存下来，下次遇到同样请求直接取用。</p>
+<p style="margin:0 0 18px;"><strong>第三组实验，测试它能否筛查 AI 的不良回答。</strong>《Just Ask Jev》检查无事实依据的回答、泄露风险、被恶意指令诱导等问题，在多组测试中获得较低成本和一定区分能力。</p>
+<p style="margin:0 0 18px;">论文使用了 AUROC 这项指标。它衡量模型能否把真正有问题的样本排在更高风险的位置；0.5 接近随机区分，1 表示完全区分。文中报告的中位值是 0.886，这个数不能读成“88.6% 的判断都正确”。研究还发现，给模型的材料是否包含关键证据，会明显影响结果。</p>
+<p style="margin:0 0 18px;"><strong>第四组实验，专门寻找它会怎样出错。</strong>《Type-Safe Is Not Error-Free》发现，改变选项名称与定义的对应方式，会显著改变判断。例如名称看起来像“是”，定义却要求它代表“否”，模型可能被名称带偏。因此，接入时必须检查选项名与解释是否一致。</p>
+<p style="margin:0 0 18px;">《JevOut》在原本答对的 508 个问题中，加入看似相关的背景句，并反复搜索能诱导错误的写法。最后有 312 个问题转向了研究者预设的错误答案，其中不少仍给出较高概率。这是经过主动搜索的攻击结果，不能解读为随便加一句话就能让六成答案出错。它说明，额外材料可以影响判断，模型也可能自信地选错。</p>
+<p style="margin:0 0 18px;">《Decision Hijacking》则测试材料中的恶意指令能否诱导系统选择危险动作。在它的实验条件下，攻击成功率相对较低，反复优化后仍有一部分成功。这与上一项研究测的是不同结果：改变概率、改错分类、最终执行危险动作，要分别观察。</p>
+<p style="margin:0 0 18px;">还有研究发现，更昂贵的模型也可能重复 Jev 的错误。把拿不准的任务转交其他模型可以节省成本，但换模型未必就能纠错。法律文档实验也显示，问题呈现方式和选项顺序变化，会影响模型表现。</p>
+<p style="margin:0 0 22px;color:#315dff;">这些论文把机会和限制放在了同一张桌上：<strong>重复判断有望更便宜；判断是否可靠，仍需按具体任务检验。</strong></p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">06</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">哪些地方适合用，哪些事情还得换工具</p></section>
+<p style="margin:0 0 18px;"><strong>客服分流和信息分类，是最容易理解的用途。</strong>让 Jev 判断邮件类别、给销售线索分级、为文章加标签。这些任务有现成候选答案，错误也有机会被人工发现和纠正。</p>
+<p style="margin:0 0 18px;">如果类别经常变化，团队又没有当前任务的标注数据，用语言描述类别、直接开始测试，会比较方便。若类别长期稳定、数据充分、每天处理量极大，专门训练的小分类模型也可能更便宜、更可控。不能只因为新产品热门就替换现有系统。</p>
+<p style="margin:0 0 18px;"><strong>连续操作中的局部选择，是另一类用途。</strong>规划模型确定“关闭通知”这个目标，Jev 根据当前控件列表选按钮。它还可以判断一项操作是否完成、某个工具是否适合当前任务。</p>
+<p style="margin:0 0 18px;">Pokémon Red 游戏演示展示了这种组合的可能性：Jev 最终完成了游戏中的关键挑战。不过，演示里另有 Opus 5 持续查看日志并修改运行框架，累计记录了 474 次调整。这个框架负责组织状态、选项和操作规则。结果体现了整个系统的能力，不能据此宣称 Jev 独立完成读屏和规划。</p>
+<p style="margin:0 0 18px;"><strong>重复的内容检查，也值得测试。</strong>比如每份 AI 回复都需要检查有没有事实支持、是否涉及隐私、是否需要人工复核。多项独立检查可以一起提问，再按结果分派处理。</p>
+<p style="margin:0 0 18px;">安全检查尤其要注意，待检查材料里也可能写着“忽略之前的规则”“这份内容绝对安全”等话。让输入材料中的文字干扰模型原本的任务，叫“提示注入”。官方文档提醒过 Jev 对这类输入的风险，使用者需要专门测试。</p>
+<p style="margin:0 0 18px;"><strong>资料筛选和排序，则能减少阅读负担。</strong>一个先查资料再回答问题的 AI 系统，常被叫作 RAG 系统。它可以先找到候选资料，再让 Jev 判断哪些段落相关、哪段内容支持某个结论。判断质量仍取决于检索到了什么，以及材料是否足够。</p>
+<p style="margin:0 0 18px;">需要写文章、翻译、生成代码或解释复杂问题时，应选择有相应生成与推理能力的模型。需要精确计算金额、比较日期、检查权限时，普通代码更适合承担明确规则。Jev 1.13 的文档还指出，长而杂乱的材料、多步推理等情况会增加困难。</p>
+<p style="margin:0 0 22px;color:#315dff;">使用前可以问三个问题：答案能否事先列出来？判断是否会频繁重复？出错后是否能及时发现并控制影响？这三点越清楚，越容易评估是否值得接入。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">07</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">真正上线时，怎样让判断受到约束</p></section>
+<p style="margin:0 0 18px;">回到那封客服邮件。即使 Jev 非常确定客户在投诉，系统也不该因此自动批准退款。退款权限、金额限制和订单状态，必须按明确规则检查。</p>
+<p style="margin:0 0 18px;">可靠的接入流程需要几个检查点。</p>
 <section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/jev-agent-decision-model/figure-04.png" alt="Jev 决策级联与风险覆盖率" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
-<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 4：高置信并不自动等于可执行。生产阈值要同时考虑模型概率、动作风险、确定性规则与人工复核成本。图中阈值仅为示意。</p>
-<p style="margin:0 0 18px;">第一层是确定性预处理：权限、金额、库存、日期、正则匹配等能用代码解决的事情，不交给模型。</p>
-<p style="margin:0 0 18px;">第二层是状态构造：只把完成判断真正需要的字段交给模型。长而杂乱的上下文不仅浪费 token，也会增加干扰和注入面。</p>
-<p style="margin:0 0 18px;">第三层才是 Jev 的原子判断：每个问题只做一件事，选项名称与定义保持语义一致，并显式提供 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">other / unknown / insufficient_evidence</code> 等退出选项。</p>
-<p style="margin:0 0 18px;">第四层是风险门控：相同置信度下，打开一个页面和转出一笔钱显然不是同一个阈值。低风险动作可以自动执行；中风险要求用户确认；高风险即使模型很自信，也应叠加规则校验或人工批准。</p>
-<p style="margin:0 0 18px;">第五层是升级路径：低置信样本可以交给更强 LLM、检索系统或人。但升级模型必须使用不同证据或不同方法，否则就会出现论文揭示的“昂贵模型与便宜模型错在同一处”。[11]</p>
-<p style="margin:0 0 18px;">第六层是持续评测：固定模型版本，记录 state、问题、选项顺序、完整概率、阈值、最终动作和人工结果。<code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">jev-latest</code> 会随版本移动；如果生产阈值是针对某个版本校准的，应固定到 <code style="font-family:Menlo,Consolas,monospace;font-size:0.92em;background:#f5f6f8;padding:1px 4px;">jev-1.13.0</code> 之类的版本 ID，再主动迁移。[3]</p>
-<p style="margin:0 0 18px;">评测也不能只看准确率。至少要同时跟踪六组指标：</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;任务质量：accuracy、F1、AUROC，按类别和业务分层统计。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;概率质量：Brier score、NLL、ECE 与可靠性图，检查 0.8 是否真的接近八成正确。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;风险—覆盖率：阈值提高后，自动处理比例下降多少，错误率是否按预期下降。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;稳定性：改写问题、交换选项顺序、替换等义标签、增加无关背景后，答案翻转多少。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;安全性：提示注入、恶意自我描述、冲突字段和长上下文下是否出现高置信错误。</p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;系统经济性：端到端延迟、每个正确决策成本、升级率和人工复核成本，而不是只比较 API 单价。</p>
-<p style="margin:0 0 18px;">校准尤其不能照搬全局数字。一个模型在英文客服邮件上校准良好，不代表它在中文合同、金融风险或新出现的攻击文本上仍然可靠。业务方必须用自己的时间切分数据做阈值选择，并定期检查分布漂移。</p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">08</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">“新范式”还是“高级分类器”？这个问题本身问偏了</p></section>
-<p style="margin:0 0 18px;">如果只看学术谱系，Jev 很难被称为凭空出现的新范式。有限标签分类、NLI 零样本分类、概率校准、奖励模型、受约束输出和模型路由都已有多年研究。开源社区也已经迅速出现利用现有开放模型 logits 构造 Jev 式接口的项目，说明“只输出决策”不一定依赖唯一架构。</p>
-<p style="margin:0 0 18px;">如果只看产品形态，它又确实做了一件过去没有被主流基础模型公司优先做的事：放弃“什么都能生成”，把模型的全部能力、API、评测和定价围绕软件判断重新设计。</p>
-<p style="margin:0 0 18px;">这就像数据库并没有发明“保存数据”，却把数据存取变成了可依赖的系统原语。Jev 是否能成为类似的基础设施，取决于三个尚未回答的问题。</p>
-<p style="margin:0 0 18px;">第一，<strong>校准能否跨领域、跨语言、跨版本保持</strong>。如果每个客户仍然需要大量标注数据重做温度缩放和阈值选择，它相对定制分类器的优势会缩小。</p>
-<p style="margin:0 0 18px;">第二，<strong>独立模型能否追平或超过 Jev 的质量—成本曲线</strong>。TypeSafe 目前的架构和数据是黑箱；当开源模型通过 logit scoring、位置校正和轻量微调得到类似接口，护城河可能更多来自数据、服务和生态，而非“System One”这个类别名称。</p>
-<p style="margin:0 0 18px;">第三，<strong>Agent 的软件栈是否真的会把规划与执行分层</strong>。如果未来通用模型的推理成本持续下降、结构化输出变得足够快，独立决策模型的空间会被压缩；如果 Agent 走向高频后台自动化，专用判断层的价值反而会放大。</p>
-<p style="margin:0 0 18px;">因此，Jev 眼下最值得重视的不是“模型是不是革命”，而是它提出了一个非常实用的问题：</p>
-<p style="margin:0 0 18px;"><strong>我们为什么要让一个擅长写作和推理的通用模型，承担软件里每一个微小的真假判断？</strong></p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">09</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">结语：AI 不一定要说话，才算在工作</p></section>
-<p style="margin:0 0 18px;">过去几年，公众理解 AI 的主要方式是一只对话框。模型是否聪明，往往通过它写了什么、解释得多像人来判断。</p>
-<p style="margin:0 0 18px;">Jev 把镜头移到了对话框背后：大量真正驱动软件运行的智能，不是长回答，而是路由、过滤、排序、允许、拒绝、升级和选择下一步。</p>
-<p style="margin:0 0 18px;">它的技术并非没有前史，它的性能也远未被充分验证。TypeSafe 没有公开架构与 RLCD 细节，近期论文仍是预印本，选项偏差、上下文攻击、语言差异和高置信错误都是真实风险。</p>
-<p style="margin:0 0 18px;">但 Jev 仍然可能成为 2026 年最值得关注的 AI 产品之一。原因不是它比大模型“更像人”，恰恰是它主动放弃了像人一样回答，开始像软件组件一样工作。</p>
-<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;">Jev 的真正信号是：生成模型之后，AI 基础设施的下一场竞争，可能不再只是谁能写出更好的答案，而是谁能把一次判断做得足够便宜、足够可观测，也足够知道什么时候不该自己做主。</p></section>
-<p style="margin:34px 0;border-top:1px solid #edf0f5;height:0;"></p>
-<section style="margin:52px 0 28px;text-align:left;"><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">参考来源</p></section>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[1] <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" style="color:#315dff;text-decoration:underline;">TypeSafe AI：Introducing System One Models &amp; Jev</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[2] <a href="https://docs.typesafe.ai/concepts/system-one" style="color:#315dff;text-decoration:underline;">TypeSafe 文档：System One</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[3] <a href="https://docs.typesafe.ai/models" style="color:#315dff;text-decoration:underline;">TypeSafe 文档：Models</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[4] <a href="https://docs.typesafe.ai/confidence" style="color:#315dff;text-decoration:underline;">TypeSafe 文档：Confidence</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[5] <a href="https://docs.typesafe.ai/model-jaggedness/jev-1.13" style="color:#315dff;text-decoration:underline;">TypeSafe 文档：Jev 1.13 jaggedness</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[6] <a href="https://docs.typesafe.ai/introduction/machine-learning-primer" style="color:#315dff;text-decoration:underline;">TypeSafe 文档：AI primer / RLCD</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[7] <a href="https://www.dcvc.com/news-insights/typesafe-emerges-from-stealth-with-a-new-way-of-doing-ai/" style="color:#315dff;text-decoration:underline;">DCVC：TypeSafe emerges from stealth with a new way of doing AI</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[8] <a href="https://arxiv.org/abs/2609.26550" style="color:#315dff;text-decoration:underline;">JEV-as-a-Judge: Accept When Confident, Escalate When Unsure</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[9] <a href="https://arxiv.org/abs/2609.26758" style="color:#315dff;text-decoration:underline;">Type-Safe Is Not Error-Free</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[10] <a href="https://arxiv.org/abs/2609.27678" style="color:#315dff;text-decoration:underline;">Same Scores, Different Decisions</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[11] <a href="https://arxiv.org/abs/2609.29769" style="color:#315dff;text-decoration:underline;">JEV vs. LLMs as Rubric Judges</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[12] <a href="https://arxiv.org/abs/2609.30186" style="color:#315dff;text-decoration:underline;">Jev-Mobile: Jev as an Executor for Mobile GUI Agents</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[13] <a href="https://arxiv.org/abs/2609.22753" style="color:#315dff;text-decoration:underline;">Replacing Large Language Models with Jev Decision Models for Low-Latency Edge Service Orchestration</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[14] <a href="https://arxiv.org/abs/2609.30243" style="color:#315dff;text-decoration:underline;">JevOut: Natural Context Can Flip Decision Models</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[15] <a href="https://arxiv.org/abs/2609.29429" style="color:#315dff;text-decoration:underline;">Just Ask Jev</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[16] <a href="https://arxiv.org/abs/2609.30216" style="color:#315dff;text-decoration:underline;">Jev in the Wild</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[17] <a href="https://arxiv.org/abs/2609.28613" style="color:#315dff;text-decoration:underline;">Decision Hijacking: Prompt Injection Attacks on Jev's Typed Probabilistic Decisions</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[18] <a href="https://aclanthology.org/D19-1404/" style="color:#315dff;text-decoration:underline;">Benchmarking Zero-shot Text Classification</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[19] <a href="https://proceedings.mlr.press/v70/guo17a.html" style="color:#315dff;text-decoration:underline;">On Calibration of Modern Neural Networks</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[20] <a href="https://aclanthology.org/2023.emnlp-main.853/" style="color:#315dff;text-decoration:underline;">The Benefits of Label-Description Training for Zero-Shot Text Classification</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[21] <a href="https://arxiv.org/abs/2501.10868" style="color:#315dff;text-decoration:underline;">Generating Structured Outputs from Language Models: Benchmark and Studies</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[22] <a href="https://openreview.net/pdf?id=8sSqNntaMr" style="color:#315dff;text-decoration:underline;">RouteLLM: Learning to Route LLMs with Preference Data</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[23] <a href="https://aclanthology.org/2024.findings-acl.333/" style="color:#315dff;text-decoration:underline;">Unveiling Selection Biases: Exploring Order and Token Sensitivity in Large Language Models</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[24] <a href="https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict" style="color:#315dff;text-decoration:underline;">VentureBeat：Companies are putting Jev in charge of AI agent decisions</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[25] <a href="https://www.itmedia.co.jp/aiplus/article/2609/20/2000001664/" style="color:#315dff;text-decoration:underline;">ITmedia AI+：文章を書かない AI がなぜ話題に？</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[26] <a href="https://thenextweb.com/news/typesafe-jev-decision-model-vercel-fastest-adopted" style="color:#315dff;text-decoration:underline;">The Next Web：The fastest-adopted model on Vercel this year cannot write a word</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[27] <a href="https://news.ycombinator.com/item?id=49717558" style="color:#315dff;text-decoration:underline;">Hacker News：Introducing System One Models and Jev</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[28] <a href="https://www.reddit.com/r/AI_India/comments/1wmvyqz/" style="color:#315dff;text-decoration:underline;">Reddit 开发者自测：JEV vs. LLMs, BERT and Laya</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[29] <a href="https://jev-plays-pokemon.standardagents.ai/" style="color:#315dff;text-decoration:underline;">Standard Agents：Jev plays Pokémon Red</a></p>
-<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;[30] <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/developer-says-jev-decision-model-beat-pokemon-red-in-under-a-week-non-llm-engine-succeeds-where-traditional-chatbots-stalled-for-months-but-claude-opus-5-coached-the-model-through-its-dead-ends" style="color:#315dff;text-decoration:underline;">Tom's Hardware：Jev beat Pokémon Red with Opus 5 coaching the harness</a></p>
-</div></article>
-<aside class="read-next sans"><p>继续阅读</p><a href="/zhitan/articles/vla-vision-language-action.html">VLA 把看懂和动手接上了，但最后一厘米仍然很难 →</a><br><a href="/zhitan/#articles">返回全部文章 →</a></aside>
-</main><footer class="site-footer">
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图 4：从明确规则检查，到模型判断，再到人工或其他模型复核，按风险安排不同出口。“原子问题”指一次只判断一件事，“完整概率分布”指每个选项都有概率。提高自动处理门槛，通常会让更多任务进入复核；图中阈值仅为示意。</p>
+<p style="margin:0 0 18px;"><strong>先用代码检查明确条件。</strong>权限、库存、金额和日期已经有规定时，照规定处理，避免交给模型猜测。</p>
+<p style="margin:0 0 18px;"><strong>再准备足够、相关的材料。</strong>邮件说“钱扣了”，就应提供付款和发货状态。缺少这些信息，模型只能靠语气推测。无关的长篇背景既增加费用，也可能干扰判断。</p>
+<p style="margin:0 0 18px;"><strong>把问题与选项写清楚。</strong>每个问题只判断一件事，并允许选择“信息不足”“无法判断”。如果只有“批准”和“拒绝”，模型可能被迫在材料不够时选一个。</p>
+<p style="margin:0 0 18px;"><strong>按动作风险设定门槛。</strong>门槛也叫阈值，是系统预设的处理条件。给工单加标签可以相对宽松；退款、删数据等影响较大的动作应增加规则和人工检查。具体概率门槛需要用自己的业务样本测试，不能抄一个通用数字。</p>
+<p style="margin:0 0 18px;"><strong>安排复核与退出。</strong>系统可以把不确定的任务交给人工、其他模型或进一步查资料。复核时要补证据、换检查方法，才能减少重复同一个错误的可能性。</p>
+<p style="margin:0 0 18px;"><strong>持续记录结果。</strong>记录输入材料、问题、选项、概率、最终动作，以及事后发现的错误。固定模型版本也很重要：换了模型之后，即使提问不变，概率和判断表现也可能变化。</p>
+<p style="margin:0 0 18px;">评估时，可以围绕六个实际问题展开：</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;一百个工单分对了多少？不同类别有没有特别容易漏掉？</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;模型说有八成把握时，这一批判断是否大约八成正确？</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;提高自动处理门槛后，错误少了多少，又有多少任务需要人工？</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;改写问题、交换选项顺序或增加背景，答案是否明显变化？</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;输入恶意指令时，系统是否仍能守住处理规则？</p>
+<p style="margin:0 0 12px;padding-left:1.25em;text-indent:-1.25em;">•&nbsp;&nbsp;算上重试、复核和返工，每个正确处理的任务到底花了多少钱、多久？</p>
+<p style="margin:0 0 22px;color:#315dff;">换一批客户、换一种语言或换一个版本，表现都可能变化。正式上线后还需要定期检查，不能把一次测试当成长期保证。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">08</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">它的新意，最终要在整个系统里检验</p></section>
+<p style="margin:0 0 18px;">回头看，分类、评分、概率校准和任务分派都有成熟的研究前史。Jev 的产品选择，是将这些能力集中到一个方便软件调用的判断服务中，并围绕判断重新安排接口、速度和收费。</p>
+<p style="margin:0 0 22px;color:#315dff;">这给使用者提供了一个新选项。原来每一步都调用大模型的系统，现在可以尝试把一部分重复选择交给专用判断服务，再比较整体效果。</p>
+<p style="margin:0 0 18px;">这种分工是否值得，仍有三个问题需要回答。</p>
+<p style="margin:0 0 18px;">第一，<strong>换到自己的业务里还准不准。</strong>英文测试成绩无法自动代表中文客服效果；类别、语言和材料来源变化后，需要重新测。</p>
+<p style="margin:0 0 18px;">第二，<strong>算上复核之后还省不省。</strong>如果便宜的判断造成大量返工，整体成本未必下降。判断服务与专用小模型、通用大模型之间，应比较完成同一任务的总成本和成功率。</p>
+<p style="margin:0 0 18px;">第三，<strong>软件是否真的需要大量局部判断。</strong>复杂任务可能仍离不开长时间推理；高频、重复、有清晰候选答案的后台流程，更容易发挥这种服务的价值。</p>
+<p style="margin:0 0 18px;">TypeSafe 尚未公开完整技术细节，其他团队也在探索类似接口。Jev 能形成多大优势，要继续看真实业务数据、长期稳定性，以及其他方案的进展。</p>
+<section style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">09</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">结语：把一次判断做好，也是一种 AI 能力</p></section>
+<p style="margin:0 0 18px;">一封邮件怎样分派，一段资料是否有用，一个操作是否需要复核，这些小选择很少出现在产品演示的主角位置，却会反复影响软件的运行。</p>
+<p style="margin:0 0 18px;">Jev 让人重新注意到它们的成本：一个复杂任务里，如果每个小判断都要等待，整项任务就慢；如果这些判断自信地出错，自动化规模越大，后续处理也可能越麻烦。</p>
+<p style="margin:0 0 18px;">因此，值得观察的结果很具体：它能否减少等待和费用，能否保持足够的判断质量，遇到材料不足或风险过高时，系统能否及时停下。</p>
+<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;">Jev 的价值要用完整任务来衡量：判断更快、更便宜，同时让错误有机会被发现，让不确定的任务有地方交接。</p></section>
+</div></article><aside class="read-next sans"><p>站内继续阅读</p><p><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？ →</a></p><p><a href="/zhitan/articles/fde-enterprise-ai-delivery.html">【增速·观察】FDE 越火，越说明 AI 还没准备好 →</a></p><p><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远 →</a></p><p><a href="/zhitan/articles/vla-vision-language-action.html">【增速·科普】从一句话到机械臂动作，VLA 中间做了什么 →</a></p><a href="/zhitan/#articles">返回全部文章 →</a></aside></main><footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
       <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">

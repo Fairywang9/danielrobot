@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VLA 把看懂和动手接上了，但最后一厘米仍然很难｜增速智谈</title>
-<meta name="description" content="视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。">
-<link rel="canonical" href="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html">
-<meta property="og:type" content="article"><meta property="og:title" content="VLA 把看懂和动手接上了，但最后一厘米仍然很难">
-<meta property="og:description" content="视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html">
-<meta property="og:image" content="https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png"><meta property="article:published_time" content="2026-10-05">
-<meta property="article:section" content="增速智谈·科普系列"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "VLA 把看懂和动手接上了，但最后一厘米仍然很难", "description": "视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "image": "https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html", "articleSection": "增速智谈·科普系列", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司", "logo": {"@type": "ImageObject", "url": "https://upspeedtech.com/pics/zhitan/logo-zhitan-horizontal.png"}}}</script>
-<link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css">
-</head><body>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>【增速·科普】从一句话到机械臂动作，VLA 中间做了什么｜增速智谈</title><meta name="description" content="视觉、语言与动作如何接进学习链路，从动作表示、数据和泛化理解VLA的能力与限制。"><link rel="canonical" href="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html">
+<meta property="og:type" content="article"><meta property="og:title" content="【增速·科普】从一句话到机械臂动作，VLA 中间做了什么"><meta property="og:description" content="视觉、语言与动作如何接进学习链路，从动作表示、数据和泛化理解VLA的能力与限制。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html"><meta property="og:image" content="https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png"><meta property="article:published_time" content="2026-10-05">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "【增速·科普】从一句话到机械臂动作，VLA 中间做了什么", "description": "视觉、语言与动作如何接进学习链路，从动作表示、数据和泛化理解VLA的能力与限制。", "datePublished": "2026-10-05", "dateModified": "2026-10-13", "image": "https://upspeedtech.com/pics/zhitan/vla-vision-language-action/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/vla-vision-language-action.html", "articleSection": "增速·科普", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司"}}</script><link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css"></head><body>
 <header class="site-header sans">
   <div class="wrap header-bar">
     <a class="brand" href="/zhitan/">
@@ -24,7 +16,7 @@
         <div class="mega" role="menu">
           <h4>内容流</h4>
           <a href="/zhitan/#articles">全部最新文章<span>站内全文阅读</span></a>
-          <div class="sub"><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
+          <div class="sub"><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远</a><a href="/zhitan/articles/fde-enterprise-ai-delivery.html">【增速·观察】FDE 越火，越说明 AI 还没准备好</a><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？</a><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
             <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
             <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
           </div>
@@ -77,12 +69,8 @@
       <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
     </ul>
   </div>
-</header>
-<main class="article-wrap published-article">
-<nav class="crumb sans" aria-label="面包屑"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">最新文章</a> / 科普系列</nav>
-<header class="article-heading"><p class="tag">增速智谈·科普系列 · 具身智能基础技术｜VLA 01</p><h1>VLA 把看懂和动手接上了，但最后一厘米仍然很难</h1>
-<p class="article-deck">视觉、语言和动作怎样接进同一条学习链路？从动作表示、数据、六层泛化到部署，解释 VLA 的能力与边界。</p><p class="meta">文｜增速智谈 · 网站发布 <time datetime="2026-10-05">2026-10-05</time> · 资料截至 2026-09-27</p>
-<img class="article-cover" src="/pics/zhitan/vla-vision-language-action/cover.png" alt="VLA 把看懂和动手接上了，但最后一厘米仍然很难" width="1200" height="514"></header>
+</header><main class="article-wrap published-article"><nav class="crumb sans"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">全部文章</a> / 科普</nav>
+<header class="article-heading"><p class="tag">增速·科普</p><h1>【增速·科普】从一句话到机械臂动作，VLA 中间做了什么</h1><p class="article-deck">视觉、语言与动作如何接进学习链路，从动作表示、数据和泛化理解VLA的能力与限制。</p><p class="meta">文｜增速智谈 · 网站发布 2026-10-05 · 网站更新 2026-10-13 · 资料截至 2026-09-27</p><img class="article-cover" src="/pics/zhitan/vla-vision-language-action/cover.png" alt="【增速·科普】从一句话到机械臂动作，VLA 中间做了什么" width="1200" height="514"></header>
 <article aria-label="文章正文"><div class="wechat-content">
 <p style="margin:0 0 42px;color:#9d9d9d;font-size:13px;line-height:1.7;letter-spacing:0.12em;text-align:left;">ZENGSU INTELLIGENCE<br><strong style="color:#1947d1;font-size:16px;letter-spacing:0.08em;">增速智谈·科普系列</strong></p>
 <p style="margin:0 0 14px;color:#a2a2a2;font-size:17px;font-weight:700;text-align:left;">具身智能基础技术｜VLA 01 <span style="display:inline-block;width:6px;height:17px;margin-left:12px;background:#e6a08e;vertical-align:-2px;"></span></p>
@@ -176,9 +164,7 @@
 <p style="margin:0 0 18px;">从 RT-1、RT-2 到 OpenVLA、π0.5、GR00T 和 Gemini Robotics 2，VLA 的能力沿着一条连续路线扩展：更多任务进入同一个策略，视觉语言知识帮助模型理解新物体和新指令，连续动作与动作分块改善执行，跨本体和长任务继续扩大适用范围。记忆、失败恢复与安全则把动作能力接入完整机器人系统。</p>
 <p style="margin:0 0 18px;">越接近真实部署，系统分工越需要清楚：可从大数据中学习的部分交给模型，高频稳定性由控制器保证，安全边界由独立机制约束，超出能力的情况交给人处理。</p>
 <section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;"><strong>VLA 正在把“看懂以后怎样动手”变成可规模化预训练的能力。下一阶段的差距将落在更具体的指标上：新任务需要多少数据，换一具身体要适配多久，长任务需要多少次人工接管，以及安全边界能否被验证。</strong></p></section>
-</div><section class="article-sources"><h2>资料来源</h2><ul><li><a href="https://robotics-transformer1.github.io/">RT-1: Robotics Transformer</a></li><li><a href="https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action/">RT-2: New model translates vision and language into action</a></li><li><a href="https://robotics-transformer-x.github.io/">Open X-Embodiment: Robotic Learning Datasets and RT-X Models</a></li><li><a href="https://octo-models.github.io/">Octo: An Open-Source Generalist Robot Policy</a></li><li><a href="https://openvla.github.io/">OpenVLA: An Open-Source Vision-Language-Action Model</a></li><li><a href="https://openvla-oft.github.io/">OpenVLA-OFT: Fine-Tuning Vision-Language-Action Models</a></li><li><a href="https://www.physicalintelligence.company/download/pi0.pdf">π0: A Vision-Language-Action Flow Model for General Robot Control</a></li><li><a href="https://www.physicalintelligence.company/download/pi05.pdf">π0.5: a VLA Model with Open-World Generalization</a></li><li><a href="https://research.nvidia.com/labs/gear/gr00t-n1_6/">GR00T N1.6</a></li><li><a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/">Gemini Robotics 2 brings whole body intelligence to robots</a></li><li><a href="https://agibot-world.com/blog/agibot_go1.pdf">AgiBot World Colosseo / GO-1</a></li><li><a href="https://arxiv.org/abs/2505.03233">GraspVLA: a Grasping Foundation Model Pre-trained on Billion-scale Synthetic Action Data</a></li><li><a href="https://arxiv.org/abs/2512.19562">REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation</a></li><li><a href="https://deepmind.google/research/evals/">ASIMOV-Agentic-v1</a></li><li><a href="https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/">Introducing Gemini Robotics and Gemini Robotics-ER</a></li><li><a href="https://research.nvidia.com/labs/gear/vesta/">Vesta</a></li></ul></section></article>
-<aside class="read-next sans"><p>继续阅读</p><a href="/zhitan/articles/jev-agent-decision-model.html">Jev 到底新在哪：从分类器到 Agent 决策层 →</a><br><a href="/zhitan/#articles">返回全部文章 →</a></aside>
-</main><footer class="site-footer">
+</div></article><aside class="read-next sans"><p>站内继续阅读</p><p><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？ →</a></p><p><a href="/zhitan/articles/fde-enterprise-ai-delivery.html">【增速·观察】FDE 越火，越说明 AI 还没准备好 →</a></p><p><a href="/zhitan/articles/jev-agent-decision-model.html">【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层 →</a></p><p><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远 →</a></p><a href="/zhitan/#articles">返回全部文章 →</a></aside></main><footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
       <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">

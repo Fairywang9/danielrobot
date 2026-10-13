@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>【增速·观察】FDE 越火，越说明 AI 还没准备好｜增速智谈</title><meta name="description" content="从工程师驻进客户现场，理解企业AI规模化交付、Palantir反馈回路与软件经济账。"><link rel="canonical" href="https://upspeedtech.com/zhitan/articles/fde-enterprise-ai-delivery.html">
+<meta property="og:type" content="article"><meta property="og:title" content="【增速·观察】FDE 越火，越说明 AI 还没准备好"><meta property="og:description" content="从工程师驻进客户现场，理解企业AI规模化交付、Palantir反馈回路与软件经济账。"><meta property="og:url" content="https://upspeedtech.com/zhitan/articles/fde-enterprise-ai-delivery.html"><meta property="og:image" content="https://upspeedtech.com/pics/zhitan/fde-enterprise-ai-delivery/cover.png"><meta property="article:published_time" content="2026-10-13">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "【增速·观察】FDE 越火，越说明 AI 还没准备好", "description": "从工程师驻进客户现场，理解企业AI规模化交付、Palantir反馈回路与软件经济账。", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "image": "https://upspeedtech.com/pics/zhitan/fde-enterprise-ai-delivery/cover.png", "mainEntityOfPage": "https://upspeedtech.com/zhitan/articles/fde-enterprise-ai-delivery.html", "articleSection": "增速·观察", "inLanguage": "zh-CN", "author": {"@type": "Organization", "name": "增速智谈"}, "publisher": {"@type": "Organization", "name": "北京增速科技有限公司"}}</script><link rel="icon" href="/pics/zhitan/logo-zhitan-badge.png"><link rel="stylesheet" href="/assets/css/zhitan.css"><link rel="stylesheet" href="/assets/css/zhitan-articles.css"></head><body>
+<header class="site-header sans">
+  <div class="wrap header-bar">
+    <a class="brand" href="/zhitan/">
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈">
+      <span class="brand-name">增速智谈<em>DanielRobot</em></span>
+    </a>
+    <button class="mobile-toggle" type="button" aria-label="菜单" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+    <ul class="nav" id="mainNav">
+      <li><a href="/zhitan/">首页</a></li>
+      <li>
+        <button type="button" data-mega>最新文章 ▾</button>
+        <div class="mega" role="menu">
+          <h4>内容流</h4>
+          <a href="/zhitan/#articles">全部最新文章<span>站内全文阅读</span></a>
+          <div class="sub"><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远</a><a href="/zhitan/articles/fde-enterprise-ai-delivery.html">【增速·观察】FDE 越火，越说明 AI 还没准备好</a><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？</a><a href="/zhitan/articles/jev-agent-decision-model.html">AI 决策模型技术篇 01</a><a href="/zhitan/articles/vla-vision-language-action.html">具身智能基础技术｜VLA 01</a>
+            <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">世界模型技术篇 01</a>
+            <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">李飞飞人物篇</a>
+          </div>
+          <a href="/zhitan/#series">进入专题索引</a>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>专题 ▾</button>
+        <div class="mega wide" role="menu">
+          <div>
+            <h4>一级专题</h4>
+            <a href="/zhitan/#series">世界模型<span>技术 / 人物 / 判断</span></a>
+            <div class="sub">
+              <a href="/zhitan/articles/world-model-01-what-is-a-world-model.html">技术篇 01</a>
+              <a href="/zhitan/articles/fei-fei-li-imagenet-to-world-model.html">人物篇：李飞飞</a>
+            </div>
+            <a href="/zhitan/#series">机器人小脑<span>身体控制与具身</span></a>
+          </div>
+          <div>
+            <h4>栏目</h4>
+            <a href="/zhitan/#series">造机器人的人</a>
+            <a href="/zhitan/#series">产业观察</a>
+            <a href="/reports/">研究报告库</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button type="button" data-mega>研究报告 ▾</button>
+        <div class="mega" role="menu">
+          <h4>报告中心</h4>
+          <a href="/reports/">全部报告</a>
+          <a href="/reports/china-embodied-intelligence-world-model-2026.html">具身智能与世界模型 2026<span>撰写中 · 可预约</span></a>
+          <a href="/reports/robot_market_summary.html">机器人商业化模式</a>
+          <a href="/reports/robot_engineering_report.html">动力关节</a>
+          <a href="/reports/robot_hand_market.html">灵巧手</a>
+        </div>
+      </li>
+      <li>
+        <a href="/zhitan/services.html">服务 ▾</a>
+        <div class="mega" role="menu">
+          <h4>我们做什么</h4>
+          <a href="/zhitan/services.html">服务总览</a>
+          <a href="/zhitan/services.html#interview">深度访谈与特稿</a>
+          <a href="/zhitan/services.html#video">访谈视频</a>
+          <a href="/zhitan/services.html#publish">媒体发布与搜索占位</a>
+          <a href="/zhitan/services.html#research">行业研究与图谱</a>
+        </div>
+      </li>
+      <li><a href="/zhitan/about.html">关于</a></li>
+      <li class="nav-cta"><a href="/zhitan/#contact">合作</a></li>
+    </ul>
+  </div>
+</header><main class="article-wrap published-article"><nav class="crumb sans"><a href="/zhitan/">增速智谈</a> / <a href="/zhitan/#articles">全部文章</a> / 观察</nav>
+<header class="article-heading"><p class="tag">增速·观察</p><h1>【增速·观察】FDE 越火，越说明 AI 还没准备好</h1><p class="article-deck">从工程师驻进客户现场，理解企业AI规模化交付、Palantir反馈回路与软件经济账。</p><p class="meta">文｜增速智谈 · 网站发布 2026-10-13 · 网站更新 2026-10-13 · 资料截至 2026-10-05</p><img class="article-cover" src="/pics/zhitan/fde-enterprise-ai-delivery/cover.png" alt="【增速·观察】FDE 越火，越说明 AI 还没准备好" width="1200" height="514"></header>
+<article aria-label="文章正文"><div class="wechat-content">
+<section id="article-start" data-component="brand-header" style="margin:0 0 22px;padding:23px 22px 20px;border-top:4px solid #1947d1;background:#f6f8ff;text-align:left;"><img src="/pics/zhitan/fde-enterprise-ai-delivery/figure-01.png" alt="增速智谈" style="display:block;width:146px;max-width:42%;height:auto;margin:0 0 18px;"><p style="margin:0 0 4px;color:#8c95a8;font-size:11px;line-height:1.6;letter-spacing:0.18em;">ZENGSU INTELLIGENCE</p><p style="margin:0;color:#1947d1;font-size:17px;line-height:1.55;font-weight:800;letter-spacing:0.06em;">增速智谈·观察系列</p><p style="margin:13px 0 0;padding-top:12px;border-top:1px solid #dce4fa;color:#59647a;font-size:13px;line-height:1.7;font-weight:700;letter-spacing:0.03em;">企业 AI 交付观察｜FDE 01</p></section><p data-component="standfirst" style="margin:23px 0 30px;color:#3f4654;font-size:18px;line-height:1.8;font-weight:700;letter-spacing:0.01em;text-align:left;">当工程师开始驻进客户现场，企业 AI 真正卖的到底是软件，还是人？</p>
+<section style="margin:0 0 18px;padding:20px 22px;border:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">AI 行业最迷人的承诺，一直是<strong>规模</strong>。模型训练一次，可以服务无数用户；软件写好一遍，可以复制给无数客户；Agent 接入业务以后，原本由人完成的流程将被自动执行。照这套逻辑，AI 公司理应越来越像一台高效的复制机器。</p></section>
+<p style="margin:0 0 18px;">但过去一年，另一幅画面也在迅速展开：工程师被派进银行、医院、工厂和政府机构，坐到客户身边，一条流程一条流程地梳理，一套系统一套系统地接入。</p>
+<p style="margin:0 0 18px;">他们有一个正在走红的名字：Forward Deployed Engineer，简称 FDE，中文常译作“前线部署工程师”或“前沿部署工程师”。</p>
+<p style="margin:0 0 18px;">OpenAI 的美国 FDE 岗位给出<strong>18.5 万至 30 万美元年薪</strong>，另有股权，并注明最高可能需要 50% 的时间出差。Anthropic 同类岗位的年薪区间是<strong>28 万至 32 万美元</strong>，预计出差约 25%。两家公司对这份工作的描述都很重：进入客户系统、写生产代码、建立评测、推动采用，还要把现场经验反馈给产品和模型团队。[1][2]</p>
+<p style="margin:0 0 18px;">这些岗位并不是去教普通用户怎样写提示词。它们被派去完成 AI 公司最难的一段工作：把一个在演示中表现惊艳的模型，变成企业敢于写进流程、接入数据、交给员工，并且愿意长期运行的系统。</p>
+<p style="margin:0 0 18px;">这幅景象也暴露了一个不太符合 AI 叙事的事实。</p>
+<p style="margin:0 0 18px;">如果模型已经足够强，平台已经足够完整，企业为什么还需要如此昂贵的人，亲自把它送到现场？</p>
+<p style="margin:0 0 18px;">FDE 的兴起当然可以被解释为新技术创造了新职业。换一个角度，它也可能是<strong>企业 AI 尚未完成产品化的证据</strong>：模型能力与业务价值之间，仍隔着一层厚重、复杂，而且高度依赖人的工程作业。</p>
+<p style="margin:0 0 18px;">因此，比“FDE 会不会成为下一个热门岗位”更值得讨论的是：这层人工能否被不断沉淀进产品，还是最终会固化为 AI 公司长期背负的服务成本？</p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">01</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">企业不缺 AI，缺的是把它放进流程的人</p></section>
+<p style="margin:0 0 18px;">企业 AI 眼下的难处，并不是没人使用。</p>
+<p style="margin:0 0 18px;">McKinsey 在 2025 年的全球调查中发现，<strong>88%</strong> 的受访者表示所在组织已经在至少一个业务职能中规律使用 AI。看起来，AI 进入企业已经不是一道选择题。</p>
+<p style="margin:0 0 18px;">但在同一份调查里，只有<strong>大约三分之一</strong>的受访者称公司开始规模化 AI 项目，做到全面规模化的只有 <strong>7%</strong>。能够让 AI 贡献超过 5% EBIT、同时创造显著价值的“AI 高绩效者”，约占受访者的 <strong>6%</strong>。[3]</p>
+<p style="margin:0 0 18px;">从普及走到价值，中间仍隔着一条很宽的缝。</p>
+<p style="margin:0 0 18px;">这条缝里的失败往往并不神秘：企业选了一个容易展示、实际价值有限的场景；数据散落在不同系统里，权限彼此隔绝；模型回答偶尔出错，却没有人定义什么叫“足够可靠”；PoC 做出来了，员工仍旧沿用原来的流程；即使项目上线，模型、成本和业务要求还在变化，最初的方案也可能很快失效。</p>
+<p style="margin:0 0 18px;">传统软件项目习惯先写需求，再按需求开发。企业 AI 往往连需求本身都要在使用中逐步发现。客户起初说“做一个知识助手”，到了现场才发现，更深的问题可能是：文档没有统一版本，权限体系混乱，专家不愿意维护知识库，答案出错后也没有回流机制。</p>
+<p style="margin:0 0 18px;"><strong>接一个模型 API，可能只占全部工作的很小一部分。</strong></p>
+<p style="margin:0 0 18px;">剩下的事情包括理解业务、清理数据、连接旧系统、划分权限、建立评测、设置人工复核、控制推理成本、改变用户界面，还要让日常使用这套系统的人愿意采用新流程。每一项都不是模型能力排行榜能够回答的问题。</p>
+<p style="margin:0 0 18px;">这正是 FDE 出现的位置。</p>
+<p style="margin:0 0 18px;">一个相对完整的 FDE 项目，大致要经历七个动作：找到值得改造的流程；把模糊目标拆成可验收的问题；构建应用、Agent、数据管道和界面；建立评测与护栏；接入客户的生产环境；推动用户实际采用；最后，把项目中反复出现的模式带回产品团队。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>前六步可以交付一个项目。最后一步，才决定这家公司最终卖的是软件，还是人力。</strong></p>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/fde-enterprise-ai-delivery/figure-02.png" alt="FDE 项目的七步闭环" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图：增速智谈原创示意；前六步完成一次交付，第七步决定现场经验能否进入产品。</p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">02</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">Palantir 发明的，不只是一个职位</p></section>
+<p style="margin:0 0 18px;">FDE 并非伴随大模型才出现。</p>
+<p style="margin:0 0 18px;">这个角色最常被追溯到 Palantir。它所面对的客户从政府机构到大型企业，问题通常复杂而敏感，很难仅靠一套标准软件远程解决。于是，工程师进入现场，和客户一起理解数据、重组流程、构建应用。</p>
+<p style="margin:0 0 18px;">如果故事只到这里，FDE 与技术咨询、定制开发并没有本质区别。</p>
+<p style="margin:0 0 18px;">Palantir 为它增加的关键一环，是<strong>让现场经验持续回到平台</strong>。公司在官方架构文档中把 Forward Deployed Engineering 形容为产品开发的<strong>“人类版反向传播”</strong>：工程师在工厂、战场等关键环境中工作，把现实里的误差和约束带回 AIP、Foundry、Apollo 与 Ontology 等核心能力。[4]</p>
+<p style="margin:0 0 18px;">这个比喻带有鲜明的 Palantir 自我叙事，却也准确点出了 FDE 最有价值的部分。</p>
+<p style="margin:0 0 18px;">普通项目制服务追求的是“这个客户的问题被解决”。Forward Deployed Engineering 还要继续追问：这次解决问题的过程中，有什么能让下一个客户更快抵达结果？</p>
+<p style="margin:0 0 18px;">答案可能是一只新的连接器、一套评测方法、一个权限组件、一个行业数据模型，也可能是平台中原本缺失的能力。现场不再只是产品之外的服务末端，而成为产品学习真实世界的入口。</p>
+<p style="margin:0 0 18px;">一位在 Palantir 担任 FDE 14 年的员工，2026 年在公司开发者社区里专门谈到市场上的简单改名。他强调，FDE 不是“最后一公里销售工程”，也不只是给顾问换一个名字；它是一种全组织的产品开发方式。核心产品团队、现场团队和内部运营，都围绕同一条现实反馈链工作。[5]</p>
+<p style="margin:0 0 18px;">这段辩护本身就很耐人寻味。</p>
+<p style="margin:0 0 18px;">当这个岗位的发明者开始提醒市场不要只复制表面，说明“FDE”这个名字已经脱离原有系统，被大量公司装进了不同的组织。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>FDE 的走红，最容易复制的是头衔，最难复制的却是那条反馈回路。</strong></p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">03</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">同一个 FDE，背后可能是三门完全不同的生意</p></section>
+<p style="margin:0 0 18px;">今天打开不同公司的招聘页面，会看到至少三种 FDE。</p>
+<p style="margin:0 0 18px;">第一种是 <strong>Builder 型 FDE</strong>。</p>
+<p style="margin:0 0 18px;">这类人仍然是工程师。他们进入客户环境，亲手开发生产应用、Agent、集成和评测系统，并为最终效果负责。OpenAI 要求 FDE 从发现、技术范围、系统设计一直负责到生产发布；衡量成功的不只是“上线”，还包括生产采用、可量化的工作流影响，以及能否用评测反馈改变产品和模型路线图。[1]</p>
+<p style="margin:0 0 18px;">Anthropic 的要求更具体：FDE 要在客户系统中构建基于 Claude 的生产应用，交付 MCP Server、子智能体和 Agent Skill，同时识别可重复的部署模式，把它们反馈给 Product 与 Engineering。[2]</p>
+<p style="margin:0 0 18px;">第二种更接近<strong>增强版解决方案工程师</strong>。</p>
+<p style="margin:0 0 18px;">他们参与销售、做 Demo 和 PoC，帮助客户配置产品、完成初步集成，工作中也会写代码，但主要目标仍与成交和采用有关。项目进入稳定实施后，往往交给另一支交付团队。</p>
+<p style="margin:0 0 18px;">第三种则是<strong>专业服务或实施交付</strong>。</p>
+<p style="margin:0 0 18px;">Databricks 把 AI FDE 明确放在 Professional Services &amp; Operations 类目下，并称这支团队负责交付专业服务项目。[6] 这不意味着岗位没有技术含量，却诚实地揭示了它的组织位置：FDE 有时就是软件公司内部的高端专业服务。</p>
+<p style="margin:0 0 18px;">第三方对 1000 个相关职位的分析，也观察到了类似分裂：有的岗位强调高比例编码和客户现场，有的本质上是 Sales Engineer+，还有一些甚至只是给公司内部销售与运营团队搭自动化工具。[7] 这项分析不是权威市场普查，但它指出的混乱很容易从各家公司招聘说明中得到验证。</p>
+<p style="margin:0 0 18px;">于是，围绕 FDE 的争议经常各说各话。</p>
+<p style="margin:0 0 18px;">支持者说，这是一群能理解业务、又能写生产代码的稀缺工程师。批评者看到的，却是售前、实施、客户成功和咨询顾问被装进了一个更时髦的词里。</p>
+<p style="margin:0 0 18px;">两边都可能说中了部分事实，因为他们谈论的本来就不是同一种工作。</p>
+<p style="margin:0 0 18px;">判断一家公司的 FDE 是否成立，不能只看岗位名称里有没有“工程师”，也不能只看员工会不会写代码。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>更有意义的分界是：现场劳动有没有转化成下一次可以复用的产品能力。</strong></p>
+<p style="margin:0 0 18px;">如果每签一个客户，都要重新派一批最优秀的人从头梳理、从头开发、长期驻场，那么公司交付的依然是项目。AI 或许提高了项目团队的生产率，却没有改变生意的本质。</p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">04</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">FDE 最难回答的，是软件公司的经济账</p></section>
+<p style="margin:0 0 18px;">软件生意令人着迷，在于<strong>复制成本趋近于零</strong>。专业服务则不同，收入通常<strong>随着人数、工时和项目数量一起增长</strong>。</p>
+<p style="margin:0 0 18px;">FDE 恰好站在两者中间。</p>
+<p style="margin:0 0 18px;">它可以用高强度服务撬动软件收入：先派少数工程师解决最难的部署，让客户看到价值，再扩大平台订阅、模型调用与业务覆盖。它也可能滑向另一端：客户需求不断涌入，优秀工程师被困在定制项目里，公司若想增加收入，只能继续增加人。</p>
+<p style="margin:0 0 18px;">Palantir 提供了一个支持者喜欢引用的反例。公司 2025 年 <strong>GAAP 毛利率达到 82%</strong>，已经是典型的软件水平。[8] 这至少说明，高接触的客户部署并不必然把公司拖成低毛利咨询机构。</p>
+<p style="margin:0 0 18px;">但不能把 82% 直接归功于 FDE。Palantir 的模式能够成立，还因为现场工作建立在同一套平台、数据模型、交付工具和产品组件上。它在 10-K 中反复强调产品化采购，并刻意把自己与按劳务合同为客户编写特定软件的模式区分开来。[8]</p>
+<p style="margin:0 0 18px;">同一份 10-K 也写下了另一面：随着客户增长，服务团队可能需要更多人员；如果服务无法做到高效、及时和可扩展，公司的费用可能上升，业务也会受到影响。[8]</p>
+<p style="margin:0 0 18px;">这几乎写出了 FDE 模式的完整矛盾。</p>
+<p style="margin:0 0 18px;">没有现场团队，复杂客户可能长期停在试点；现场团队过于庞大、介入过深、驻留过久，产品又可能失去规模优势。</p>
+<p style="margin:0 0 18px;">一家 FDE 驱动的公司究竟是软件公司，还是披着软件外衣的咨询公司，短期内很难从合同名称看出来。更有用的指标是：<strong>同类客户的第二次、第三次部署，所需时间和人力有没有下降</strong>；单个 FDE 能支持的客户与收入是否上升；定制代码有没有变成平台组件；客户最后能不能自己运行这套系统。</p>
+<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;"><strong>好 FDE 的价值，不是让自己永远不可替代。恰恰相反，它要不断消灭重复劳动，让下一次部署少依赖一些人。</strong></p></section>
+<section style="margin:17px 0 0;text-align:center;"><img src="/pics/zhitan/fde-enterprise-ai-delivery/figure-03.png" alt="FDE 的两种增长路径" style="display:block;box-sizing:border-box;width:100%;max-width:560px;height:auto;margin:0 auto;border:1px solid #edf0f5;"></section>
+<p style="margin:8px 0 27px;color:#9a9a9a;font-size:12px;line-height:1.7;text-align:center;">图：增速智谈原创示意；同样从客户现场出发，产品飞轮与人力项目会通向完全不同的规模曲线。</p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">05</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">中国的 FDE，正在长进原有的政企交付体系</p></section>
+<p style="margin:0 0 18px;">FDE 进入中国后，并没有原样复制硅谷版本。</p>
+<p style="margin:0 0 18px;">国内企业 AI 的客户，很多来自大型企业、金融、制造、运营商和政府相关机构。它们原本就有庞大的售前、解决方案、实施、驻场开发和运维体系。模型到来以后，FDE 很自然地被吸收进这套体系，而不是从零长出一个独立行业。</p>
+<p style="margin:0 0 18px;">几家上市公司的公开披露，已经把这种变化写得相当直接。</p>
+<p style="margin:0 0 18px;">用友在 2026 年半年报中称，在传统软件套件实施交付模式之外，公司组建了 FDE 团队，与客户围绕具体场景共创并提供持续服务，探索<strong>按结果收费</strong>；与此同时，还要拓展 Token、IaaS、数据库等关联产品转售。[9]</p>
+<p style="margin:0 0 18px;">这意味着，FDE 在国内不只是一种技术岗位，也可能成为软件订阅、模型消费、算力、数据库与持续服务之间的新商业接口。</p>
+<p style="margin:0 0 18px;">神州数码把自己的 FDE 模式概括为“轻咨询、AI 快速部署、工程师贴身服务”。工程师进入客户现场，参与场景筛选、流程拆解、数据准备和 Agent 构建。公司给出的理由也很典型：核心数据不能轻易离开本地环境；客户在项目开始时难以形成标准化需求；AI 又可能引发组织和流程变化，传统的固定需求交付难以及时响应。[10]</p>
+<p style="margin:0 0 18px;">宇信科技展示了另一种分工。公司在 2026 年 9 月的投资者交流中称，FDE 团队承担需求沟通、产品配置和问题排查，再把提示词、规则调整等配置任务下沉给交付团队。[11]</p>
+<p style="margin:0 0 18px;">从这些口径看，国内 FDE 更像交付体系里的<strong>高阶前台</strong>：站在客户、产品与实施团队之间，把模糊需求转化为能够继续交付的任务。</p>
+<p style="margin:0 0 18px;">这类工作有清晰的现实需求，也确实可能提高 AI 项目的成功率。但它与“高比例写生产代码、现场反馈直接改变核心模型”的 Builder FDE，并不完全相同。</p>
+<p style="margin:0 0 18px;">更值得留意的是，改名本身也会制造错觉。</p>
+<p style="margin:0 0 18px;">原有的售前、实施或驻场团队，只要开始使用 Agent、RAG、MCP，再把岗位名称换成 FDE，就能显得像是进入了一个新行业。公司获得了新的招聘故事，员工获得了新的职业标签，客户也可能为“AI 原生交付”支付新的溢价。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>名字变了，组织的学习方式未必改变。</strong></p>
+<p style="margin:0 0 18px;">检验国内 FDE 不能问“会不会用大模型”，而要问：它能不能把一个项目的经验沉淀到产品；下一家同类客户是否少走一遍旧路；按结果收费以后，结果如何定义；当供应商离场，客户是否仍能理解、维护和审计系统。</p>
+<p style="margin:0 0 18px;">如果这些问题始终没有答案，FDE 就很难摆脱“旧交付的新包装”这一质疑。</p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">06</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">最火的 AI 岗位，也在参与自动化自己</p></section>
+<p style="margin:0 0 18px;">FDE 身上还有一个更微妙的悖论。</p>
+<p style="margin:0 0 18px;">一边是公司争抢能够进现场、懂行业、会写代码的人；另一边，FDE 自己使用的工程工具也在被 Agent 化。</p>
+<p style="margin:0 0 18px;">Palantir 已经推出名为 <strong>“AI FDE”</strong> 的产品。按照官方文档，它可以通过自然语言执行数据转换、管理代码仓库、编辑 Ontology、编写函数、运行评测、检查权限，并把改动放进分支或 Pull Request 等待审查。[12]</p>
+<p style="margin:0 0 18px;">AI FDE 目前显然不能替代一个成熟的人类 FDE。它不知道一家银行里哪位业务负责人实际拥有决策权，也不会自然理解一条流程为什么在制度之外还有另一套运行方式，更难承担上线失误后的组织责任。</p>
+<p style="margin:0 0 18px;">但它正在自动化那些容易重复的<strong>执行层工作</strong>。</p>
+<p style="margin:0 0 18px;">这会把人类 FDE 推向更靠上的位置：发现真正的问题，选择值得重构的流程，协调业务与技术，定义什么叫成功，并为结果承担责任。</p>
+<p style="margin:0 0 18px;">于是，FDE 的长期价值可能不在于“更会写代码”，而在于能否<strong>把商业问题翻译成机器可以持续执行、组织愿意实际采用的系统</strong>。</p>
+<p style="margin:0 0 18px;">从这个角度看，FDE 并不是 AI 无法自动化的堡垒。它更像一条不断移动的边界：一部分现场知识被工程师看见，一部分经验被沉淀成产品，一部分执行再交给 Agent。边界每向前移动一步，上一轮的稀缺能力就会被标准化。</p>
+<p style="margin:0 0 18px;">这也给 FDE 热潮提供了一个反直觉的评价标准。</p>
+<p style="margin:0 0 22px;color:#315dff;"><strong>一支优秀的 FDE 团队，不应以“客户永远离不开我们”为荣耀。它更重要的成果，是让相同问题第二次出现时，不再需要同样多的人。</strong></p>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="margin:0 0 7px;color:#315dff;font-size:27px;line-height:1.1;font-weight:850;letter-spacing:0.08em;">07</p><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">FDE 不是答案，它是企业 AI 成熟度的压力表</p></section>
+<p style="margin:0 0 18px;">FDE 的兴起首先说明，企业愿意为 AI 落地付钱。它也意味着，行业正在从比拼模型演示，转向比拼<strong>生产结果</strong>。</p>
+<p style="margin:0 0 18px;">这是一种进步。</p>
+<p style="margin:0 0 18px;">过去，软件公司可以把失败归因于客户不会用；咨询公司可以交付一份方案后离场；客户也可以把一个 PoC 当作完成创新任务。FDE 把这些原本分散的责任压进同一个角色：既要理解问题，又要写出系统，还要看它是否真的被使用。</p>
+<p style="margin:0 0 18px;"><strong>但一个新头衔不会自动创造新能力。</strong></p>
+<p style="margin:0 0 18px;">判断 FDE 究竟代表产品进步，还是服务换了名字，可以连续追问几个问题：工程师是否亲自对生产系统负责？成功指标是签单、上线，还是持续采用和业务结果？现场经验有没有进入核心产品？同类项目的交付人力是否下降？客户最终能否独立运行系统？收入主要来自订阅和结果，还是来自人天？</p>
+<p style="margin:0 0 18px;">这些答案决定了 FDE 是<strong>软件公司的学习飞轮</strong>，还是一层<strong>昂贵的人工补丁</strong>。</p>
+<p style="margin:0 0 18px;">因此，FDE 还不是一个已经成型的新行业。它更像企业 AI 当前阶段的一张剖面：上面同时叠着模型能力、软件平台、专业服务、行业知识和组织变革。</p>
+<p style="margin:0 0 18px;">它的热度越高，越能说明客户对 AI 的期待已经进入核心业务；它对人的依赖越持久，也越能说明产品离真正成熟还有距离。</p>
+<p style="margin:0 0 18px;">FDE 最终会不会成为一个长期稳定的职业，可能并不是最重要的事。</p>
+<p style="margin:0 0 18px;">更值得观察的是，当今天这批工程师从客户现场带回足够多的失败与经验之后，企业 AI 的下一次部署，能不能少派一些人。</p>
+<section style="margin:36px 0 48px;padding:22px 24px;border-left:4px solid #315dff;background:#f7f9ff;"><p style="margin:0;font-size:17px;font-weight:700;line-height:1.9;"><strong>如果可以，FDE 完成了自己的使命。若仍做不到，AI 公司可能只是在重新发明咨询业——只不过这一次，顾问真的会写代码。</strong></p></section>
+<section data-component="chapter-heading" style="margin:52px 0 28px;text-align:left;"><p style="width:38px;height:4px;margin:0 0 13px;background:#e6a08e;border-radius:2px;"></p><p style="margin:0;color:#4a4f5c;font-size:23px;line-height:1.55;font-weight:800;">参考资料</p></section>
+<p style="margin:0 0 18px;">[1] <a href="https://openai.com/careers/forward-deployed-engineer-%28fde%29-sf-san-francisco/" style="color:#315dff;text-decoration:underline;">OpenAI：Forward Deployed Engineer（San Francisco）</a> [2] <a href="https://job-boards.greenhouse.io/anthropic/jobs/5302966008" style="color:#315dff;text-decoration:underline;">Anthropic：Forward Deployed Engineer</a> [3] <a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf/n" style="color:#315dff;text-decoration:underline;">McKinsey：The State of AI in 2025</a> [4] <a href="https://www.palantir.com/docs/foundry/architecture-center/platforms" style="color:#315dff;text-decoration:underline;">Palantir：Architecture Center—Platforms</a> [5] <a href="https://community.palantir.com/t/who-are-palantir-fdes/6847/4" style="color:#315dff;text-decoration:underline;">Palantir Developer Community：Who are Palantir FDEs?</a> [6] <a href="https://www.databricks.com/company/careers/professional-services-operations/ai-engineer-fde-forward-deployed-engineer-8015848002?gh_jid=8015848002" style="color:#315dff;text-decoration:underline;">Databricks：AI Engineer, Forward Deployed Engineer</a> [7] <a href="https://bloomberry.com/blog/i-analyzed-1000-forward-deployed-engineer-jobs-what-i-learned/" style="color:#315dff;text-decoration:underline;">Bloomberry：What I learned analyzing 1K FDE jobs</a> [8] <a href="https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm" style="color:#315dff;text-decoration:underline;">Palantir：2025 Form 10-K</a> [9] <a href="https://static.cninfo.com.cn/finalpage/2026-08-22/1225490345.PDF" style="color:#315dff;text-decoration:underline;">用友网络：2026 年半年度报告</a> [10] <a href="https://static.cninfo.com.cn/finalpage/2026-09-01/1225540407.PDF" style="color:#315dff;text-decoration:underline;">神州数码：2026-08-31 投资者关系活动记录</a> [11] <a href="https://static.cninfo.com.cn/finalpage/2026-09-03/1225547373.PDF" style="color:#315dff;text-decoration:underline;">宇信科技：2026-09-02/03 投资者关系活动记录</a> [12] <a href="https://www.palantir.com/docs/foundry/ai-fde/overview" style="color:#315dff;text-decoration:underline;">Palantir：AI FDE documentation</a></p>
+<section style="margin:0 0 42px;padding:20px 22px;border-left:2px solid #315dff;border-top:1px solid #dfe6f7;border-right:1px solid #dfe6f7;border-bottom:1px solid #dfe6f7;background:#ffffff;"><p style="margin:0;">注：文中岗位职责来自公司公开招聘与官方文档，代表各公司的岗位口径，不等于全行业统一定义；Palantir 82% 毛利率为公司整体指标，不能归因于 FDE。国内案例来自上市公司披露，尚缺独立客户访谈与长期项目数据验证。</p></section>
+<section id="related-reading" data-component="related-reading" style="margin:52px 0 0;text-align:left;"><p style="margin:0 0 6px;color:#1947d1;font-size:12px;line-height:1.5;font-weight:800;letter-spacing:0.16em;">RELATED STORIES</p><p style="margin:0 0 18px;color:#343a46;font-size:20px;line-height:1.55;font-weight:800;">继续阅读</p><a data-component="related-card" href="https://mp.weixin.qq.com/s/E4En5Ars7Md1AeojCXxocg" style="display:block;box-sizing:border-box;margin:0 0 12px;padding:17px 18px 16px;border:1px solid #e1e6f0;border-left:4px solid #315dff;background:#ffffff;text-decoration:none;"><span style="display:block;margin:0 0 7px;color:#315dff;font-size:12px;line-height:1.5;font-weight:800;letter-spacing:0.12em;">人物</span><span style="display:block;color:#2f3542;font-size:16px;line-height:1.65;font-weight:800;">【增速·人物】从 ImageNet 到世界模型：李飞飞的两次豪赌</span><span style="display:block;margin:7px 0 0;color:#727a89;font-size:13px;line-height:1.75;">从 ImageNet 到世界模型，两次押注背后的技术判断与现实代价。</span><span style="display:block;margin:10px 0 0;color:#1947d1;font-size:12px;line-height:1.5;font-weight:700;">阅读全文 →</span></a><a data-component="related-card" href="https://mp.weixin.qq.com/s/t0KDMTg-aAz5BGo9lPpy8A" style="display:block;box-sizing:border-box;margin:0 0 12px;padding:17px 18px 16px;border:1px solid #e1e6f0;border-left:4px solid #315dff;background:#ffffff;text-decoration:none;"><span style="display:block;margin:0 0 7px;color:#315dff;font-size:12px;line-height:1.5;font-weight:800;letter-spacing:0.12em;">科普</span><span style="display:block;color:#2f3542;font-size:16px;line-height:1.65;font-weight:800;">【增速·科普】一组图看懂 VLA 的泛化</span><span style="display:block;margin:7px 0 0;color:#727a89;font-size:13px;line-height:1.75;">从语义、场景到跨本体与失败恢复，拆开 VLA 的六层泛化。</span><span style="display:block;margin:10px 0 0;color:#1947d1;font-size:12px;line-height:1.5;font-weight:700;">阅读全文 →</span></a></section><section id="brand-footer" data-component="brand-footer" style="margin:42px 0 0;padding:23px 22px 21px;border-top:3px solid #1947d1;background:#f6f8ff;text-align:left;"><img src="/pics/zhitan/fde-enterprise-ai-delivery/figure-01.png" alt="增速智谈" style="display:block;width:132px;max-width:40%;height:auto;margin:0 0 16px;"><p style="margin:0 0 13px;color:#424a58;font-size:14px;line-height:1.85;">持续追踪机器人、具身智能与企业 AI 的技术和商业变化。</p><p style="margin:0;color:#737d90;font-size:12px;line-height:1.9;">网站｜upspeedtech.com<br>邮箱｜contact@speedup-ai.com</p><p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #dce4fa;color:#8a93a5;font-size:11px;line-height:1.7;letter-spacing:0.05em;">研究、撰文与制图｜增速智谈</p></section>
+</div></article><aside class="read-next sans"><p>站内继续阅读</p><p><a href="/zhitan/articles/atlas-new-hand-four-fingers.html">【增速·时事】波士顿动力Atlas：换了新手，却没给它加小指？ →</a></p><p><a href="/zhitan/articles/jev-agent-decision-model.html">【增速·科普】Jev 到底新在哪：从分类器到 Agent 决策层 →</a></p><p><a href="/zhitan/articles/fourier-rehab-humanoid.html">【增速·拆解】傅利叶机器人：康复业务能把人形机器人带多远 →</a></p><p><a href="/zhitan/articles/vla-vision-language-action.html">【增速·科普】从一句话到机械臂动作，VLA 中间做了什么 →</a></p><a href="/zhitan/#articles">返回全部文章 →</a></aside></main><footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <img src="/pics/zhitan/logo-zhitan-horizontal.png" alt="增速智谈" style="height:32px;margin-bottom:.7rem">
+      <p>增速智谈关注机器人、AI 与硬科技。深度内容、研究报告与媒体服务。</p>
+    </div>
+    <div>
+      <strong>阅读</strong>
+      <a href="/zhitan/#articles">最新文章</a><br>
+      <a href="/zhitan/#series">专题</a><br>
+      <a href="/reports/">研究报告</a>
+    </div>
+    <div>
+      <strong>服务</strong>
+      <a href="/zhitan/services.html">我们做什么</a><br>
+      <a href="/zhitan/#contact">合作咨询</a><br>
+      <a href="/company.html">增速科技</a>
+    </div>
+    <div>
+      <strong>联系</strong>
+      <a href="https://jmx9kgn7nz.feishu.cn/share/base/form/shrcncmbT9nBPSYMpXzW1OaQ1ph" target="_blank" rel="noopener noreferrer">飞书合作问卷</a><br>
+      <a href="mailto:contact@speedup-ai.com">contact@speedup-ai.com</a><br>
+      公众号：增速智谈
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 北京增速科技有限公司 · 增速智谈 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">京ICP备2026024443号</a> · <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802048887" target="_blank" rel="noopener noreferrer">京公网安备11010802048887号</a></div>
+</footer><script>
+(function(){
+  const nav=document.getElementById('mainNav');
+  if(!nav) return;
+  nav.querySelectorAll('button[data-mega]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      if(!window.matchMedia('(max-width:980px)').matches) return;
+      e.preventDefault();
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+})();
+</script></body></html>
