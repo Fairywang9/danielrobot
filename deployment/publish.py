@@ -3,6 +3,7 @@
 import argparse
 import base64
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -10,6 +11,7 @@ import shlex
 import subprocess
 import sys
 import urllib.request
+import urllib.error
 import uuid
 
 SOURCE = Path(__file__).resolve().parent.parent
@@ -207,8 +209,14 @@ def verify(files, field, release):
             continue
         url = SITE + '/' + quote(item['path']) + '?publish_check=' + release
         request = urllib.request.Request(url, headers={'Cache-Control': 'no-cache', 'Accept-Encoding': 'identity'})
-        with urllib.request.urlopen(request, timeout=20) as response:
-            data = response.read()
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(request, timeout=20) as response:
+                    data = response.read()
+                break
+            except (http.client.IncompleteRead, urllib.error.URLError, TimeoutError, ConnectionError):
+                if attempt == 2:
+                    raise
         if checksum(data) != item[field]:
             raise RuntimeError('Live page checksum mismatch: ' + item['path'])
 
