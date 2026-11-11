@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>具身智能与 VLA 模型研究进展｜增速机器人情报</title>
+  <meta name="description" content="跟踪具身智能和视觉语言动作模型（VLA）的论文、开源工具与机器人评测，查阅 LeRobot 版本说明、研究原文和中文解读。">
+  <link rel="canonical" href="https://upspeedtech.com/robotnews/topic/embodied-ai/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="具身智能与 VLA 模型研究进展｜增速机器人情报">
+  <meta property="og:description" content="跟踪具身智能与 VLA 的研究论文、开源工具和机器人评测，保留原始出处与评测条件。">
+  <meta property="og:url" content="https://upspeedtech.com/robotnews/topic/embodied-ai/">
+  <meta property="og:image" content="https://upspeedtech.com/pics/upspeed_logo.png">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://upspeedtech.com/robotnews/topic/embodied-ai/#webpage",
+        "url": "https://upspeedtech.com/robotnews/topic/embodied-ai/",
+        "name": "具身智能与 VLA 模型研究进展",
+        "inLanguage": "zh-CN",
+        "isPartOf": {"@id": "https://upspeedtech.com/robotnews/#webpage"},
+        "breadcrumb": {"@id": "https://upspeedtech.com/robotnews/topic/embodied-ai/#breadcrumb"}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://upspeedtech.com/robotnews/topic/embodied-ai/#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "机器人资讯", "item": "https://upspeedtech.com/robotnews/"},
+          {"@type": "ListItem", "position": 2, "name": "具身智能与 VLA"}
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/robotnews.css">
+</head>
+<body>
+  <nav class="nav" aria-label="主导航">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">U</span><span>增速机器人情报<small>ROBOTICS INTELLIGENCE</small></span></a>
+      <div class="nav-links">
+        <a class="current" href="/robotnews/">机器人资讯</a>
+        <a href="/zhitan/">增速智谈</a>
+        <a href="/reports/">报告中心</a>
+      </div>
+    </div>
+  </nav>
+  <header class="hero topic-hero">
+    <div class="hero-inner">
+      <nav class="breadcrumbs" aria-label="当前位置">
+        <span><a href="/robotnews/">机器人资讯</a></span>
+        <span aria-current="page">具身智能与 VLA</span>
+      </nav>
+      <h1>具身智能与 VLA 模型研究进展</h1>
+      <p>视觉语言动作模型（VLA）把图像、语言指令和机器人动作接在一起。这里跟踪模型与开发工具的变化，重点看论文用什么任务评测，以及工具在哪些模型和设备上能运行。</p>
+    </div>
+  </header>
+  <main class="container">
+    <section class="section" aria-labelledby="updates-title">
+      <div class="section-head"><h2 id="updates-title">开发工具与论文</h2><p>论文日期以 arXiv 所列提交日为准</p></div>
+      <div class="news-list">
+        <article class="news-card">
+          <p class="source-meta"><time datetime="2026-11-05">2026-11-05</time> · 版本发布</p>
+          <h3>LeRobot v0.7.0 支持执行过程中切换子任务</h3>
+          <p>交互式运行允许操作者在机器人执行过程中用语言切换子任务。发布说明列出了支持这一功能的策略和外部规划器配置。</p>
+          <a class="read" href="https://huggingface.co/blog/lerobot/lerobot-release-v070">LeRobot v0.7.0 发布说明</a>
+        </article>
+        <article class="news-card">
+          <p class="source-meta"><time datetime="2026-11-03">2026-11-03</time> · arXiv v1</p>
+          <h3>研究发现 VLA 的文字解释和动作可能分离</h3>
+          <p>论文在驾驶模型 Alpamayo 和操作模型 InstructVLA 中观察到，图像扰动可以改变预测动作，同时保留原有文字解释。结果提示评测需要直接检查模型输出的动作。</p>
+          <a class="read" href="https://arxiv.org/abs/2611.04166v1">arXiv 论文原文 · Say the Same, Act Differently</a>
+        </article>
+        <article class="news-card">
+          <p class="source-meta"><time datetime="2026-10-07">2026-10-07</time> · arXiv v1</p>
+          <h3>换个说法，VLA 的任务表现可能明显变化</h3>
+          <p>研究在 π₀、π₀.₅ 和指定测试任务中对照了不同指令措辞，并尝试用规则改写指令来改善表现。读结果时可核对模型检查点、任务和措辞条件。</p>
+          <a class="read" href="https://arxiv.org/abs/2610.10526v1">arXiv 论文原文 · Rephrase Before You Act</a>
+        </article>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="reading-title">
+      <div class="section-head"><h2 id="reading-title">延伸阅读</h2></div>
+      <div class="topic-grid">
+        <article class="topic-card">
+          <h3><a href="/zhitan/articles/vla-vision-language-action.html">从一句话到机械臂动作，VLA 中间做了什么？</a></h3>
+          <p>从动作表示、数据和泛化理解视觉语言动作模型。</p>
+        </article>
+        <article class="topic-card">
+          <h3><a href="/reports/china-embodied-intelligence-world-model-2026.html">中国具身智能与世界模型研究报告</a></h3>
+          <p>查看相关研究与产业路线，了解世界模型如何进入机器人开发。</p>
+        </article>
+        <article class="topic-card">
+          <h3><a href="/robotnews/topic/humanoid/">人形机器人行业动态与产品进展</a></h3>
+          <p>查看机器人本体、场景演示和商业进展。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="footer-inner"><span>增速机器人情报</span><span><a href="/robotnews/">机器人资讯</a> · <a href="/zhitan/">增速智谈</a></span></div></footer>
+</body>
+</html>
