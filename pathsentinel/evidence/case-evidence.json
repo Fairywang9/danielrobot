@@ -1,0 +1,58 @@
+{
+  "fixture": "PS-LAB-001",
+  "data_type": "synthetic",
+  "scope": "local loopback HTTP fixture only",
+  "executed_at": "2026-10-21T06:57:26.982675+00:00",
+  "source_sha256": "b162c1f35345b34b7137b4192f89d861bfa801b117c2c98ff81ba24a637e5000",
+  "tests": [
+    {
+      "id": "before-cross-tenant",
+      "label": "修复前跨租户请求",
+      "method": "GET",
+      "path": "/before/reports/report-b",
+      "principal": "Alice / tenant-a",
+      "status": 200,
+      "body": {
+        "tenant_id": "tenant-b",
+        "report_id": "report-b",
+        "content": "Synthetic report B"
+      },
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "id": "after-cross-tenant",
+      "label": "修复后跨租户请求",
+      "method": "GET",
+      "path": "/after/reports/report-b",
+      "principal": "Alice / tenant-a",
+      "status": 403,
+      "body": {
+        "error": "forbidden"
+      },
+      "expected_status": 403,
+      "passed": true
+    },
+    {
+      "id": "after-same-tenant",
+      "label": "修复后合法请求",
+      "method": "GET",
+      "path": "/after/reports/report-a",
+      "principal": "Alice / tenant-a",
+      "status": 200,
+      "body": {
+        "tenant_id": "tenant-a",
+        "report_id": "report-a",
+        "content": "Synthetic report A"
+      },
+      "expected_status": 200,
+      "passed": true
+    }
+  ],
+  "finding": {
+    "title": "报告读取接口缺少租户归属校验",
+    "classification": "CWE-639",
+    "business_effect": "普通用户可读取另一租户的合成报告",
+    "remediation": "在服务端校验当前租户与目标报告的tenant_id一致"
+  }
+}
